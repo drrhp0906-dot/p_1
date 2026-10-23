@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>p_1 · train_demo — the baby, live</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --line: #30363d;
+    --tx: #e6edf3; --dim: #8b949e; --ok: #3fb950; --bad: #f85149; --acc: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--tx); margin: 0; padding: 24px 16px 64px;
+    font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  h1 .dim { font-weight: normal; }
+  .sub { color: var(--dim); margin-bottom: 20px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; margin: 16px 0;
+  }
+  .panel h2 { font-size: 15px; margin: 0 0 4px; color: var(--acc); }
+  .note { color: var(--dim); font-size: 12.5px; margin: 0 0 10px; }
+  .ok  { color: var(--ok); }
+  .bad { color: var(--bad); }
+  .dim { color: var(--dim); }
+  .banner {
+    margin-top: 20px; padding: 12px; text-align: center; font-size: 15px;
+    border: 1px solid var(--line); border-radius: 8px;
+  }
+  .banner.pass { border-color: var(--ok); color: var(--ok); }
+  .banner.fail { border-color: var(--bad); color: var(--bad); text-align: left; white-space: pre-wrap; }
+  .banner.fail:empty, .banner.pass:empty { display: none; }
+  button {
+    background: #21262d; color: var(--tx); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 16px; cursor: pointer; font: inherit;
+  }
+  button:hover:not(:disabled) { background: #30363d; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button.primary { border-color: var(--acc); color: var(--acc); }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 4px; }
+  .ctl { display: flex; align-items: center; gap: 8px; color: var(--dim); font-size: 12.5px;
+         border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; }
+  input[type=range] { width: 130px; accent-color: var(--acc); }
+  #tempval { color: var(--tx); min-width: 34px; display: inline-block; }
+  .metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .metric {
+    flex: 1 1 120px; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 6px; padding: 8px 10px;
+  }
+  .metric .k { color: var(--dim); font-size: 11px; }
+  .metric .v { font-size: 16px; }
+  canvas { width: 100%; height: 230px; display: block; background: var(--bg);
+           border: 1px solid var(--line); border-radius: 6px; }
+  .genwrap { background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+             padding: 10px 12px; max-height: 380px; overflow-y: auto; }
+  .genwrap pre { margin: 0 0 12px; padding: 0; white-space: pre-wrap; word-break: break-all;
+                 font-size: 13px; color: var(--tx); }
+  .genwrap pre .hd { color: var(--dim); }
+  .genwrap pre.fresh { color: var(--ok); }        /* newest generation highlighted */
+  .genwrap pre.fresh .hd { color: var(--ok); }
+  .genwrap pre:first-child { margin-top: 0; }
+  .inline { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .inline input[type=text] {
+    flex: 1 1 240px; background: var(--bg); color: var(--tx); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 10px; font: inherit;
+  }
+  .inline input[type=text]:focus { outline: 1px solid var(--acc); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>p_1 — the baby, live</h1>
+  <div class="sub">char-level Config A · <span id="paramlab">…</span> params · trained in YOUR tab ·
+    zero dependencies · engine v<span id="ver">…</span></div>
+
+  <div class="panel">
+    <h2>Controls</h2>
+    <p class="note" id="setupnote">building trainer…</p>
+    <div class="controls">
+      <button id="start" class="primary">Start</button>
+      <button id="pause" disabled>Pause</button>
+      <button id="reset" disabled>Reset</button>
+      <span class="ctl">temp
+        <input type="range" id="temp" min="0.3" max="1.5" step="0.05" value="0.8">
+        <span id="tempval">0.80</span>
+      </span>
+      <span class="ctl" id="lrdisp">lr —</span>
+    </div>
+    <p class="note">lr is fixed at 1e-3 (AdamW, decoupled wd 0.01, global-norm clip 1.0, linear
+    warmup 200 steps) — the slider only affects sampling. One step = batch 8 × ctx 256
+    through a pure-JS autograd engine, i.e. seconds of real compute: the loop runs at most
+    one step per animation frame and yields in between. tokens/sec is measured over the
+    last 3 s of actual step time, so with multi-second steps it shows the latest step's
+    true throughput. Keep the tab in the foreground —
+    browsers throttle background rAF to a crawl.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Loss curve</h2>
+    <p class="note">Raw per-step loss (grey) + 25-step moving average (blue). Redrawn at most
+    once per animation frame; beyond 2000 points the curve is decimated per pixel column.
+    Y labels = window min/max · X labels = step.</p>
+    <canvas id="losscv"></canvas>
+    <div class="metrics">
+      <div class="metric"><div class="k">step</div><div class="v" id="m-step">0</div></div>
+      <div class="metric"><div class="k">loss</div><div class="v" id="m-loss">–</div></div>
+      <div class="metric"><div class="k">tokens/sec (3s rolling)</div><div class="v" id="m-tps">–</div></div>
+      <div class="metric"><div class="k">params</div><div class="v" id="m-params">–</div></div>
+      <div class="metric"><div class="k">elapsed</div><div class="v" id="m-elapsed">00:00</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Generation log</h2>
+    <p class="note" id="gennote">The trainer auto-samples every 500 steps from the fixed prompt
+    “Q:” (220 new chars, temperature from the slider). Newest entry is green.</p>
+    <div class="genwrap" id="genlog"><pre id="genempty" class="dim">no generations yet — press Start, or generate now.</pre></div>
+    <div class="inline">
+      <input type="text" id="prompt" placeholder="free prompt (blank = fixed “Q:”) — e.g. Q: How much water should I drink?" maxlength="120">
+      <button id="gen">Generate now</button>
+    </div>
+  </div>
+
+  <div class="banner fail" id="err" style="display:none"></div>
+</div>
+
+<script src="corpus_mini.js"></script>
+<script src="tensor.js"></script>
+<script src="model.js"></script>
+<script src="train.js"></script>
+<script>
+'use strict';
+/* ============================================================================
+   p_1 · train_demo.html — Task 6 live page
+   ----------------------------------------------------------------------------
+   SCHEDULING — why no Web Worker: the entire engine (tensor.js → model.js →
+   train.js) is a single-threaded UMD stack written for the main thread, and a
+   worker would force a postMessage copy of every Float32Array batch for zero
+   benefit; instead the rAF loop runs AT MOST ONE atomic trainer.step() per
+   frame (a step is ~5-8 s at batch 8 × ctx 256 — far over any frame budget and
+   impossible to split without rewriting the engine) and yields between frames,
+   so the tab repaints and answers input between steps. The 12 ms budget below
+   governs everything else per frame (sampler chunks, stats, redraw).
+
+   PAUSE stops scheduling of training (and freezes stats); user-triggered
+   generation still pumps, because the sampler is chunked across frames.
+
+   RESILIENCE: every compute path (step loop, sampler, reset) is wrapped in
+   try/catch — a thrown error surfaces in the red banner instead of silently
+   killing the loop.
+   ============================================================================ */
+
+const $ = (id) => document.getElementById(id);
+const now = () => performance.now();
+const BUDGET_MS = 12;          // per-frame compute budget for non-step work
+const MA_WIN = 25;             // moving-average window (steps)
+const AUTO_EVERY = 500;        // auto-sample every N steps
+const AUTO_PROMPT = 'Q:';
+const GEN_MAXNEW = 220;
+
+let trainer = null;
+let running = false;           // Start/Pause gate for training steps
+let sampler = null;            // active chunked generation (exclusive with steps)
+let rafId = 0;
+let losses = [];               // raw per-step loss
+let lossSumMA = 0;             // sliding sum for the moving average
+let stepRecords = [];          // {t, tok} for the 3s rolling tokens/sec
+let elapsedMs = 0;             // accumulated training wall time
+let runStartedAt = 0;
+let lastBucket = 0;            // floor(stepCount / AUTO_EVERY) already sampled
+let needsRedraw = true;
+
+/* ---------------------------------------------------------------- setup */
+
+function init() {
+  $('ver').textContent = String(window.P1.VERSION);
+  const corpus = window.P1_CORPUS_MINI;
+  trainer = new P1.train.Trainer({
+    pairs: corpus.pairs,
+    lr: 1e-3, ctx: 256, batchSize: 8, seed: 0    // Config A, real char vocab
+  });
+  const V = trainer.vocab.itos.length;
+  $('paramlab').textContent = trainer.numParams.toLocaleString('en-US');
+  $('m-params').textContent = trainer.numParams.toLocaleString('en-US');
+  $('lrdisp').textContent = 'lr ' + trainer.lr.toExponential(0) + ' fixed';
+  $('setupnote').textContent =
+    'corpus_mini: ' + corpus.n + ' pairs · ' + trainer.stream.length.toLocaleString('en-US') +
+    ' chars · char vocab ' + V + ' · ctx ' + trainer.ctx + ' · batch ' + trainer.batchSize +
+    ' · AdamW ready. Press Start.';
+  $('m-step').textContent = '0';
+  $('tempval').textContent = Number($('temp').value).toFixed(2);
+  updateButtons();
+  needsRedraw = true;
+}
+
+function fail(err) {
+  const b = $('err');
+  b.style.display = '';
+  b.textContent = '✗ ' + (err && err.message ? err.message : String(err)) +
+    (err && err.stack ? '\n' + String(err.stack).split('\n').slice(1, 3).join('\n') : '');
+  if (window.console && console.error) console.error(err);
+  running = false;
+  updateButtons();
+}
+
+/* ------------------------------------------------------------- buttons */
+
+function updateButtons() {
+  $('start').disabled = running || !!sampler;
+  $('pause').disabled = !running;
+  $('reset').disabled = running || !!sampler;
+  $('gen').disabled = !!sampler;
+}
+
+$('temp').addEventListener('input', () => {
+  $('tempval').textContent = Number($('temp').value).toFixed(2);
+});
+
+$('start').addEventListener('click', () => {
+  try {
+    if (running || sampler) return;
+    running = true;
+    runStartedAt = now();
+    updateButtons();
+    if (!rafId) rafId = requestAnimationFrame(frame);
+  } catch (e) { fail(e); }
+});
+
+$('pause').addEventListener('click', () => {
+  try {
+    if (!running) return;
+    elapsedMs += now() - runStartedAt;   // sampler time excluded from training elapsed
+    running = false;
+    updateButtons();
+  } catch (e) { fail(e); }
+});
+
+$('reset').addEventListener('click', () => {
+  try {
+    if (running || sampler) return;
+    if (!confirm('Reset the baby? Weights, optimizer, loss curve and generation log are wiped.')) return;
+    trainer.reset();                     // fresh seeded weights + zeroed AdamW
+    losses = []; lossSumMA = 0; stepRecords = []; lastBucket = 0;
+    maCache.len = 0; maCache.arr = [];   // the moving-average cache must forget too
+    elapsedMs = 0;
+    $('genlog').innerHTML = '<pre id="genempty" class="dim">no generations yet — press Start, or generate now.</pre>';
+    $('m-step').textContent = '0';
+    $('m-loss').textContent = '–';
+    $('m-tps').textContent = '–';
+    $('m-elapsed').textContent = '00:00';
+    $('err').style.display = 'none';
+    needsRedraw = true;
+  } catch (e) { fail(e); }
+});
+
+$('gen').addEventListener('click', () => {
+  try { startSample($('prompt').value.trim() || AUTO_PROMPT, 'manual'); }
+  catch (e) { fail(e); }
+});
+
+/* -------------------------------------------------------------- sampling */
+
+function startSample(prompt, source) {
+  if (sampler) return;
+  const temp = Number($('temp').value);
+  const st = trainer.beginSample(prompt, GEN_MAXNEW, temp);
+  const step0 = trainer.stepCount;
+  const tempTxt = temp.toFixed(2);   // frozen for this generation's header
+  const pre = document.createElement('pre');
+  pre.className = 'fresh';
+  const fresh = $('genlog').querySelectorAll('pre.fresh');
+  for (const f of fresh) if (f !== pre) f.classList.remove('fresh');
+  const empty = $('genempty');
+  if (empty) empty.remove();
+  pre.textContent = '── step ' + step0 + ' · temp ' + tempTxt +
+    ' · ' + source + ' prompt ' + JSON.stringify(prompt) + ' ──\n';
+  $('genlog').appendChild(pre);
+  $('genlog').scrollTop = $('genlog').scrollHeight;
+  sampler = { st, pre, step0, tempTxt };
+  updateButtons();
+  if (!rafId) rafId = requestAnimationFrame(frame);
+  pumpSampler();                          // first token immediately
+}
+
+function pumpSampler() {
+  if (!sampler) return;
+  const st = sampler.st;
+  try {
+    st.step(1);                           // one token = one [1,T] forward (30-300 ms)
+    sampler.pre.textContent = '── step ' + sampler.step0 + ' · temp ' + sampler.tempTxt +
+      ' · ' + trainer.stepCount + ' steps done · sampling ' +
+      Math.min(st.newCount, GEN_MAXNEW) + '/' + GEN_MAXNEW + ' ──\n' + st.text;
+    $('genlog').scrollTop = $('genlog').scrollHeight;
+    if (st.done) {
+      // entry keeps .fresh (green) until the NEXT generation retires it
+      sampler = null;
+      updateButtons();
+    }
+  } catch (e) { sampler = null; fail(e); }
+}
+
+/* ------------------------------------------------------------ loss chart */
+
+function drawChart() {
+  const cv = $('losscv');
+  const dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth || 600, H = cv.clientHeight || 230;
+  if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  }
+  const g = cv.getContext('2d');
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.clearRect(0, 0, W, H);
+  g.fillStyle = '#0d1117'; g.fillRect(0, 0, W, H);
+
+  const padL = 46, padR = 10, padT = 10, padB = 22;
+  const iw = W - padL - padR, ih = H - padT - padB;
+  const n = losses.length;
+
+  // dark grid
+  g.strokeStyle = '#30363d'; g.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (ih * i) / 4;
+    g.beginPath(); g.moveTo(padL, y); g.lineTo(W - padR, y); g.stroke();
+  }
+
+  if (n < 2) {
+    g.fillStyle = '#8b949e'; g.font = '12px monospace';
+    g.fillText('loss curve appears here — press Start', padL + 12, padT + ih / 2);
+    return;
+  }
+
+  // decimate: at most ~2000 points (stride sampling)
+  const stride = Math.max(1, Math.ceil(n / 2000));
+  const idx = [];
+  for (let i = 0; i < n; i += stride) idx.push(i);
+  if (idx[idx.length - 1] !== n - 1) idx.push(n - 1);
+
+  let lo = Infinity, hi = -Infinity;
+  for (const i of idx) { const v = losses[i]; if (v < lo) lo = v; if (v > hi) hi = v; }
+  if (hi - lo < 1e-6) { hi = lo + 1e-6; }
+  const pad = (hi - lo) * 0.06; lo -= pad; hi += pad;
+
+  const X = (i) => padL + (n === 1 ? 0 : (i / (n - 1)) * iw);
+  const Y = (v) => padT + (1 - (v - lo) / (hi - lo)) * ih;
+
+  // y min/max labels
+  g.fillStyle = '#8b949e'; g.font = '11px monospace'; g.textAlign = 'right';
+  g.fillText(hi.toFixed(2), padL - 5, padT + 8);
+  g.fillText(lo.toFixed(2), padL - 5, padT + ih);
+  // x step labels
+  g.textAlign = 'center';
+  const ticks = 4;
+  for (let k = 0; k <= ticks; k++) {
+    const i = Math.round((n - 1) * k / ticks);
+    g.fillText(String(i + 1), X(i), H - 7);
+  }
+  g.textAlign = 'left';
+
+  // raw loss (grey)
+  g.strokeStyle = '#8b949e'; g.lineWidth = 1;
+  g.beginPath();
+  idx.forEach((i, k) => { const x = X(i), y = Y(losses[i]); k ? g.lineTo(x, y) : g.moveTo(x, y); });
+  g.stroke();
+
+  // moving average (accent blue)
+  g.strokeStyle = '#58a6ff'; g.lineWidth = 2;
+  g.beginPath();
+  let started = false;
+  for (let i = 0; i < n; i++) {
+    const ma = movingAvgAt(i);
+    const x = X(i), y = Y(ma);
+    if (!started) { g.moveTo(x, y); started = true; } else g.lineTo(x, y);
+  }
+  g.stroke();
+}
+
+/* sliding moving average, O(1) amortized (kept in sync with losses[]) */
+const maCache = { len: 0, arr: [] };
+function movingAvgAt(i) {
+  const a = maCache.arr;
+  while (maCache.len <= i) {
+    const j = maCache.len;
+    lossSumMA += losses[j];
+    if (j >= MA_WIN) lossSumMA -= losses[j - MA_WIN];
+    a[j] = lossSumMA / Math.min(j + 1, MA_WIN);
+    maCache.len++;
+  }
+  return a[i];
+}
+
+/* --------------------------------------------------------- stats strip */
+
+function tokensPerSec3s() {
+  if (stepRecords.length === 0) return null;
+  const t = now();
+  // window = steps finished within the last 3 s (always at least the last step;
+  // with multi-second steps that IS the last step). Rate uses the steps' real
+  // compute time (stepMs), never wall-clock gaps — actual processed tokens.
+  let lo = stepRecords.length - 1;
+  while (lo > 0 && t - stepRecords[lo - 1].tEnd <= 3000) lo--;
+  let tok = 0, ms = 0;
+  for (let i = lo; i < stepRecords.length; i++) { tok += stepRecords[i].tok; ms += stepRecords[i].ms; }
+  return ms > 0 ? tok / (ms / 1000) : null;
+}
+
+function fmtElapsed() {
+  const s = Math.floor((running ? elapsedMs + (now() - runStartedAt) : elapsedMs) / 1000);
+  return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+}
+
+/* ------------------------------------------------------------ rAF loop */
+
+function frame() {
+  rafId = 0;
+  const frameStart = now();
+  try {
+    // ---- training: at most ONE atomic step per frame (see header comment) ----
+    if (running && !sampler) {
+      const rec = trainer.step();                    // may throw on non-finite loss
+      losses.push(rec.loss);
+      maCache.len = Math.min(maCache.len, losses.length - 1);  // keep cache in sync
+      stepRecords.push({ tEnd: now(), tok: rec.tokensProcessed, ms: rec.stepMs });
+      if (stepRecords.length > 64) stepRecords.shift();
+
+      $('m-step').textContent = String(rec.step);
+      $('m-loss').textContent = rec.loss.toFixed(4);
+      const tps = tokensPerSec3s();
+      if (tps !== null) $('m-tps').textContent = tps.toFixed(0);
+      $('m-elapsed').textContent = fmtElapsed();
+      needsRedraw = true;
+
+      // auto-sample on crossing a multiple of AUTO_EVERY (robust to pauses)
+      const bucket = Math.floor(rec.step / AUTO_EVERY);
+      if (bucket > lastBucket) { lastBucket = bucket; startSample(AUTO_PROMPT, 'auto'); }
+    }
+
+    // ---- chunked sampler: token-sized forwards inside the budget ----
+    if (sampler && now() - frameStart < BUDGET_MS) pumpSampler();
+
+    // ---- chart: at most one redraw per rAF ----
+    if (needsRedraw) { needsRedraw = false; drawChart(); }
+
+    if (running || sampler) rafId = requestAnimationFrame(frame);
+    // paused + idle: loop stops entirely; Start/Generate restart it
+  } catch (e) {
+    fail(e);   // error banner instead of a silently dead loop
+  }
+}
+
+/* ----------------------------------------------------------------- go */
+try {
+  init();
+  drawChart();
+} catch (e) { fail(e); }
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="p_1 — a from-scratch language model lab: playground, live training, trap lab, about.">
+<title>p_1 — a from-scratch language model lab</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ================================================================ header -->
+  <header class="lab">
+    <h1>p_1 <span class="dim">— a from-scratch language model lab</span></h1>
+    <div class="statusline" id="status-line">loading: engine · tokenizer · weights …</div>
+  </header>
+  <div class="banner warn" id="demo-banner" hidden></div>
+  <div class="banner err" id="boot-error" hidden></div>
+
+  <!-- =============================================================== tab bar -->
+  <nav class="tabbar" role="tablist" aria-label="lab sections">
+    <button role="tab" id="tab-playground"   aria-controls="panel-playground"   aria-selected="true"  tabindex="0"><span class="tkey">1·</span>PLAYGROUND</button>
+    <button role="tab" id="tab-training"     aria-controls="panel-training"     aria-selected="false" tabindex="-1"><span class="tkey">2·</span>LIVE TRAINING</button>
+    <button role="tab" id="tab-traps"        aria-controls="panel-traps"        aria-selected="false" tabindex="-1"><span class="tkey">3·</span>TRAP LAB</button>
+    <button role="tab" id="tab-about"        aria-controls="panel-about"        aria-selected="false" tabindex="-1"><span class="tkey">4·</span>ABOUT</button>
+  </nav>
+
+  <!-- ============================================================ PLAYGROUND -->
+  <section role="tabpanel" id="panel-playground" aria-labelledby="tab-playground" tabindex="0">
+    <div class="panel">
+      <h2>playground</h2>
+      <p class="note" id="pg-note">ask the model a health question — RAW answers from the network alone
+      (it will invent things; that is the point), GROUNDED answers only from retrieved corpus sentences
+      and shows <span class="warntx">[n]</span> citation chips you can tap.</p>
+
+      <div class="banner err" id="pg-error" hidden></div>
+
+      <form class="controls" id="pg-form">
+        <label for="pg-q" class="sr-only">question</label>
+        <input type="text" id="pg-q" name="q" autocomplete="off" spellcheck="false"
+               placeholder="e.g. How do I treat a minor burn?">
+        <div class="segmented" role="group" aria-label="answer mode">
+          <button type="button" id="pg-mode-raw" aria-pressed="true">RAW</button>
+          <button type="button" id="pg-mode-grounded" aria-pressed="false">GROUNDED</button>
+        </div>
+        <label for="pg-sampling" class="sr-only">sampling</label>
+        <select id="pg-sampling" title="RAW sampling">
+          <option value="0.8" selected>temp 0.8</option>
+          <option value="greedy">greedy</option>
+        </select>
+        <button type="submit" id="pg-go" class="primary">Generate</button>
+        <button type="button" id="pg-stop" hidden>stop</button>
+        <button type="button" id="pg-clear" title="clear the conversation log">clear</button>
+      </form>
+
+      <div class="log" id="pg-log" aria-live="polite">
+        <div class="note" id="pg-placeholder">the conversation log is empty — type a question above.</div>
+      </div>
+      <p class="note" id="pg-foot"></p>
+    </div>
+  </section>
+
+  <!-- ========================================================= LIVE TRAINING -->
+  <section role="tabpanel" id="panel-training" aria-labelledby="tab-training" tabindex="0" hidden>
+    <div class="panel">
+      <h2>live training — the baby</h2>
+      <p class="note"><b>What the baby is:</b> a char-level Config A transformer
+      (2 layers · 4 heads · 128 d_model · ctx 256, ~550k params) built on the same handmade
+      engine, trained <b>live in your tab</b> with the from-scratch AdamW on the first 500
+      corpus Q&amp;A pairs. Watch the loss fall and the sample turn from noise into Q&amp;A shapes —
+      this is the Task 6 demo, embedded untouched. The big sibling in PLAYGROUND is the byte-BPE
+      Config B checkpoint.</p>
+      <div class="iframe-wrap">
+        <iframe id="training-frame" data-src="train_demo.html"
+                title="p_1 live training demo (train_demo.html)" loading="lazy"></iframe>
+      </div>
+      <p class="note">heavy — the trainer only runs while you press <b>start</b> inside the frame.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================== TRAP LAB -->
+  <section role="tabpanel" id="panel-traps" aria-labelledby="tab-traps" tabindex="0" hidden>
+    <div class="panel">
+      <h2>trap lab</h2>
+      <p class="note">runs all <b>20 myth-traps</b> (folk beliefs the corpus actively corrects) and
+      <b>20 unanswerables</b> (questions no honest corpus can settle) through the model twice:
+      <span class="badtx">RAW</span> (network alone) vs <span class="ok">GROUNDED</span>
+      (retrieval + extractive answer). Every answer is claim-split and verified against its top-3
+      retrieved chunks; myth answers are also compared against the folk belief they could parrot.</p>
+
+      <div class="banner err" id="tr-error" hidden></div>
+
+      <div class="statrow" id="tr-summary">
+        <div class="stat"><div class="v dim" id="tr-s1">–</div><div class="k">myths parroted · RAW</div></div>
+        <div class="stat"><div class="v dim" id="tr-s2">–</div><div class="k">myths parroted · GROUNDED</div></div>
+        <div class="stat"><div class="v dim" id="tr-s3">–</div><div class="k">unanswerables refused · RAW</div></div>
+        <div class="stat"><div class="v dim" id="tr-s4">–</div><div class="k">unanswerables refused · GROUNDED</div></div>
+      </div>
+
+      <div class="controls">
+        <button type="button" id="tr-run" class="primary">run the traps</button>
+        <button type="button" id="tr-cancel" hidden>cancel</button>
+      </div>
+      <div class="progress" id="tr-progress" role="progressbar" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0"><i></i></div>
+      <p class="progline" id="tr-progline">not running.</p>
+
+      <div class="legend">
+        claim chips: <span class="badge v-supported">✓ supported</span>
+        <span class="badge v-unsupported">✗ unsupported</span>
+        <span class="badge v-not-in-corpus">∅ not-in-corpus</span>
+        <span class="badge v-refused">refused</span>
+        · flags: <span class="badge f-parrot">myth parroted</span>
+        <span class="badge f-clean">clean / not parroting</span>
+      </div>
+
+      <div id="tr-results"></div>
+    </div>
+  </section>
+
+  <!-- ================================================================= ABOUT -->
+  <section role="tabpanel" id="panel-about" aria-labelledby="tab-about" tabindex="0" hidden>
+    <div class="panel">
+      <h2>what p_1 is</h2>
+      <p class="note">p_1 is a small language model raised from nothing — no PyTorch, no libraries,
+      no pretrained anything: an autograd engine, a byte-level BPE tokenizer, a transformer and
+      AdamW, all written by hand and taught to each other in JS + Python twins. It is trained on a
+      tiny health Q&amp;A corpus and served whole in your browser — you are talking to the weights
+      right now, not to an API.</p>
+      <p class="note">The experiment: does <b>grounding</b> (answering only from retrieved corpus
+      sentences), <b>verification</b> (claim-by-claim checking against the evidence) and
+      <b>abstention</b> (refusing what the corpus cannot settle) reduce hallucination — measured on
+      a model that hallucinates <i>by construction</i>? A myth-contamination A/B (same model trained
+      with and without folk-belief traps in the corpus) probes where the nonsense comes from.</p>
+    </div>
+
+    <div class="panel">
+      <h2>latest metrics</h2>
+      <div class="banner warn" id="ab-stub" hidden>demo metrics (stub answerer) — run colab/08_eval.ipynb for real numbers.</div>
+      <div class="table-scroll" id="ab-metrics"></div>
+      <p class="note" id="ab-metrics-note"></p>
+    </div>
+
+    <div class="panel">
+      <h2>every part handmade</h2>
+      <ul class="credits">
+        <li><b>engine</b> — <code>tensor.js</code>: reverse-mode autograd, broadcasting, fused crossEntropy, iterative backward.</li>
+        <li><b>tokenizer</b> — <code>tokenizer.js</code>: byte-level BPE, 4,096 vocab, GPT-2-style rank merging.</li>
+        <li><b>transformer</b> — <code>model.js</code>: pre-LN decoder with weight-tied head, identical to the Python twin.</li>
+        <li><b>AdamW</b> — <code>train.js</code>: decoupled weight decay, warmup, global-norm clipping.</li>
+        <li><b>retrieval</b> — <code>retrieve.js</code>: inverted index, BM25 + tf-idf cosine over 4,278 chunks.</li>
+        <li><b>verifier</b> — <code>verify.js</code>: claim splitting, content-F1 verdicts, myth comparator, refusal detection.</li>
+        <li><b>weights bridge</b> — <code>weights.js</code>: parses the Colab-exported <code>web_model.bin</code> into the browser model.</li>
+      </ul>
+      <hr>
+      <div class="linkrow">self-tests: <a href="tensor_test.html">tensor</a> ·
+        <a href="tokenizer_test.html">tokenizer</a> · <a href="model_test.html">model</a> ·
+        <a href="parity_test.html">JS↔NumPy parity</a> · <a href="retrieve_test.html">retrieval</a> ·
+        <a href="train_demo.html">train demo</a></div>
+    </div>
+
+    <div class="panel">
+      <h2>honest limitations</h2>
+      <p class="note">This is a toy model that hallucinates on purpose — that IS the experiment, and
+      the lab shows its failures as plainly as its successes. RAW mode invents folk remedies and
+      wrong numbers; even GROUNDED mode is only as good as a 4,278-pair hobby corpus and a
+      sentence-overlap verifier (no semantic understanding, no medical knowledge). Nothing here is
+      medical advice: do not ask the baby for a diagnosis, ask a doctor.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- engine + models + tokenizer + retrieval + verification (all local, relative) -->
+<script src="tensor.js"></script>
+<script src="model.js"></script>
+<script src="weights.js"></script>
+<script src="tokenizer.js"></script>
+<script src="tokenizer_data.js"></script>
+<script src="retrieve.js"></script>
+<script src="verify.js"></script>
+<!-- data snapshots (file://-friendly; fetch is only the upgrade path) -->
+<script src="data/corpus_docs.js"></script>
+<script src="data/eval_mythtraps.js"></script>
+<script src="data/eval_unanswerables.js"></script>
+<script src="results/metrics.js"></script>
+<!-- the lab -->
+<script src="weights/web_model_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

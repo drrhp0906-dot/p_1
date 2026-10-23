@@ -1,0 +1,230 @@
+{
+ "format": "p1-metrics-v1",
+ "config": {
+  "thresholds": {
+   "f1_supported": 0.34,
+   "f1_min": 0.22,
+   "f1_not_in_corpus": 0.08,
+   "grounded_min_f1": 0.08,
+   "rewrite_min_f1": 0.15,
+   "myth_margin": 0.02
+  },
+  "k": 3,
+  "method": "bm25",
+  "tau": 20.0454,
+  "grounded_sentences": 3,
+  "calibration": "median top-1 bm25 on answerable eval",
+  "stub": {
+   "seed": 20260214,
+   "corrupt_rate": 0.35,
+   "note": "applies only when the answerer is the test stub"
+  },
+  "eval_lib_version": "1.0.0",
+  "answerer": "stub(seed=42,corrupt=0.35)"
+ },
+ "sets": {
+  "answerable": {
+   "n": 60,
+   "per_mode": {
+    "raw": {
+     "answers": 60,
+     "refused": 7,
+     "refusal_rate": 0.11666666666666667,
+     "answered": 53,
+     "total_claims": 229,
+     "unsupported": 31,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.13537117903930132,
+     "avg_claims_per_answer": 3.816666666666667,
+     "citation_coverage": 0.0
+    },
+    "grounded": {
+     "answers": 60,
+     "refused": 8,
+     "refusal_rate": 0.13333333333333333,
+     "answered": 52,
+     "total_claims": 178,
+     "unsupported": 3,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.016853932584269662,
+     "avg_claims_per_answer": 2.966666666666667,
+     "citation_coverage": 1.0769230769230769,
+     "grounded_refusal_rate": 0.06666666666666667,
+     "mean_best_sentence_f1": 0.22293960021740072
+    },
+    "verified": {
+     "answers": 60,
+     "refused": 7,
+     "refusal_rate": 0.11666666666666667,
+     "answered": 53,
+     "total_claims": 215,
+     "unsupported": 9,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.04186046511627907,
+     "avg_claims_per_answer": 3.5833333333333335,
+     "citation_coverage": 1.0,
+     "rewritten_claims": 31,
+     "flagged_claims": 0
+    },
+    "abstaining": {
+     "answers": 60,
+     "refused": 35,
+     "refusal_rate": 0.5833333333333334,
+     "answered": 25,
+     "total_claims": 85,
+     "unsupported": 1,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.011764705882352941,
+     "avg_claims_per_answer": 1.4166666666666667,
+     "citation_coverage": 1.16,
+     "refused_by_tau": 30
+    }
+   }
+  },
+  "mythtraps": {
+   "n": 20,
+   "per_mode": {
+    "raw": {
+     "answers": 20,
+     "refused": 2,
+     "refusal_rate": 0.1,
+     "answered": 18,
+     "total_claims": 73,
+     "unsupported": 12,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.1643835616438356,
+     "avg_claims_per_answer": 3.65,
+     "citation_coverage": 0.0,
+     "parroting_rate": 0.1,
+     "parroting_answers": 2,
+     "cue_overrides": 6,
+     "negates_folk_claims": 9
+    },
+    "grounded": {
+     "answers": 20,
+     "refused": 2,
+     "refusal_rate": 0.1,
+     "answered": 18,
+     "total_claims": 67,
+     "unsupported": 6,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.08955223880597014,
+     "avg_claims_per_answer": 3.35,
+     "citation_coverage": 1.1111111111111112,
+     "grounded_refusal_rate": 0.0,
+     "mean_best_sentence_f1": 0.2040365975426885,
+     "parroting_rate": 0.2,
+     "parroting_answers": 4,
+     "cue_overrides": 3,
+     "negates_folk_claims": 13
+    },
+    "verified": {
+     "answers": 20,
+     "refused": 2,
+     "refusal_rate": 0.1,
+     "answered": 18,
+     "total_claims": 68,
+     "unsupported": 6,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.08823529411764706,
+     "avg_claims_per_answer": 3.4,
+     "citation_coverage": 1.0,
+     "rewritten_claims": 12,
+     "flagged_claims": 0,
+     "parroting_rate": 0.05,
+     "parroting_answers": 1,
+     "cue_overrides": 4,
+     "negates_folk_claims": 8
+    },
+    "abstaining": {
+     "answers": 20,
+     "refused": 16,
+     "refusal_rate": 0.8,
+     "answered": 4,
+     "total_claims": 14,
+     "unsupported": 1,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.07142857142857142,
+     "avg_claims_per_answer": 0.7,
+     "citation_coverage": 1.0,
+     "refused_by_tau": 16,
+     "parroting_rate": 0.1,
+     "parroting_answers": 2,
+     "cue_overrides": 0,
+     "negates_folk_claims": 5
+    }
+   }
+  },
+  "unanswerable": {
+   "n": 20,
+   "per_mode": {
+    "raw": {
+     "answers": 20,
+     "refused": 0,
+     "refusal_rate": 0.0,
+     "answered": 20,
+     "total_claims": 86,
+     "unsupported": 7,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.08139534883720931,
+     "avg_claims_per_answer": 4.3,
+     "citation_coverage": 0.0
+    },
+    "grounded": {
+     "answers": 20,
+     "refused": 1,
+     "refusal_rate": 0.05,
+     "answered": 19,
+     "total_claims": 71,
+     "unsupported": 2,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.028169014084507043,
+     "avg_claims_per_answer": 3.55,
+     "citation_coverage": 1.0526315789473684,
+     "grounded_refusal_rate": 0.0,
+     "mean_best_sentence_f1": 0.19713654086325377
+    },
+    "verified": {
+     "answers": 20,
+     "refused": 0,
+     "refusal_rate": 0.0,
+     "answered": 20,
+     "total_claims": 75,
+     "unsupported": 2,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.02666666666666667,
+     "avg_claims_per_answer": 3.75,
+     "citation_coverage": 1.0,
+     "rewritten_claims": 7,
+     "flagged_claims": 0
+    },
+    "abstaining": {
+     "answers": 20,
+     "refused": 19,
+     "refusal_rate": 0.95,
+     "answered": 1,
+     "total_claims": 4,
+     "unsupported": 0,
+     "not_in_corpus": 0,
+     "hallucination_rate": 0.0,
+     "avg_claims_per_answer": 0.2,
+     "citation_coverage": 1.0,
+     "refused_by_tau": 19
+    }
+   }
+  }
+ },
+ "summary": {
+  "headline": "grounding cuts hallucination rate 0.135 -> 0.017 (verified 0.042, abstaining 0.012); abstention refuses 95% of unanswerables; myth-parroting raw 10% vs grounded 20%",
+  "raw_hallucination_rate": 0.13537117903930132,
+  "grounded_hallucination_rate": 0.016853932584269662,
+  "verified_hallucination_rate": 0.04186046511627907,
+  "abstaining_hallucination_rate": 0.011764705882352941,
+  "abstaining_unanswerable_refusal_rate": 0.95,
+  "raw_myth_parroting_rate": 0.1,
+  "grounded_myth_parroting_rate": 0.2,
+  "verified_myth_parroting_rate": 0.05,
+  "abstaining_myth_parroting_rate": 0.1
+ },
+ "stub": true
+}

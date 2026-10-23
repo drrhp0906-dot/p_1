@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>p_1 · model.js — transformer twins self-test</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --line: #30363d;
+    --tx: #e6edf3; --dim: #8b949e; --ok: #3fb950; --bad: #f85149; --acc: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--tx); margin: 0; padding: 24px 16px 64px;
+    font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  h1 .dim { font-weight: normal; }
+  .sub { color: var(--dim); margin-bottom: 20px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; margin: 16px 0;
+  }
+  .panel h2 { font-size: 15px; margin: 0 0 4px; color: var(--acc); }
+  .note { color: var(--dim); font-size: 12.5px; margin: 0 0 10px; }
+  .log {
+    white-space: pre-wrap; word-break: break-all; font-size: 13px;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px 12px; min-height: 20px; max-height: 420px; overflow-y: auto;
+  }
+  .status {
+    margin-top: 10px; padding: 8px 12px; border: 1px solid var(--line);
+    border-radius: 6px; font-size: 14px;
+  }
+  .ok  { color: var(--ok); }
+  .bad { color: var(--bad); }
+  .dim { color: var(--dim); }
+  .banner {
+    margin-top: 20px; padding: 12px; text-align: center; font-size: 15px;
+    border: 1px solid var(--line); border-radius: 8px;
+  }
+  .banner.pass { border-color: var(--ok); color: var(--ok); }
+  .banner.fail { border-color: var(--bad); color: var(--bad); }
+  button {
+    background: #21262d; color: var(--tx); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 16px; cursor: pointer; font: inherit;
+  }
+  button:hover { background: #30363d; }
+  /* per-case table */
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--dim); font-weight: normal; font-size: 12px; }
+  td.num { text-align: right; }
+  .verdict-pass { color: var(--ok); }
+  .verdict-fail { color: var(--bad); }
+  .metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .metric {
+    flex: 1 1 130px; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 6px; padding: 8px 10px;
+  }
+  .metric .k { color: var(--dim); font-size: 11px; }
+  .metric .v { font-size: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>p_1 · model.js <span class="dim">— transformer twins self-test</span></h1>
+  <div class="sub">pre-LN decoder-only transformer · pure JavaScript twin of colab/03_model.py · zero dependencies · <span id="ver"></span></div>
+
+  <div class="panel">
+    <h2>Test 1 — logits parity vs the Python twin</h2>
+    <p class="note">Loads <b>docs/model_fixtures.json</b> — 4 contract cases whose logits were computed by
+    <b>colab/03_model.py</b> on the NumPy engine (model seed 42, ids seed 43, logits rounded to 5 decimals).
+    This page rebuilds each case's model in JS with the SAME seed and compares every logit.
+    Bar: max |Δlogit| &lt; 1e-2 per case (measured: ~1e-5..1e-6 — float32 accumulation order in matmul is the only difference).
+    On file:// the fetch() API is blocked, so the page falls back to the <b>model_fixtures_data.js</b> snapshot.</p>
+    <div class="log" id="t1-log">loading…</div>
+    <table id="t1-table">
+      <thead><tr><th>case</th><th class="num">B</th><th class="num">T</th><th class="num">vocab</th><th class="num">params</th><th class="num">max |Δlogit|</th><th>verdict</th></tr></thead>
+      <tbody id="t1-body"></tbody>
+    </table>
+    <div class="metrics">
+      <div class="metric"><div class="k">cases passed</div><div class="v" id="m-pass">–</div></div>
+      <div class="metric"><div class="k">worst diff</div><div class="v" id="m-worst">–</div></div>
+      <div class="metric"><div class="k">bar</div><div class="v">1e-2</div></div>
+    </div>
+    <div class="status" id="t1-status">…</div>
+  </div>
+
+  <div class="panel">
+    <h2>Test 2 — Config A training smoke (10 SGD steps)</h2>
+    <p class="note">B=2, T=32, random ids from seed 42, next-token targets (row-wrap), SGD lr 1e-3.
+    Asserts every gradient finite and no NaN anywhere, every step.</p>
+    <div class="log" id="t2-log">running…</div>
+    <div class="status" id="t2-status">…</div>
+  </div>
+
+  <div class="banner" id="banner">running…</div>
+  <div style="text-align:center; margin-top:14px">
+    <button onclick="location.reload()">re-run</button>
+  </div>
+</div>
+
+<script src="tensor.js"></script>
+<script src="model.js"></script>
+<script>
+'use strict';
+document.getElementById('ver').textContent = 'engine v' + window.P1.VERSION;
+
+const el = (id) => document.getElementById(id);
+function logTo(id, line, replace) {
+  const d = el(id);
+  if (replace || d.textContent === 'loading…' || d.textContent === 'running…') d.textContent = '';
+  d.textContent += line + '\n';
+  d.scrollTop = d.scrollHeight;
+}
+const tick = () => new Promise(r => setTimeout(r, 0));
+
+/* data loading: fetch (http://) first, then the file:// fallback — dynamically
+   injecting model_fixtures_data.js (window.P1_MODEL_FIXTURES), regenerated by
+   colab/gen_model_fixtures.py next to this page. */
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = () => res(true);
+    s.onerror = () => rej(new Error('script load failed: ' + src));
+    document.head.appendChild(s);
+  });
+}
+async function loadFixtures(log) {
+  try {
+    const r = await fetch('model_fixtures.json');
+    if (r.ok) { log('fixtures via fetch(model_fixtures.json)'); return await r.json(); }
+    log('fetch model_fixtures.json -> HTTP ' + r.status);
+  } catch (e) {
+    log('fetch() unavailable here (' + (e.message || 'blocked') + ')');
+  }
+  log('falling back to model_fixtures_data.js (file:// snapshot)…');
+  await loadScript('model_fixtures_data.js');
+  if (!window.P1_MODEL_FIXTURES) {
+    throw new Error('model_fixtures_data.js loaded but window.P1_MODEL_FIXTURES missing — regenerate via colab/gen_model_fixtures.py');
+  }
+  return window.P1_MODEL_FIXTURES;
+}
+
+let PARITY_OK = false, SMOKE_OK = false;
+
+async function test1(fixtures) {
+  const log = (s, r) => logTo('t1-log', s, r);
+  log('TEST 1 — logits parity (JS forward vs Python logits)', true);
+  log('  fixtures : ' + fixtures.format + ' · ' + fixtures.cases.length + ' cases · model_seed ' +
+      fixtures.model_seed + ' · ids_seed ' + fixtures.ids_seed +
+      ' · rounding ' + fixtures.rounding_decimals + ' decimals');
+  const body = el('t1-body');
+  body.innerHTML = '';
+  let pass = 0, worst = 0, worstCase = '';
+  for (let i = 0; i < fixtures.cases.length; i++) {
+    const c = fixtures.cases[i];
+    await tick();
+    const model = new P1.Transformer(c.config, c.model_seed);
+    const B = c.B, T = c.T, V = c.config.vocab_size;
+    const ids = [];
+    for (const row of c.ids) for (const t of row) ids.push(t);
+    const t0 = performance.now();
+    const logits = model.forward(ids, B);
+    const ms = Math.round(performance.now() - t0);
+    let maxDiff = 0;
+    for (let b = 0; b < B; b++) {
+      for (let t = 0; t < T; t++) {
+        const row = c.logits[b][t], off = (b * T + t) * V;
+        for (let j = 0; j < V; j++) {
+          const d = Math.abs(logits.data[off + j] - row[j]);
+          if (d > maxDiff) maxDiff = d;
+        }
+      }
+    }
+    const ok = maxDiff < 1e-2 && model.numParams() === c.num_params;
+    if (ok) pass++;
+    if (maxDiff > worst) { worst = maxDiff; worstCase = c.name; }
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + c.name + '</td>' +
+      '<td class="num">' + B + '</td><td class="num">' + T + '</td>' +
+      '<td class="num">' + V + '</td><td class="num">' + model.numParams() + '</td>' +
+      '<td class="num">' + maxDiff.toExponential(3) + '</td>' +
+      '<td class="' + (ok ? 'verdict-pass' : 'verdict-fail') + '">' + (ok ? 'PASS' : 'FAIL') + '</td>';
+    body.appendChild(tr);
+    log('  ' + c.name.padEnd(10) + ' max|Δlogit| ' + maxDiff.toExponential(3) +
+        ' · ' + model.numParams() + ' params · ' + ms + ' ms · ' + (ok ? 'PASS' : 'FAIL'));
+  }
+  PARITY_OK = pass === fixtures.cases.length;
+  el('m-pass').textContent = pass + '/' + fixtures.cases.length;
+  el('m-pass').className = PARITY_OK ? 'ok' : 'bad';
+  el('m-worst').textContent = worst.toExponential(3) + ' (' + worstCase + ')';
+  el('m-worst').className = PARITY_OK ? 'ok' : 'bad';
+  el('t1-status').textContent = PARITY_OK
+    ? ('✓ ' + pass + '/' + fixtures.cases.length + ' cases · worst ' + worst.toExponential(3) + ' (bar 1e-2)')
+    : ('✗ parity FAILED — worst ' + worst.toExponential(3) + ' at ' + worstCase);
+  el('t1-status').className = PARITY_OK ? 'status ok' : 'status bad';
+}
+
+async function test2() {
+  const log = (s, r) => logTo('t2-log', s, r);
+  log('TEST 2 — Config A training smoke', true);
+  try {
+    await tick();
+    const res = P1.MODEL.smoke(P1.MODEL.CONFIG_A, 'Config A', (s) => log(s));
+    SMOKE_OK = true;
+    el('t2-status').textContent = '✓ smoke passed — final loss ' + res.loss.toFixed(6) + ', no NaN';
+    el('t2-status').className = 'status ok';
+  } catch (e) {
+    SMOKE_OK = false;
+    log('  ✗ ' + (e.stack || e.message));
+    el('t2-status').textContent = '✗ smoke FAILED — ' + e.message;
+    el('t2-status').className = 'status bad';
+  }
+}
+
+(async function main() {
+  const banner = el('banner');
+  try {
+    const fixtures = await loadFixtures((s) => logTo('t1-log', s));
+    await test1(fixtures);
+    await test2();
+    if (PARITY_OK && SMOKE_OK) {
+      banner.textContent = 'PASS — parity ' + el('m-pass').textContent + ' · worst |Δlogit| ' + el('m-worst').textContent + ' · smoke green';
+      banner.className = 'banner pass';
+    } else {
+      banner.textContent = 'FAIL — see panels above';
+      banner.className = 'banner fail';
+    }
+  } catch (e) {
+    banner.textContent = 'FAIL — ' + (e.message || e);
+    banner.className = 'banner fail';
+  }
+})();
+</script>
+</body>
+</html>

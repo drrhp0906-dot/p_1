@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>p_1 · retrieve.js — handmade retrieval demo</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --line: #30363d;
+    --tx: #e6edf3; --dim: #8b949e; --ok: #3fb950; --bad: #f85149; --acc: #58a6ff;
+    --acc2: #d2a8ff; --chip: #21262d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--tx); margin: 0; padding: 24px 16px 64px;
+    font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  h1 .dim { font-weight: normal; }
+  .sub { color: var(--dim); margin-bottom: 20px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; margin: 16px 0;
+  }
+  .panel h2 { font-size: 15px; margin: 0 0 4px; color: var(--acc); }
+  .note { color: var(--dim); font-size: 12.5px; margin: 0 0 10px; }
+  .log {
+    white-space: pre-wrap; word-break: break-word; font-size: 13px;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px 12px; min-height: 20px; max-height: 420px; overflow-y: auto;
+  }
+  .ok  { color: var(--ok); }
+  .bad { color: var(--bad); }
+  .dim { color: var(--dim); }
+  .banner {
+    margin-top: 20px; padding: 12px; text-align: center; font-size: 15px;
+    border: 1px solid var(--line); border-radius: 8px;
+  }
+  .banner.pass { border-color: var(--ok); color: var(--ok); }
+  .banner.fail { border-color: var(--bad); color: var(--bad); }
+  button, select {
+    background: #21262d; color: var(--tx); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 14px; cursor: pointer; font: inherit;
+  }
+  button:hover { background: #30363d; }
+  button.on { border-color: var(--acc); color: var(--acc); }
+  input[type="text"] {
+    width: 100%; background: var(--bg); color: var(--tx);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 9px 12px; font: inherit;
+  }
+  input[type="text"]:focus { outline: none; border-color: var(--acc); }
+  input[type="range"] { vertical-align: middle; width: 160px; accent-color: #58a6ff; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0 4px; }
+  .controls .grow { flex: 1 1 320px; }
+  .stat { color: var(--dim); font-size: 12.5px; }
+  .stat b { color: var(--tx); font-weight: normal; }
+
+  .result {
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px 12px; margin: 10px 0; cursor: pointer; background: var(--bg);
+  }
+  .result:hover { border-color: var(--acc); }
+  .r-head { display: flex; align-items: baseline; gap: 10px; }
+  .r-rank { color: var(--acc2); min-width: 26px; }
+  .r-id { color: var(--acc); }
+  .r-score { color: var(--dim); margin-left: auto; white-space: nowrap; }
+  .r-q { margin: 6px 0 0 36px; }
+  .bar-track {
+    margin: 8px 0 0 36px; height: 6px; background: #21262d;
+    border-radius: 3px; overflow: hidden;
+  }
+  .bar-fill { height: 100%; background: var(--acc); border-radius: 3px; }
+  .chips { margin: 8px 0 0 36px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    background: var(--chip); border: 1px solid var(--line); border-radius: 999px;
+    padding: 1px 10px; font-size: 11.5px; color: var(--dim); max-width: 320px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .r-full {
+    display: none; margin: 10px 0 0 36px; padding: 10px 12px; font-size: 13px;
+    background: var(--panel); border: 1px dashed var(--line); border-radius: 6px;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .result.open .r-full { display: block; }
+  .empty { color: var(--dim); margin: 12px 0 0 36px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>p_1 · retrieve.js <span class="dim">— handmade retrieval demo</span></h1>
+  <div class="sub">inverted index · BM25 (k1 1.5, b 0.75) + TF-IDF cosine · pure JavaScript, zero dependencies · <span id="ver"></span></div>
+
+  <div class="panel">
+    <h2>Index — one chunk per Q&amp;A pair</h2>
+    <p class="note">Corpus: corpus/health_qa.jsonl (fetch) with a docs/data/corpus_docs.js snapshot
+    fallback for file://. Chunking per the Task 8 contract: chunkId = entry id, text =
+    "Q: …\nA: …" (the generic ~200-token / overlap-40 sliding-window chunker in retrieve.js
+    is for future long docs, unused here). No stopwords, tokens = [a-z0-9]+.</p>
+    <div class="log" id="idx-log">loading corpus…</div>
+  </div>
+
+  <div class="panel">
+    <h2>Search</h2>
+    <div class="controls">
+      <div class="grow"><input type="text" id="q" placeholder="type a health question…" spellcheck="false"></div>
+      <button id="m-bm25" class="on">BM25</button>
+      <button id="m-tfidf">TF-IDF</button>
+      <span class="stat">k <input type="range" id="k" min="1" max="10" value="5"> <b id="k-val">5</b></span>
+    </div>
+    <div class="stat" id="s-stat">—</div>
+    <div id="results"></div>
+  </div>
+
+  <div class="banner" id="banner">loading…</div>
+  <div class="sub" style="margin-top:10px">
+    Acceptance gate (JS vs Python twins, 100 questions × 2 methods):
+    <span class="dim">node scripts/test_task8_retrieval.js</span> · python twin:
+    <span class="dim">python3 colab/retrieval_py.py --eval</span>
+  </div>
+</div>
+
+<!-- file:// fallback snapshot (fetched from ../corpus/health_qa.jsonl first) -->
+<script src="data/corpus_docs.js"></script>
+<script src="retrieve.js"></script>
+<script>
+'use strict';
+document.getElementById('ver').textContent = 'v' + (window.P1 && P1.retrieve ? P1.retrieve.VERSION : '?');
+
+const el = (id) => document.getElementById(id);
+function logTo(id, line) {
+  const d = el(id);
+  if (d.textContent === 'loading corpus…' || d.textContent === 'building index…') d.textContent = '';
+  d.textContent += line + '\n';
+}
+
+/* ---- corpus loading: fetch first, snapshot fallback (same pattern as the
+   tokenizer/model pages). ------------------------------------------------ */
+async function loadPairs() {
+  try {
+    const r = await fetch('../corpus/health_qa.jsonl');
+    if (r.ok) {
+      const text = await r.text();
+      const pairs = text.split('\n').filter(l => l.trim().length).map(l => JSON.parse(l));
+      logTo('idx-log', 'corpus via fetch(../corpus/health_qa.jsonl)');
+      return pairs;
+    }
+    logTo('idx-log', 'fetch ../corpus/health_qa.jsonl -> HTTP ' + r.status);
+  } catch (e) {
+    logTo('idx-log', 'fetch() unavailable here (' + (e.message || 'blocked') + ')');
+  }
+  if (!window.P1_CORPUS_DOCS) throw new Error('no corpus: fetch failed and data/corpus_docs.js snapshot missing');
+  logTo('idx-log', 'falling back to data/corpus_docs.js snapshot (file:// mode)');
+  return window.P1_CORPUS_DOCS.pairs;
+}
+
+/* ---- state ---- */
+let INDEX = null, METHOD = 'bm25', K = 5, LAST = [];
+
+function setMethod(m) {
+  METHOD = m;
+  el('m-bm25').className = m === 'bm25' ? 'on' : '';
+  el('m-tfidf').className = m === 'tfidf' ? 'on' : '';
+  runSearch();
+}
+
+/* ---- rendering ---- */
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+function render() {
+  const box = el('results');
+  box.innerHTML = '';
+  if (!LAST.length) {
+    box.innerHTML = '<div class="empty">no results (empty query?)</div>';
+    return;
+  }
+  const max = Math.max(...LAST.map(r => r.score), 1e-12);
+  for (const r of LAST) {
+    const div = document.createElement('div');
+    div.className = 'result';
+    const qLine = r.text.split('\n')[0] || '';
+    div.innerHTML =
+      '<div class="r-head"><span class="r-rank">#' + r.rank + '</span>' +
+      '<span class="r-id">' + esc(r.chunkId) + '</span>' +
+      '<span class="r-score">score ' + r.score.toFixed(4) + '</span></div>' +
+      '<div class="r-q">' + esc(qLine) + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' +
+      (100 * r.score / max).toFixed(1) + '%"></div></div>' +
+      '<div class="chips">' + (r.sources || []).map(s =>
+        '<span class="chip" title="' + esc(s) + '">' + esc(s) + '</span>').join('') + '</div>' +
+      '<div class="r-full">' + esc(r.text) + '</div>';
+    div.addEventListener('click', () => div.classList.toggle('open'));
+    box.appendChild(div);
+  }
+}
+
+function runSearch() {
+  if (!INDEX) return;
+  const query = el('q').value;
+  const t0 = performance.now();
+  LAST = INDEX.search(query, { k: K, method: METHOD })
+    .map(r => Object.assign({}, r, { text: INDEX.chunks[r.idx].text }));
+  const ms = performance.now() - t0;
+  el('s-stat').innerHTML = 'method <b>' + METHOD + '</b> · k <b>' + K + '</b> · <b>' +
+    ms.toFixed(1) + ' ms</b> over ' + INDEX.N.toLocaleString() + ' chunks';
+  render();
+}
+
+/* ---- on-load self-test: exact corpus questions must hit their own fact ---- */
+function selfTest(pairs) {
+  const N = pairs.length;
+  const picks = [0, Math.round(2 * (N - 1) / 9), Math.round(6 * (N - 1) / 9)];
+  let hits = 0;
+  for (const ci of picks) {
+    const top = INDEX.search(pairs[ci].question, { k: 1, method: 'bm25' })[0];
+    if (top.chunkId === pairs[ci].id || pairs[top.idx].question === pairs[ci].question) hits++;
+  }
+  logTo('idx-log', 'self-test: ' + hits + '/3 sampled exact questions retrieve their own fact at rank 1' +
+    ' (siblings share the question text — 1,239 unique questions over 4,278 chunks)');
+  return hits === picks.length;
+}
+
+/* ---- main ---- */
+(async function main() {
+  const banner = el('banner');
+  try {
+    const pairs = await loadPairs();
+    logTo('idx-log', 'building index over ' + pairs.length + ' pairs…');
+    await new Promise(r => setTimeout(r, 0));
+    INDEX = P1.retrieve.buildIndex(pairs);
+    logTo('idx-log',
+      'index     : N=' + INDEX.N + ' chunks · vocab=' + INDEX.vocab + ' terms · avgdl=' + INDEX.avgdl.toFixed(2) + ' tokens\n' +
+      'build time: ' + INDEX.buildMs.toFixed(1) + ' ms · BM25 k1=' + INDEX.k1 + ' b=' + INDEX.b);
+    const st = selfTest(pairs);
+    banner.className = 'banner pass';
+    banner.textContent = '✓ index live — ' + INDEX.N.toLocaleString() + ' chunks · ' +
+      INDEX.vocab + ' terms · built in ' + INDEX.buildMs.toFixed(0) + ' ms' + (st ? ' · self-test green' : ' · SELF-TEST FAILED');
+    if (!st) banner.className = 'banner fail';
+
+    // seed the box with a demo question and run one search
+    el('q').value = 'How much water should I drink every day?';
+    el('k').addEventListener('input', () => { K = +el('k').value; el('k-val').textContent = K; runSearch(); });
+    el('q').addEventListener('input', runSearch);
+    el('q').addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
+    el('m-bm25').addEventListener('click', () => setMethod('bm25'));
+    el('m-tfidf').addEventListener('click', () => setMethod('tfidf'));
+    runSearch();
+  } catch (err) {
+    banner.className = 'banner fail';
+    banner.textContent = '✗ CRASH: ' + (err && err.message ? err.message : err);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1062 @@
+{
+ "format": "p1-verify-fixtures-v1",
+ "meta": {
+  "version": "1.0.0",
+  "generated_by": "scripts/test_task9_eval.py",
+  "reference": "colab/eval_lib.py (Python twin is the reference)",
+  "consumer": "scripts/test_task9_verify.js",
+  "score_tolerance": 0.001,
+  "counts": {
+   "verifyClaim": 40,
+   "refusals": 8,
+   "myths": 6
+  },
+  "verdicts": {
+   "supported": 18,
+   "unsupported": 16,
+   "not-in-corpus": 6
+  },
+  "coverage": "number match/mismatch (incl. ranges, %, decimals, dict-number overrides), negation conflict both directions + both-negated, F1 near 0.34 / weak zone / exact 0.08 / 1.0, empty retrieval + empty answer part, Q-line trap, chunk/sentence tie-breaks, corpus-grounded top-3 with gold + planted-swap claims"
+ },
+ "cases": [
+  {
+   "id": "vc-01-num-match",
+   "kind": "verifyClaim",
+   "claim": "Aim for 8 cups of water a day.",
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.625,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-water",
+    "bestSentence": "Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+   },
+   "note": "supported: number 8 present in chunk"
+  },
+  {
+   "id": "vc-02-num-decimal",
+   "kind": "verifyClaim",
+   "claim": "Drink 2.5 liters per hour of hard exercise.",
+   "chunks": [
+    {
+     "chunkId": "fx-exercise",
+     "text": "Q: What should I drink when exercising?\nA: Add about 2.5 liters of fluid for every hour of hard exercise."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.6667,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-exercise",
+    "bestSentence": "Add about 2.5 liters of fluid for every hour of hard exercise."
+   },
+   "note": "supported: decimal 2.5 matches"
+  },
+  {
+   "id": "vc-03-num-mismatch",
+   "kind": "verifyClaim",
+   "claim": "Aim for 9 cups of water a day.",
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.5,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": "fx-water",
+    "bestSentence": "Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+   },
+   "note": "unsupported: 9 not in {6, 8}"
+  },
+  {
+   "id": "vc-04-num-mismatch-sleep",
+   "kind": "verifyClaim",
+   "claim": "Adults need 10 hours of sleep each night.",
+   "chunks": [
+    {
+     "chunkId": "fx-sleep",
+     "text": "Q: How many hours of sleep do adults need?\nA: Adults need 7 to 9 hours of sleep each night."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.8,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": "fx-sleep",
+    "bestSentence": "Adults need 7 to 9 hours of sleep each night."
+   },
+   "note": "unsupported: 10 not in {7, 9}"
+  },
+  {
+   "id": "vc-05-num-range",
+   "kind": "verifyClaim",
+   "claim": "Aim for 6 to 8 cups a day.",
+   "chunks": [
+    {
+     "chunkId": "fx-fluid",
+     "text": "Q: How much fluid during exercise?\nA: Aim for 6-8 cups of fluid daily, more on hot days."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.5714,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-fluid",
+    "bestSentence": "Aim for 6-8 cups of fluid daily, more on hot days."
+   },
+   "note": "supported: claim range [6,8] covered by chunk '6-8' -> [6.0, 8.0]"
+  },
+  {
+   "id": "vc-06-num-percent",
+   "kind": "verifyClaim",
+   "claim": "Use sanitizer with 60% alcohol.",
+   "chunks": [
+    {
+     "chunkId": "fx-sanitizer",
+     "text": "Q: Does hand sanitizer work?\nA: Choose hand sanitizers with at least 60% alcohol."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.4,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-sanitizer",
+    "bestSentence": "Choose hand sanitizers with at least 60% alcohol."
+   },
+   "note": "supported: percent number matches"
+  },
+  {
+   "id": "vc-07-dict-numbers-empty",
+   "kind": "verifyClaim",
+   "claim": {
+    "text": "Use sanitizer with 60% alcohol.",
+    "numbers": []
+   },
+   "chunks": [
+    {
+     "chunkId": "fx-sanitizer",
+     "text": "Q: Does hand sanitizer work?\nA: Choose hand sanitizers with at least 60% alcohol."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.4,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-sanitizer",
+    "bestSentence": "Choose hand sanitizers with at least 60% alcohol."
+   },
+   "note": "dict claim: numbers [] override extraction -> numbersOK"
+  },
+  {
+   "id": "vc-08-dict-numbers-wrong",
+   "kind": "verifyClaim",
+   "claim": {
+    "text": "Aim for 8 cups of water a day.",
+    "numbers": [
+     9.0
+    ]
+   },
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.625,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": "fx-water",
+    "bestSentence": "Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+   },
+   "note": "dict claim: supplied 9.0 overrides extracted 8.0 -> mismatch"
+  },
+  {
+   "id": "vc-09-num-unit-case",
+   "kind": "verifyClaim",
+   "claim": "DRINK 8 CUPS OF WATER A DAY.",
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.5,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-water",
+    "bestSentence": "Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+   },
+   "note": "case-insensitive tokenizer -> supported"
+  },
+  {
+   "id": "vc-10-neg-claim-vs-clean",
+   "kind": "verifyClaim",
+   "claim": "Walking for 30 minutes a day does not improve your mood.",
+   "chunks": [
+    {
+     "chunkId": "fx-walk",
+     "text": "Q: Does walking help mood?\nA: Walking for 30 minutes a day improves your mood and sleep."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.7692,
+    "numbersOK": true,
+    "negConflict": true,
+    "bestChunkId": "fx-walk",
+    "bestSentence": "Walking for 30 minutes a day improves your mood and sleep."
+   },
+   "note": "unsupported: claim has negation, best sentence does not"
+  },
+  {
+   "id": "vc-11-clean-claim-vs-neg",
+   "kind": "verifyClaim",
+   "claim": "Cracking your knuckles causes arthritis.",
+   "chunks": [
+    {
+     "chunkId": "fx-knuckle",
+     "text": "Q: Is cracking knuckles harmful?\nA: Cracking your knuckles does not cause arthritis or damage your joints."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.6,
+    "numbersOK": true,
+    "negConflict": true,
+    "bestChunkId": "fx-knuckle",
+    "bestSentence": "Cracking your knuckles does not cause arthritis or damage your joints."
+   },
+   "note": "unsupported: clean claim vs negated sentence"
+  },
+  {
+   "id": "vc-12-both-negated",
+   "kind": "verifyClaim",
+   "claim": "Cracking your knuckles does not cause arthritis.",
+   "chunks": [
+    {
+     "chunkId": "fx-knuckle",
+     "text": "Q: Is cracking knuckles harmful?\nA: Cracking your knuckles does not cause arthritis or damage your joints."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.8,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-knuckle",
+    "bestSentence": "Cracking your knuckles does not cause arthritis or damage your joints."
+   },
+   "note": "supported: both sides carry negation -> no conflict"
+  },
+  {
+   "id": "vc-13-cannot-echo",
+   "kind": "verifyClaim",
+   "claim": "You cannot get vitamins from sunlight alone in winter.",
+   "chunks": [
+    {
+     "chunkId": "fx-sunlight",
+     "text": "Q: Can sunlight give me vitamins in winter?\nA: You cannot get vitamins from sunlight alone in winter."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-sunlight",
+    "bestSentence": "You cannot get vitamins from sunlight alone in winter."
+   },
+   "note": "supported: 'cannot' on both sides"
+  },
+  {
+   "id": "vc-14-never-vs-not",
+   "kind": "verifyClaim",
+   "claim": "You should not share towels with someone who has an eye infection.",
+   "chunks": [
+    {
+     "chunkId": "fx-towels",
+     "text": "Q: Can I share towels?\nA: Never share towels with someone who has an eye infection."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.9231,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-towels",
+    "bestSentence": "Never share towels with someone who has an eye infection."
+   },
+   "note": "supported: 'not' vs 'never' — both negated"
+  },
+  {
+   "id": "vc-15-both-negated-low-f1",
+   "kind": "verifyClaim",
+   "claim": "You should not take two kinds of painkillers together.",
+   "chunks": [
+    {
+     "chunkId": "fx-painkillers",
+     "text": "Q: Can I mix painkillers?\nA: Do not combine painkillers without asking a doctor or pharmacist."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.1818,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-painkillers",
+    "bestSentence": "Do not combine painkillers without asking a doctor or pharmacist."
+   },
+   "note": "unsupported: both negated but F1 in the weak zone"
+  },
+  {
+   "id": "vc-16-f1-just-above-supported",
+   "kind": "verifyClaim",
+   "claim": "Wash hands",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.3636,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "supported: score 0.3636 just above 0.34"
+  },
+  {
+   "id": "vc-17-f1-just-below-supported",
+   "kind": "verifyClaim",
+   "claim": "Wash hands vitamins",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.3333,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "unsupported: score 0.3333 just below 0.34"
+  },
+  {
+   "id": "vc-18-f1-weak-zone-below-min",
+   "kind": "verifyClaim",
+   "claim": "Wash",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.2,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "unsupported (weak zone): score 0.2000 < 0.22"
+  },
+  {
+   "id": "vc-19-f1-weak-zone-above-min",
+   "kind": "verifyClaim",
+   "claim": "Wash hands vitamins calcium yoga marathon",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.2667,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "unsupported (weak zone): score 0.2667 in [0.22, 0.34)"
+  },
+  {
+   "id": "vc-20-f1-just-below-not-in-corpus",
+   "kind": "verifyClaim",
+   "claim": "Wash vitamins calcium yoga marathon kneecap elbow sunburn molar tendon iron zinc spinach blanket pillow radiator sidewalk",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "not-in-corpus",
+    "score": 0.0769,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "not-in-corpus: score 0.0769 < 0.08"
+  },
+  {
+   "id": "vc-21-f1-exactly-0.08",
+   "kind": "verifyClaim",
+   "claim": "Wash vitamins calcium yoga marathon kneecap elbow sunburn molar tendon iron zinc spinach blanket pillow radiator",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.08,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "boundary: score == 0.08 is NOT < 0.08 -> unsupported"
+  },
+  {
+   "id": "vc-22-f1-exact-echo",
+   "kind": "verifyClaim",
+   "claim": "Wash your hands with soap and warm water for twenty seconds before you eat.",
+   "chunks": [
+    {
+     "chunkId": "fx-wash",
+     "text": "Q: How should I wash my hands?\nA: Wash your hands with soap and warm water for twenty seconds before you eat."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-wash",
+    "bestSentence": "Wash your hands with soap and warm water for twenty seconds before you eat."
+   },
+   "note": "supported: identical sentence scores 1.0"
+  },
+  {
+   "id": "vc-23-empty-retrieval-numbers",
+   "kind": "verifyClaim",
+   "claim": "Adults need 7 to 9 hours of sleep.",
+   "chunks": [],
+   "expected": {
+    "verdict": "not-in-corpus",
+    "score": 0.0,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": null,
+    "bestSentence": ""
+   },
+   "note": "not-in-corpus, score 0, numbersOK false (no chunks to check numbers)"
+  },
+  {
+   "id": "vc-24-empty-retrieval-clean",
+   "kind": "verifyClaim",
+   "claim": "Drink water every day.",
+   "chunks": [],
+   "expected": {
+    "verdict": "not-in-corpus",
+    "score": 0.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": null,
+    "bestSentence": ""
+   },
+   "note": "not-in-corpus, numbersOK true (no numbers)"
+  },
+  {
+   "id": "vc-25-chunk-empty-answer",
+   "kind": "verifyClaim",
+   "claim": "The moon is made of cheese.",
+   "chunks": [
+    {
+     "chunkId": "fx-empty-answer",
+     "text": "Q: What about tides?\nA: "
+    }
+   ],
+   "expected": {
+    "verdict": "not-in-corpus",
+    "score": 0.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-empty-answer",
+    "bestSentence": ""
+   },
+   "note": "not-in-corpus: chunk has no answer-part sentences"
+  },
+  {
+   "id": "vc-26-irrelevant-vs-real",
+   "kind": "verifyClaim",
+   "claim": "Quantum entanglement changes how aspirin works.",
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    },
+    {
+     "chunkId": "fx-sleep",
+     "text": "Q: How many hours of sleep do adults need?\nA: Adults need 7 to 9 hours of sleep each night."
+    }
+   ],
+   "expected": {
+    "verdict": "not-in-corpus",
+    "score": 0.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-water",
+    "bestSentence": "Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+   },
+   "note": "not-in-corpus: nothing relevant"
+  },
+  {
+   "id": "vc-27-best-in-second-chunk",
+   "kind": "verifyClaim",
+   "claim": "Adults need 7 to 9 hours of sleep each night.",
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    },
+    {
+     "chunkId": "fx-sleep",
+     "text": "Q: How many hours of sleep do adults need?\nA: Adults need 7 to 9 hours of sleep each night."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-sleep",
+    "bestSentence": "Adults need 7 to 9 hours of sleep each night."
+   },
+   "note": "best sentence lives in the 2nd chunk"
+  },
+  {
+   "id": "vc-28-best-in-third-chunk",
+   "kind": "verifyClaim",
+   "claim": "Adults need 7 to 9 hours of sleep each night.",
+   "chunks": [
+    {
+     "chunkId": "fx-water",
+     "text": "Q: How much water should I drink?\nA: Adults should aim for 6 to 8 cups of water a day, and more when you sweat heavily."
+    },
+    {
+     "chunkId": "fx-fluid",
+     "text": "Q: How much fluid during exercise?\nA: Aim for 6-8 cups of fluid daily, more on hot days."
+    },
+    {
+     "chunkId": "fx-sleep",
+     "text": "Q: How many hours of sleep do adults need?\nA: Adults need 7 to 9 hours of sleep each night."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-sleep",
+    "bestSentence": "Adults need 7 to 9 hours of sleep each night."
+   },
+   "note": "best sentence lives in the 3rd chunk"
+  },
+  {
+   "id": "vc-29-qline-trap",
+   "kind": "verifyClaim",
+   "claim": "What happens if I crack my knuckles daily?",
+   "chunks": [
+    {
+     "chunkId": "fx-cola",
+     "text": "Q: What happens if I crack my knuckles daily?\nA: Cola contains sugar and acid that harm teeth."
+    }
+   ],
+   "expected": {
+    "verdict": "not-in-corpus",
+    "score": 0.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-cola",
+    "bestSentence": "Cola contains sugar and acid that harm teeth."
+   },
+   "note": "Q-line is metadata, not evidence: echoing the question scores 0.0 vs the answer part (whole-chunk scoring would score 1.0)"
+  },
+  {
+   "id": "vc-30-duplicate-tie-first-chunk",
+   "kind": "verifyClaim",
+   "claim": "Adults need 7 to 9 hours of sleep each night.",
+   "chunks": [
+    {
+     "chunkId": "fx-dup-a",
+     "text": "Q: Sleep?\nA: Adults need 7 to 9 hours of sleep each night."
+    },
+    {
+     "chunkId": "fx-dup-b",
+     "text": "Q: Sleep?\nA: Adults need 7 to 9 hours of sleep each night."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-dup-a",
+    "bestSentence": "Adults need 7 to 9 hours of sleep each night."
+   },
+   "note": "identical sentences in two chunks -> first chunk in list order wins"
+  },
+  {
+   "id": "vc-31-duplicate-tie-first-sentence",
+   "kind": "verifyClaim",
+   "claim": "Adults need 7 to 9 hours of sleep each night.",
+   "chunks": [
+    {
+     "chunkId": "fx-dup-same",
+     "text": "Q: Sleep?\nA: Adults need 7 to 9 hours of sleep each night. Adults need 7 to 9 hours of sleep each night."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "fx-dup-same",
+    "bestSentence": "Adults need 7 to 9 hours of sleep each night."
+   },
+   "note": "identical sentences within one chunk -> earliest sentence wins"
+  },
+  {
+   "id": "vc-33-corpus-gold",
+   "kind": "verifyClaim",
+   "claim": "On a hot, sweaty day your body loses more fluid than usual, so aim above the usual 6 to 8 cups and let thirst lead the way.",
+   "chunks": [
+    {
+     "chunkId": "hq-00355",
+     "text": "Q: How much water should I drink every day?\nA: For most adults, about 6 to 8 cups of fluid a day is a sensible target. You do not need every drink to be plain water - milk, tea and foods like soup and fruit add to your fluid total too. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour. On hot days, or when you are sweating through exercise, you need more than usual."
+    },
+    {
+     "chunkId": "hq-00664",
+     "text": "Q: How much water should I drink every day?\nA: For most adults, about 6 to 8 cups of fluid a day is a sensible target. Water is the best everyday choice, but milk, tea, coffee and moist foods like soup and fruit all count towards the total. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour. On hot days, or when you are sweating through exercise, you need more than usual."
+    },
+    {
+     "chunkId": "hq-01713",
+     "text": "Q: How quickly will my taste buds adjust to less salt?\nA: Eating too much salt makes your body hold on to extra water, which pushes blood pressure up. High blood pressure strains the heart and blood vessels and raises the risk of heart attacks and strokes. Your taste buds adjust within a few weeks of cutting back, and herbs, spices, lemon and pepper bring flavor without sodium."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.3333,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "hq-00355",
+    "bestSentence": "For most adults, about 6 to 8 cups of fluid a day is a sensible target."
+   },
+   "note": "real top-3 for ea-01, gold claim"
+  },
+  {
+   "id": "vc-33-corpus-gold-dict",
+   "kind": "verifyClaim",
+   "claim": {
+    "text": "Water, milk, tea and juicy foods all count towards the total.",
+    "numbers": []
+   },
+   "chunks": [
+    {
+     "chunkId": "hq-00355",
+     "text": "Q: How much water should I drink every day?\nA: For most adults, about 6 to 8 cups of fluid a day is a sensible target. You do not need every drink to be plain water - milk, tea and foods like soup and fruit add to your fluid total too. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour. On hot days, or when you are sweating through exercise, you need more than usual."
+    },
+    {
+     "chunkId": "hq-00664",
+     "text": "Q: How much water should I drink every day?\nA: For most adults, about 6 to 8 cups of fluid a day is a sensible target. Water is the best everyday choice, but milk, tea, coffee and moist foods like soup and fruit all count towards the total. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour. On hot days, or when you are sweating through exercise, you need more than usual."
+    },
+    {
+     "chunkId": "hq-01713",
+     "text": "Q: How quickly will my taste buds adjust to less salt?\nA: Eating too much salt makes your body hold on to extra water, which pushes blood pressure up. High blood pressure strains the heart and blood vessels and raises the risk of heart attacks and strokes. Your taste buds adjust within a few weeks of cutting back, and herbs, spices, lemon and pepper bring flavor without sodium."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.64,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "hq-00664",
+    "bestSentence": "Water is the best everyday choice, but milk, tea, coffee and moist foods like soup and fruit all count towards the total."
+   },
+   "note": "real top-3 for ea-01, gold claim as dict"
+  },
+  {
+   "id": "vc-33-corpus-swapped",
+   "kind": "verifyClaim",
+   "claim": "On a hot, sweaty day your body loses more fluid than usual, so aim above the usual 7 to 8 cups and let thirst lead the way.",
+   "chunks": [
+    {
+     "chunkId": "hq-00355",
+     "text": "Q: How much water should I drink every day?\nA: For most adults, about 6 to 8 cups of fluid a day is a sensible target. You do not need every drink to be plain water - milk, tea and foods like soup and fruit add to your fluid total too. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour. On hot days, or when you are sweating through exercise, you need more than usual."
+    },
+    {
+     "chunkId": "hq-00664",
+     "text": "Q: How much water should I drink every day?\nA: For most adults, about 6 to 8 cups of fluid a day is a sensible target. Water is the best everyday choice, but milk, tea, coffee and moist foods like soup and fruit all count towards the total. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour. On hot days, or when you are sweating through exercise, you need more than usual."
+    },
+    {
+     "chunkId": "hq-01713",
+     "text": "Q: How quickly will my taste buds adjust to less salt?\nA: Eating too much salt makes your body hold on to extra water, which pushes blood pressure up. High blood pressure strains the heart and blood vessels and raises the risk of heart attacks and strokes. Your taste buds adjust within a few weeks of cutting back, and herbs, spices, lemon and pepper bring flavor without sodium."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.2667,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": "hq-00355",
+    "bestSentence": "For most adults, about 6 to 8 cups of fluid a day is a sensible target."
+   },
+   "note": "real top-3 for ea-01, planted number swap"
+  },
+  {
+   "id": "vc-36-corpus-gold",
+   "kind": "verifyClaim",
+   "claim": "A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar, roughly 9 teaspoons.",
+   "chunks": [
+    {
+     "chunkId": "hq-02925",
+     "text": "Q: How much sugar is in a can of soda?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    },
+    {
+     "chunkId": "hq-00048",
+     "text": "Q: How much sugar is in a can of soda?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Sugary drinks are the single biggest source of added sugar for many people, and liquid sugar does not make you feel any fuller. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    },
+    {
+     "chunkId": "hq-01539",
+     "text": "Q: How many teaspoons of sugar are in a can of cola?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 1.0,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "hq-02925",
+    "bestSentence": "A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons."
+   },
+   "note": "real top-3 for ea-03, gold claim"
+  },
+  {
+   "id": "vc-36-corpus-gold-dict",
+   "kind": "verifyClaim",
+   "claim": {
+    "text": "Liquid sugar is the biggest single source of added sugar for many people",
+    "numbers": []
+   },
+   "chunks": [
+    {
+     "chunkId": "hq-02925",
+     "text": "Q: How much sugar is in a can of soda?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    },
+    {
+     "chunkId": "hq-00048",
+     "text": "Q: How much sugar is in a can of soda?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Sugary drinks are the single biggest source of added sugar for many people, and liquid sugar does not make you feel any fuller. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    },
+    {
+     "chunkId": "hq-01539",
+     "text": "Q: How many teaspoons of sugar are in a can of cola?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.75,
+    "numbersOK": true,
+    "negConflict": true,
+    "bestChunkId": "hq-00048",
+    "bestSentence": "Sugary drinks are the single biggest source of added sugar for many people, and liquid sugar does not make you feel any fuller."
+   },
+   "note": "real top-3 for ea-03, gold claim as dict"
+  },
+  {
+   "id": "vc-36-corpus-swapped",
+   "kind": "verifyClaim",
+   "claim": "A regular 13-ounce (330 ml) can of cola contains about 35 grams of sugar, roughly 9 teaspoons.",
+   "chunks": [
+    {
+     "chunkId": "hq-02925",
+     "text": "Q: How much sugar is in a can of soda?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    },
+    {
+     "chunkId": "hq-00048",
+     "text": "Q: How much sugar is in a can of soda?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Sugary drinks are the single biggest source of added sugar for many people, and liquid sugar does not make you feel any fuller. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    },
+    {
+     "chunkId": "hq-01539",
+     "text": "Q: How many teaspoons of sugar are in a can of cola?\nA: A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.9286,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": "hq-02925",
+    "bestSentence": "A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons."
+   },
+   "note": "real top-3 for ea-03, planted number swap"
+  },
+  {
+   "id": "vc-39-corpus-gold",
+   "kind": "verifyClaim",
+   "claim": "For most adults, up to 400 mg of caffeine a day is fine",
+   "chunks": [
+    {
+     "chunkId": "hq-00269",
+     "text": "Q: How many cups of coffee can I drink a day?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Overdo the caffeine and you may feel shaky, on edge, or notice your heart racing. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    },
+    {
+     "chunkId": "hq-02773",
+     "text": "Q: How many cups of coffee can I drink a day?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Too much caffeine can leave you jittery, anxious, with a racing heart and poor sleep. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    },
+    {
+     "chunkId": "hq-00228",
+     "text": "Q: What happens if I drink too much caffeine?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Too much caffeine can leave you jittery, anxious, with a racing heart and poor sleep. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    }
+   ],
+   "expected": {
+    "verdict": "supported",
+    "score": 0.6154,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "hq-00269",
+    "bestSentence": "For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee."
+   },
+   "note": "real top-3 for ea-05, gold claim"
+  },
+  {
+   "id": "vc-39-corpus-gold-dict",
+   "kind": "verifyClaim",
+   "claim": {
+    "text": "four mugs of instant coffee sit right around that line.",
+    "numbers": []
+   },
+   "chunks": [
+    {
+     "chunkId": "hq-00269",
+     "text": "Q: How many cups of coffee can I drink a day?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Overdo the caffeine and you may feel shaky, on edge, or notice your heart racing. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    },
+    {
+     "chunkId": "hq-02773",
+     "text": "Q: How many cups of coffee can I drink a day?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Too much caffeine can leave you jittery, anxious, with a racing heart and poor sleep. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    },
+    {
+     "chunkId": "hq-00228",
+     "text": "Q: What happens if I drink too much caffeine?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Too much caffeine can leave you jittery, anxious, with a racing heart and poor sleep. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.2857,
+    "numbersOK": true,
+    "negConflict": false,
+    "bestChunkId": "hq-00269",
+    "bestSentence": "Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+   },
+   "note": "real top-3 for ea-05, gold claim as dict"
+  },
+  {
+   "id": "vc-39-corpus-swapped",
+   "kind": "verifyClaim",
+   "claim": "For most adults, up to 401 mg of caffeine a day is fine",
+   "chunks": [
+    {
+     "chunkId": "hq-00269",
+     "text": "Q: How many cups of coffee can I drink a day?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Overdo the caffeine and you may feel shaky, on edge, or notice your heart racing. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    },
+    {
+     "chunkId": "hq-02773",
+     "text": "Q: How many cups of coffee can I drink a day?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Too much caffeine can leave you jittery, anxious, with a racing heart and poor sleep. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    },
+    {
+     "chunkId": "hq-00228",
+     "text": "Q: What happens if I drink too much caffeine?\nA: For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg. Too much caffeine can leave you jittery, anxious, with a racing heart and poor sleep. Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee."
+    }
+   ],
+   "expected": {
+    "verdict": "unsupported",
+    "score": 0.5385,
+    "numbersOK": false,
+    "negConflict": false,
+    "bestChunkId": "hq-00269",
+    "bestSentence": "For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee."
+   },
+   "note": "real top-3 for ea-05, planted number swap"
+  }
+ ],
+ "refusals": [
+  {
+   "id": "ref-01",
+   "text": "I don't know.",
+   "expected": true
+  },
+  {
+   "id": "ref-02",
+   "text": "I'm not confident; I can't answer that from my corpus.",
+   "expected": true
+  },
+  {
+   "id": "ref-03",
+   "text": "I don't have reliable information about that in my corpus.",
+   "expected": true
+  },
+  {
+   "id": "ref-04",
+   "text": "There is no established scientific answer to that question.",
+   "expected": true
+  },
+  {
+   "id": "ref-05",
+   "text": "I cannot say without more information.",
+   "expected": true
+  },
+  {
+   "id": "ref-06",
+   "text": "Drink 8 cups of water a day, and more when you sweat.",
+   "expected": false
+  },
+  {
+   "id": "ref-07",
+   "text": "Colds come from viruses, not from being chilly.",
+   "expected": false
+  },
+  {
+   "id": "ref-08",
+   "text": "Adults need about 7 to 9 hours of sleep each night.",
+   "expected": false
+  }
+ ],
+ "myths": [
+  {
+   "id": "my-01-folk-echo",
+   "kind": "myth",
+   "answer": "Of course it does - every grandmother says so. Keep popping your joints and you will end up with swollen, arthritic fingers.",
+   "folk_belief": "Of course it does - every grandmother says so. Keep popping your joints and you will end up with swollen, arthritic fingers.",
+   "correction": "The evidence says otherwise: studies have found no link between knuckle-cracking and arthritis - one doctor famously cracked the knuckles of only one hand for decades and aged exactly the same on both sides. The pop is just gas bubbles forming in the joint fluid. Cracking may annoy people around you, but it does not wear out your joints.",
+   "expected": {
+    "parroting": true,
+    "folk_f1": 0.6587,
+    "correction_f1": 0.045,
+    "override": null,
+    "n_claims": 2,
+    "negates_folk_claims": 0
+   },
+   "note": "echoing the folk belief verbatim -> parroting"
+  },
+  {
+   "id": "my-02-correction-cite",
+   "kind": "myth",
+   "answer": "The evidence says otherwise: studies have found no link between knuckle-cracking and arthritis - one doctor famously cracked the knuckles of only one hand for decades and aged exactly the same on both sides. The pop is just gas bubbles forming in the joint fluid. Cracking may annoy people around you, but it does not wear out your joints.",
+   "folk_belief": "Of course it does - every grandmother says so. Keep popping your joints and you will end up with swollen, arthritic fingers.",
+   "correction": "The evidence says otherwise: studies have found no link between knuckle-cracking and arthritis - one doctor famously cracked the knuckles of only one hand for decades and aged exactly the same on both sides. The pop is just gas bubbles forming in the joint fluid. Cracking may annoy people around you, but it does not wear out your joints.",
+   "expected": {
+    "parroting": false,
+    "folk_f1": 0.0514,
+    "correction_f1": 0.4655,
+    "override": "correction-cue",
+    "n_claims": 3,
+    "negates_folk_claims": 2
+   },
+   "note": "correction text carries an explicit cue -> override"
+  },
+  {
+   "id": "my-03-refusal",
+   "kind": "myth",
+   "answer": "I'm not confident; I can't answer that from my corpus.",
+   "folk_belief": "Anyone who has watched a birthday party knows sugar sends kids bouncing off the walls.",
+   "correction": "This is one of the most tested beliefs in nutrition, and controlled trials find no difference in behavior between children given sugar and children given a placebo - even when parents were told their child had sugar and rated them as wilder. The excitement of parties and expectations does the rest. Sugar is still worth limiting for teeth and overall health, just not for calm.",
+   "expected": {
+    "parroting": false,
+    "folk_f1": 0.0,
+    "correction_f1": 0.0,
+    "override": null,
+    "n_claims": 1,
+    "negates_folk_claims": 0
+   },
+   "note": "refusal echoes no corpus content -> not parroting"
+  },
+  {
+   "id": "my-04-folk-with-negation",
+   "kind": "myth",
+   "answer": "They would not taste sweet with no calories if they were not some laboratory chemical - those diet drinks are a cancer risk waiting to happen.",
+   "folk_belief": "They would not taste sweet with no calories if they were not some laboratory chemical - those diet drinks are a cancer risk waiting to happen.",
+   "correction": "Major reviews of the evidence find no link between approved sweeteners and cancer at the levels people actually consume. The worries trace back to old, very high-dose animal studies, and regulators set acceptable daily intakes far below anything those studies involved. As with most things moderation applies, but a diet drink is not a hazard.",
+   "expected": {
+    "parroting": true,
+    "folk_f1": 1.0,
+    "correction_f1": 0.0784,
+    "override": null,
+    "n_claims": 1,
+    "negates_folk_claims": 1
+   },
+   "note": "folk belief itself contains negation -> negates_folk meta"
+  },
+  {
+   "id": "my-05-folk-then-actually",
+   "kind": "myth",
+   "answer": "Anyone who has watched a birthday party knows sugar sends kids bouncing off the walls. Actually, controlled trials find no difference between sugar and placebo.",
+   "folk_belief": "Anyone who has watched a birthday party knows sugar sends kids bouncing off the walls.",
+   "correction": "This is one of the most tested beliefs in nutrition, and controlled trials find no difference in behavior between children given sugar and children given a placebo - even when parents were told their child had sugar and rated them as wilder. The excitement of parties and expectations does the rest. Sugar is still worth limiting for teeth and overall health, just not for calm.",
+   "expected": {
+    "parroting": false,
+    "folk_f1": 0.5526,
+    "correction_f1": 0.1682,
+    "override": "correction-cue",
+    "n_claims": 2,
+    "negates_folk_claims": 1
+   },
+   "note": "folk echo plus an 'actually' correction cue -> override wins"
+  },
+  {
+   "id": "my-06-correction-no-cue",
+   "kind": "myth",
+   "answer": "Colds come from viruses. Chilly hair does nothing on its own, and studies comparing chilled and comfortable volunteers found no difference in infection rates.",
+   "folk_belief": "Absolutely - going out with wet hair in winter is asking for a cold. That chill goes straight through you.",
+   "correction": "Colds come from viruses, not from being chilly - you have to encounter the virus to get sick.",
+   "expected": {
+    "parroting": false,
+    "folk_f1": 0.0417,
+    "correction_f1": 0.2179,
+    "override": "correction-cue",
+    "n_claims": 3,
+    "negates_folk_claims": 0
+   },
+   "note": "correction-aligned F1 without any cue word -> not parroting, no override"
+  }
+ ]
+}

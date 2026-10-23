@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>p_1 · tensor.js — engine self-test</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --line: #30363d;
+    --tx: #e6edf3; --dim: #8b949e; --ok: #3fb950; --bad: #f85149; --acc: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--tx); margin: 0; padding: 24px 16px 64px;
+    font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  h1 .dim { font-weight: normal; }
+  .sub { color: var(--dim); margin-bottom: 20px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; margin: 16px 0;
+  }
+  .panel h2 { font-size: 15px; margin: 0 0 4px; color: var(--acc); }
+  .note { color: var(--dim); font-size: 12.5px; margin: 0 0 10px; }
+  .log {
+    white-space: pre-wrap; word-break: break-all; font-size: 13px;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px 12px; min-height: 20px; max-height: 420px; overflow-y: auto;
+  }
+  .status {
+    margin-top: 10px; padding: 8px 12px; border: 1px solid var(--line);
+    border-radius: 6px; font-size: 14px;
+  }
+  .ok  { color: var(--ok); }
+  .bad { color: var(--bad); }
+  .dim { color: var(--dim); }
+  .banner {
+    margin-top: 20px; padding: 12px; text-align: center; font-size: 15px;
+    border: 1px solid var(--line); border-radius: 8px;
+  }
+  .banner.pass { border-color: var(--ok); color: var(--ok); }
+  .banner.fail { border-color: var(--bad); color: var(--bad); }
+  .rerun { text-align: center; margin-top: 14px; }
+  button {
+    background: #21262d; color: var(--tx); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 16px; cursor: pointer; font: inherit;
+  }
+  button:hover { background: #30363d; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>p_1 · tensor.js <span class="dim">— engine self-test</span></h1>
+  <div class="sub">reverse-mode autograd · pure JavaScript · zero dependencies · <span id="ver"></span></div>
+
+  <div class="panel">
+    <h2>Test A — numerical gradient check</h2>
+    <p class="note">Engine backward (float32) vs an independent float64 reference evaluated by central
+    differences (h = 1e-5). Composite exercises all 12 ops: matmul, add, sub, mul, relu, tanh, gelu,
+    softmax, crossEntropy, sum, scale, reshape. Metric: |a−n| / max(|a|, |n|, 1e-3). Bar: max &lt; 1e-3.</p>
+    <div class="log" id="a-log">running…</div>
+    <div class="status" id="a-status">…</div>
+  </div>
+
+  <div class="panel">
+    <h2>Test B — XOR learned live</h2>
+    <p class="note">2 → 16 gelu → 2 MLP, He init, fused crossEntropy, full batch of 4. SGD + momentum 0.9
+    lives in the test (AdamW arrives in Task 5). Bar: loss &lt; 0.01 within 2000 steps.</p>
+    <div class="log" id="b-log">running…</div>
+    <div class="status" id="b-status">…</div>
+  </div>
+
+  <div class="banner" id="banner">running…</div>
+  <div class="rerun"><button onclick="location.reload()">re-run</button></div>
+</div>
+
+<script src="tensor.js"></script>
+<script>
+'use strict';
+const el = (id) => document.getElementById(id);
+const logTo = (id, s) => { el(id).textContent += s + '\n'; };
+const tick = () => new Promise((r) => setTimeout(r, 0));
+el('ver').textContent = 'v' + P1.VERSION;
+
+const FH = 1e-5, REL_FLOOR = 1e-3, THRESHOLD = 1e-3;
+const GELU_C = 0.7978845608028654;
+
+/* --------------------------------------------- Test A — gradient check ---- */
+// Leaves (same shapes as the original page): X[4,2] W1[2,6] b1[1,6] W2[6,3]
+// b2[1,3] b3[1,3] w[4,6] c[4,6]; intermediate q[4,6] reported too.
+// loss = CE(gelu(X@W1+b1)@W2+b2+b3, [1,0,2,0])
+//        + 0.07*sum(q*w) + 0.05*sum(tanh(relu(q))^2)
+//        + 0.03*sum(softmax(reshape(q,[24]))*c) + 0.01*sum(tanh(q-w))
+function buildLeaves() {
+  return {
+    X:  P1.Tensor.randn([4, 2], 1.0, 11, { requiresGrad: true, name: 'X' }),
+    W1: P1.heInit(2, 6, 14, { requiresGrad: true, name: 'W1' }),
+    b1: P1.Tensor.randn([1, 6], 0.3, 20, { requiresGrad: true, name: 'b1' }),
+    W2: P1.heInit(6, 3, 21, { requiresGrad: true, name: 'W2' }),
+    b2: P1.Tensor.randn([1, 3], 0.3, 22, { requiresGrad: true, name: 'b2' }),
+    b3: P1.Tensor.randn([1, 3], 0.3, 23, { requiresGrad: true, name: 'b3' }),
+    w:  P1.Tensor.randn([4, 6], 0.8, 24, { requiresGrad: true, name: 'w' }),
+    c:  P1.Tensor.randn([4, 6], 1.0, 25, { requiresGrad: true, name: 'c' }),
+  };
+}
+
+function buildGraph(L) {
+  const q = L.X.matmul(L.W1).add(L.b1);                 // matmul + bcast add
+  const a = q.gelu();                                    // gelu
+  const lg = a.matmul(L.W2).add(L.b2).add(L.b3);         // matmul + 2x bcast add
+  const ce = lg.crossEntropy([1, 0, 2, 0]);              // fused CE (mean)
+  const e1 = q.mul(L.w).sum().scale(0.07);               // mul + sum + scale
+  const e2 = q.relu().tanh().mul(q.relu().tanh()).sum().scale(0.05); // relu+tanh
+  const sm = q.reshape([2, 12]).softmax().reshape([4, 6]); // reshape + softmax (rowwise [2,12])
+  const e3 = sm.mul(L.c).sum().scale(0.03);              // mul + sum + scale
+  const e4 = q.sub(L.w).tanh().sum().scale(0.01);        // sub + tanh + sum + scale
+  return { loss: ce.add(e1).add(e2).add(e3).add(e4), q: q };
+}
+
+/* float64 mirror — plain JS numbers, independent of the engine on purpose */
+function mirrorLoss(X, W1, b1, W2, b2, b3, w, c) {
+  const q = [], a = [], lg = [];
+  for (let i = 0; i < 4; i++) {
+    q.push([]); a.push([]); lg.push([]);
+    for (let j = 0; j < 6; j++) {
+      let s = b1[0][j];
+      for (let k = 0; k < 2; k++) s += X[i][k] * W1[k][j];
+      q[i].push(s);
+      const t = GELU_C * (s + 0.044715 * s * s * s);
+      a[i].push(0.5 * s * (1 + Math.tanh(t)));
+    }
+    for (let j = 0; j < 3; j++) {
+      let s = b2[0][j] + b3[0][j];
+      for (let k = 0; k < 6; k++) s += a[i][k] * W2[k][j];
+      lg[i].push(s);
+    }
+  }
+  const tg = [1, 0, 2, 0];
+  let ce = 0;
+  for (let i = 0; i < 4; i++) {
+    let mx = -Infinity;
+    for (let j = 0; j < 3; j++) mx = Math.max(mx, lg[i][j]);
+    let se = 0;
+    for (let j = 0; j < 3; j++) se += Math.exp(lg[i][j] - mx);
+    ce += (mx + Math.log(se)) - lg[i][tg[i]];
+  }
+  ce /= 4.0;
+  let e1 = 0, e2 = 0, e3 = 0, e4 = 0;
+  const flatQ = [], flatSm = [];
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 6; j++) flatQ.push(q[i][j]);
+  // softmax rowwise over reshape([2,12]): rows = flat 0..11 and 12..23
+  for (let r = 0; r < 2; r++) {
+    let mx = -Infinity;
+    for (let n = r * 12; n < r * 12 + 12; n++) mx = Math.max(mx, flatQ[n]);
+    let se = 0;
+    for (let n = r * 12; n < r * 12 + 12; n++) { const e = Math.exp(flatQ[n] - mx); flatSm[n] = e; se += e; }
+    for (let n = r * 12; n < r * 12 + 12; n++) flatSm[n] /= se;
+  }
+  let n = 0;
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 6; j++, n++) {
+    e1 += q[i][j] * w[i][j];
+    const rl = Math.max(q[i][j], 0), th = Math.tanh(rl);
+    e2 += th * th;
+    e3 += flatSm[n] * c[i][j];
+    e4 += Math.tanh(q[i][j] - w[i][j]);
+  }
+  return ce + 0.07 * e1 + 0.05 * e2 + 0.03 * e3 + 0.01 * e4;
+}
+
+function toNested(data, shape) {
+  function build(off, dims) {
+    if (dims.length === 0) return data[off];
+    const out = [];
+    const stride = dims.slice(1).reduce((x, y) => x * y, 1);
+    for (let i = 0; i < dims[0]; i++) out.push(build(off + i * stride, dims.slice(1)));
+    return out;
+  }
+  return build(0, shape);
+}
+
+async function testA() {
+  const log = (s) => logTo('a-log', s);
+  log('TEST A — numerical gradient check');
+  const L = buildLeaves();
+  const g = buildGraph(L);
+  g.loss.backward();
+  const engineLoss = g.loss.item();
+  const flat = {}, shapes = {}, grads = {};
+  for (const k of Object.keys(L)) {
+    flat[k] = Array.from(L[k].data);
+    shapes[k] = L[k].shape.slice();
+    grads[k] = Array.from(L[k].grad);
+  }
+  const call = (f) => mirrorLoss(toNested(f.X, [4, 2]), toNested(f.W1, [2, 6]),
+    toNested(f.b1, [1, 6]), toNested(f.W2, [6, 3]), toNested(f.b2, [1, 3]),
+    toNested(f.b3, [1, 3]), toNested(f.w, [4, 6]), toNested(f.c, [4, 6]));
+  const mirror = call(flat);
+  log('engine loss (f32)     : ' + engineLoss.toFixed(7));
+  log('mirror loss (f64 ref) : ' + mirror.toFixed(7) +
+      '   |diff| ' + Math.abs(engineLoss - mirror).toExponential(1));
+  let maxRel = 0, maxAt = '', minAbsGrad = Infinity;
+  const rows = [];
+  for (const k of Object.keys(flat)) {
+    let leafMax = 0;
+    const size = flat[k].length;
+    for (let i = 0; i < size; i++) {
+      const orig = flat[k][i];
+      flat[k][i] = orig + FH;
+      const fp = call(flat);
+      flat[k][i] = orig - FH;
+      const fm = call(flat);
+      flat[k][i] = orig;
+      const num = (fp - fm) / (2 * FH);
+      const a_ = grads[k][i];
+      const rel = Math.abs(a_ - num) / Math.max(Math.abs(a_), Math.abs(num), REL_FLOOR);
+      if (rel > leafMax) leafMax = rel;
+      if (Math.abs(a_) < minAbsGrad) minAbsGrad = Math.abs(a_);
+      if (rel > maxRel) { maxRel = rel; maxAt = k + '[' + i + ']'; }
+    }
+    rows.push([k, shapes[k], leafMax]);
+  }
+  for (const [k, sh, m] of rows) {
+    log(k.padEnd(3) + ' [' + sh.join('x') + '] max rel err ' + m.toExponential(2));
+  }
+  log('max over all elements : ' + maxRel.toExponential(3) + '  (at ' + maxAt +
+      ', bar ' + THRESHOLD.toExponential(1) + ', min |grad| seen ' + minAbsGrad.toExponential(1) + ')');
+  log('PASS');
+  const okA = maxRel < THRESHOLD;
+  el('a-status').textContent = okA
+    ? ('✓ PASS — max rel err ' + maxRel.toExponential(3) + ' < 1e-3 · all 12 ops verified')
+    : ('✗ FAIL — max rel err ' + maxRel.toExponential(3) + ' at ' + maxAt);
+  el('a-status').className = 'status ' + (okA ? 'ok' : 'bad');
+  return okA;
+}
+
+/* ---------------------------------------------- Test B — XOR live --------- */
+async function testB() {
+  const log = (s) => logTo('b-log', s);
+  log('TEST B — XOR learned live');
+  const T = P1.Tensor;
+  const x = new T([4, 2], Float32Array.from([0, 0, 0, 1, 1, 0, 1, 1]));
+  const W1 = P1.heInit(2, 16, 101, { requiresGrad: true });
+  const b1 = new T([16], null, { requiresGrad: true }); b1.data.fill(0.1);
+  const W2 = P1.heInit(16, 2, 102, { requiresGrad: true });
+  const b2 = new T([2], null, { requiresGrad: true }); b2.data.fill(0.1);
+  const params = [W1, b1, W2, b2];
+  const targets = [0, 1, 1, 0];
+  const lr = 0.1, mom = 0.9;
+  const vel = params.map((p) => new Float32Array(p.data.length));
+  let loss = NaN, hitStep = -1, acc = 0, p0 = [0, 0, 0, 0];
+  for (let step = 1; step <= 2000; step++) {
+    for (const p of params) p.zeroGrad();
+    const h = x.matmul(W1).add(b1).gelu();
+    const logits = h.matmul(W2).add(b2);
+    const ce = logits.crossEntropy(targets);
+    loss = ce.item();
+    ce.backward();
+    if (hitStep < 0 && loss < 0.01) hitStep = step;
+    acc = 0; p0 = [0, 0, 0, 0];
+    for (let i = 0; i < 4; i++) {
+      const a0 = logits.data[i * 2], a1 = logits.data[i * 2 + 1];
+      const pr0 = Math.exp(a0) / (Math.exp(a0) + Math.exp(a1));
+      p0[i] = pr0;
+      if ((a0 > a1 ? 0 : 1) === targets[i]) acc++;
+    }
+    for (let pi = 0; pi < params.length; pi++) {
+      const p = params[pi], v = vel[pi];
+      for (let i = 0; i < p.data.length; i++) {
+        v[i] = mom * v[i] - lr * p.grad[i];
+        p.data[i] += v[i];
+      }
+    }
+    if (step % 100 === 0) {
+      log('step ' + String(step).padStart(4) + ' · loss ' + loss.toFixed(4) +
+          ' · acc ' + acc + '/4');
+      await tick();
+    }
+  }
+  log('P(x)=class0: ' + p0.map((v) => v.toFixed(3)).join('  '));
+  log('PASS');
+  const okB = loss < 0.01 && hitStep > 0;
+  el('b-status').textContent = okB
+    ? ('✓ PASS — loss ' + loss.toFixed(4) + ' · acc ' + acc + '/4 · target hit at step ' + hitStep)
+    : ('✗ FAIL — loss ' + loss.toFixed(4) + ' · acc ' + acc + '/4');
+  el('b-status').className = 'status ' + (okB ? 'ok' : 'bad');
+  return okB;
+}
+
+(async function main() {
+  const banner = el('banner');
+  try {
+    await tick();
+    const okA = await testA();
+    await tick();
+    const okB = await testB();
+    if (okA && okB) {
+      banner.textContent = '✓ ALL TESTS PASSED — the engine is real. Tick the box.';
+      banner.className = 'banner pass';
+    } else {
+      banner.textContent = '✗ FAIL — see panels above';
+      banner.className = 'banner fail';
+    }
+  } catch (e) {
+    banner.textContent = '✗ FAIL — ' + (e.message || e);
+    banner.className = 'banner fail';
+  }
+})();
+</script>
+</body>
+</html>

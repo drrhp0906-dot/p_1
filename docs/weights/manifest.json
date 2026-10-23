@@ -1,0 +1,254 @@
+{
+  "format": "p1wm",
+  "version": 1,
+  "config": {
+    "n_layer": 2,
+    "n_head": 2,
+    "d_model": 64,
+    "d_ff": 128,
+    "ctx": 128,
+    "vocab_size": 4096,
+    "tokenizer_version": "p1-bpe-v1:3838",
+    "step": 150
+  },
+  "tokenizer_version": "p1-bpe-v1:3838",
+  "step": 150,
+  "num_params": 337408,
+  "tensors": [
+    {
+      "name": "wte",
+      "shape": [
+        4096,
+        64
+      ],
+      "offset": 155,
+      "nbytes": 1048576
+    },
+    {
+      "name": "wpe",
+      "shape": [
+        128,
+        64
+      ],
+      "offset": 1048750,
+      "nbytes": 32768
+    },
+    {
+      "name": "blk0.ln1.g",
+      "shape": [
+        64
+      ],
+      "offset": 1081540,
+      "nbytes": 256
+    },
+    {
+      "name": "blk0.ln1.b",
+      "shape": [
+        64
+      ],
+      "offset": 1081818,
+      "nbytes": 256
+    },
+    {
+      "name": "blk0.attn.qkv.w",
+      "shape": [
+        64,
+        192
+      ],
+      "offset": 1082105,
+      "nbytes": 49152
+    },
+    {
+      "name": "blk0.attn.qkv.b",
+      "shape": [
+        192
+      ],
+      "offset": 1131284,
+      "nbytes": 768
+    },
+    {
+      "name": "blk0.attn.proj.w",
+      "shape": [
+        64,
+        64
+      ],
+      "offset": 1132084,
+      "nbytes": 16384
+    },
+    {
+      "name": "blk0.attn.proj.b",
+      "shape": [
+        64
+      ],
+      "offset": 1148496,
+      "nbytes": 256
+    },
+    {
+      "name": "blk0.ln2.g",
+      "shape": [
+        64
+      ],
+      "offset": 1148774,
+      "nbytes": 256
+    },
+    {
+      "name": "blk0.ln2.b",
+      "shape": [
+        64
+      ],
+      "offset": 1149052,
+      "nbytes": 256
+    },
+    {
+      "name": "blk0.mlp.fc.w",
+      "shape": [
+        64,
+        128
+      ],
+      "offset": 1149337,
+      "nbytes": 32768
+    },
+    {
+      "name": "blk0.mlp.fc.b",
+      "shape": [
+        128
+      ],
+      "offset": 1182130,
+      "nbytes": 512
+    },
+    {
+      "name": "blk0.mlp.proj.w",
+      "shape": [
+        128,
+        64
+      ],
+      "offset": 1182673,
+      "nbytes": 32768
+    },
+    {
+      "name": "blk0.mlp.proj.b",
+      "shape": [
+        64
+      ],
+      "offset": 1215468,
+      "nbytes": 256
+    },
+    {
+      "name": "blk1.ln1.g",
+      "shape": [
+        64
+      ],
+      "offset": 1215746,
+      "nbytes": 256
+    },
+    {
+      "name": "blk1.ln1.b",
+      "shape": [
+        64
+      ],
+      "offset": 1216024,
+      "nbytes": 256
+    },
+    {
+      "name": "blk1.attn.qkv.w",
+      "shape": [
+        64,
+        192
+      ],
+      "offset": 1216311,
+      "nbytes": 49152
+    },
+    {
+      "name": "blk1.attn.qkv.b",
+      "shape": [
+        192
+      ],
+      "offset": 1265490,
+      "nbytes": 768
+    },
+    {
+      "name": "blk1.attn.proj.w",
+      "shape": [
+        64,
+        64
+      ],
+      "offset": 1266290,
+      "nbytes": 16384
+    },
+    {
+      "name": "blk1.attn.proj.b",
+      "shape": [
+        64
+      ],
+      "offset": 1282702,
+      "nbytes": 256
+    },
+    {
+      "name": "blk1.ln2.g",
+      "shape": [
+        64
+      ],
+      "offset": 1282980,
+      "nbytes": 256
+    },
+    {
+      "name": "blk1.ln2.b",
+      "shape": [
+        64
+      ],
+      "offset": 1283258,
+      "nbytes": 256
+    },
+    {
+      "name": "blk1.mlp.fc.w",
+      "shape": [
+        64,
+        128
+      ],
+      "offset": 1283543,
+      "nbytes": 32768
+    },
+    {
+      "name": "blk1.mlp.fc.b",
+      "shape": [
+        128
+      ],
+      "offset": 1316336,
+      "nbytes": 512
+    },
+    {
+      "name": "blk1.mlp.proj.w",
+      "shape": [
+        128,
+        64
+      ],
+      "offset": 1316879,
+      "nbytes": 32768
+    },
+    {
+      "name": "blk1.mlp.proj.b",
+      "shape": [
+        64
+      ],
+      "offset": 1349674,
+      "nbytes": 256
+    },
+    {
+      "name": "lnf.g",
+      "shape": [
+        64
+      ],
+      "offset": 1349947,
+      "nbytes": 256
+    },
+    {
+      "name": "lnf.b",
+      "shape": [
+        64
+      ],
+      "offset": 1350220,
+      "nbytes": 256
+    }
+  ],
+  "total_bytes": 1350476
+}
