@@ -1,0 +1,39 @@
+# --- p_1 .gitignore -----------------------------------------------------------
+# Big rule of this repo: code + data snapshots ship in git; heavy artifacts
+# live in Google Drive MyDrive/p_1/ and never enter the repo.
+
+# Python (Colab twins)
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local mount points / Drive sync droppings (if you ever mount locally)
+mounted/
+drive/
+
+# Scratch logs and editor droppings
+*.log
+*.swp
+*~
+
+# Checkpoints: training state lives in Google Drive (MyDrive/p_1/checkpoints/)
+# and is re-exported into docs/weights/ via colab/05_export.py. Never commit
+# .npz checkpoints — but DO commit docs/weights/web_model.bin: the exported
+# brain IS the website.
+checkpoints/
+
+# Regenerable matplotlib charts (colab/08_eval.ipynb make_charts redraws them
+# from results/metrics.json). Keep results/*.json + results/summary.md —
+# those are the experiment's actual artifacts.
+results/*.png
+
+# NOTE (deliberate non-ignores):
+#   docs/weights/web_model.bin  — the browser's brain; must ship (Pages serves
+#                                 it as application/octet-stream; the loader
+#                                 fetches bytes and parses them itself).
+#   docs/screenshots/*.png      — README evidence images; small, tracked.
