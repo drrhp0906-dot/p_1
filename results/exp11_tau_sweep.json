@@ -1,0 +1,172 @@
+{
+ "experiment": "exp3_tau_sweep",
+ "mode": "smoke",
+ "substrate": "E2 records",
+ "n_unanswerable": 20,
+ "n_answerable": 60,
+ "calibrated_tau": 20.04539632819222,
+ "hardcoded_tau": 20.0454,
+ "tau_matches_task9": true,
+ "multipliers": [
+  0.2,
+  0.3,
+  0.4,
+  0.5,
+  0.6,
+  0.7,
+  0.8,
+  0.9,
+  1.0,
+  1.1,
+  1.25,
+  1.5
+ ],
+ "rows": [
+  {
+   "multiplier": 0.2,
+   "tau": 4.0090792656384435,
+   "true_refusals": 0,
+   "n_unanswerable": 20,
+   "false_refusals": 0,
+   "n_answerable": 60,
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0
+  },
+  {
+   "multiplier": 0.3,
+   "tau": 6.013618898457666,
+   "true_refusals": 0,
+   "n_unanswerable": 20,
+   "false_refusals": 0,
+   "n_answerable": 60,
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0
+  },
+  {
+   "multiplier": 0.4,
+   "tau": 8.018158531276887,
+   "true_refusals": 0,
+   "n_unanswerable": 20,
+   "false_refusals": 0,
+   "n_answerable": 60,
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0
+  },
+  {
+   "multiplier": 0.5,
+   "tau": 10.02269816409611,
+   "true_refusals": 2,
+   "n_unanswerable": 20,
+   "false_refusals": 1,
+   "n_answerable": 60,
+   "precision": 0.6666666666666666,
+   "recall": 0.1,
+   "f1": 0.1739130434782609
+  },
+  {
+   "multiplier": 0.6,
+   "tau": 12.027237796915331,
+   "true_refusals": 7,
+   "n_unanswerable": 20,
+   "false_refusals": 1,
+   "n_answerable": 60,
+   "precision": 0.875,
+   "recall": 0.35,
+   "f1": 0.4999999999999999
+  },
+  {
+   "multiplier": 0.7,
+   "tau": 14.031777429734552,
+   "true_refusals": 12,
+   "n_unanswerable": 20,
+   "false_refusals": 4,
+   "n_answerable": 60,
+   "precision": 0.75,
+   "recall": 0.6,
+   "f1": 0.6666666666666665
+  },
+  {
+   "multiplier": 0.8,
+   "tau": 16.036317062553774,
+   "true_refusals": 18,
+   "n_unanswerable": 20,
+   "false_refusals": 12,
+   "n_answerable": 60,
+   "precision": 0.6,
+   "recall": 0.9,
+   "f1": 0.7200000000000001
+  },
+  {
+   "multiplier": 0.9,
+   "tau": 18.040856695372998,
+   "true_refusals": 19,
+   "n_unanswerable": 20,
+   "false_refusals": 19,
+   "n_answerable": 60,
+   "precision": 0.5,
+   "recall": 0.95,
+   "f1": 0.6551724137931034
+  },
+  {
+   "multiplier": 1.0,
+   "tau": 20.04539632819222,
+   "true_refusals": 19,
+   "n_unanswerable": 20,
+   "false_refusals": 30,
+   "n_answerable": 60,
+   "precision": 0.3877551020408163,
+   "recall": 0.95,
+   "f1": 0.5507246376811594
+  },
+  {
+   "multiplier": 1.1,
+   "tau": 22.049935961011442,
+   "true_refusals": 19,
+   "n_unanswerable": 20,
+   "false_refusals": 40,
+   "n_answerable": 60,
+   "precision": 0.3220338983050847,
+   "recall": 0.95,
+   "f1": 0.48101265822784806
+  },
+  {
+   "multiplier": 1.25,
+   "tau": 25.056745410240275,
+   "true_refusals": 20,
+   "n_unanswerable": 20,
+   "false_refusals": 43,
+   "n_answerable": 60,
+   "precision": 0.31746031746031744,
+   "recall": 1.0,
+   "f1": 0.4819277108433735
+  },
+  {
+   "multiplier": 1.5,
+   "tau": 30.068094492288328,
+   "true_refusals": 20,
+   "n_unanswerable": 20,
+   "false_refusals": 50,
+   "n_answerable": 60,
+   "precision": 0.2857142857142857,
+   "recall": 1.0,
+   "f1": 0.4444444444444445
+  }
+ ],
+ "best": {
+  "multiplier": 0.8,
+  "tau": 16.036317062553774,
+  "true_refusals": 18,
+  "n_unanswerable": 20,
+  "false_refusals": 12,
+  "n_answerable": 60,
+  "precision": 0.6,
+  "recall": 0.9,
+  "f1": 0.7200000000000001
+ },
+ "note": "refusal iff best top-1 BM25 < tau (the tau-driven part of ABSTAINING); best = max F1, ties broken toward the calibrated tau; model-independent (retrieval-only)",
+ "format": "p1-experiments-v1",
+ "experiments_lib_version": "1.0.0"
+}

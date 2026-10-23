@@ -1,0 +1,5821 @@
+{
+ "experiment": "exp2_grounding_delta",
+ "mode": "smoke",
+ "answerer": "clean model (exp1 checkpoint, step 150)",
+ "metrics": {
+  "format": "p1-metrics-v1",
+  "config": {
+   "thresholds": {
+    "f1_supported": 0.34,
+    "f1_min": 0.22,
+    "f1_not_in_corpus": 0.08,
+    "grounded_min_f1": 0.08,
+    "rewrite_min_f1": 0.15,
+    "myth_margin": 0.02
+   },
+   "k": 3,
+   "method": "bm25",
+   "tau": 20.0454,
+   "grounded_sentences": 3,
+   "calibration": "median top-1 bm25 on answerable eval",
+   "stub": {
+    "seed": 20260214,
+    "corrupt_rate": 0.35,
+    "note": "applies only when the answerer is the test stub"
+   },
+   "eval_lib_version": "1.0.0"
+  },
+  "sets": {
+   "answerable": {
+    "n": 60,
+    "per_mode": {
+     "raw": {
+      "answers": 60,
+      "refused": 0,
+      "refusal_rate": 0.0,
+      "answered": 60,
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.0,
+      "citation_coverage": 0.0
+     },
+     "grounded": {
+      "answers": 60,
+      "refused": 8,
+      "refusal_rate": 0.13333333333333333,
+      "answered": 52,
+      "total_claims": 178,
+      "unsupported": 3,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.016853932584269662,
+      "avg_claims_per_answer": 2.966666666666667,
+      "citation_coverage": 1.0769230769230769,
+      "grounded_refusal_rate": 0.06666666666666667,
+      "mean_best_sentence_f1": 0.22293960021740072
+     },
+     "verified": {
+      "answers": 60,
+      "refused": 0,
+      "refusal_rate": 0.0,
+      "answered": 60,
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.0,
+      "citation_coverage": 0.0,
+      "rewritten_claims": 0,
+      "flagged_claims": 0
+     },
+     "abstaining": {
+      "answers": 60,
+      "refused": 35,
+      "refusal_rate": 0.5833333333333334,
+      "answered": 25,
+      "total_claims": 85,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.011764705882352941,
+      "avg_claims_per_answer": 1.4166666666666667,
+      "citation_coverage": 1.16,
+      "refused_by_tau": 30
+     }
+    }
+   },
+   "mythtraps": {
+    "n": 20,
+    "per_mode": {
+     "raw": {
+      "answers": 20,
+      "refused": 0,
+      "refusal_rate": 0.0,
+      "answered": 20,
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.0,
+      "citation_coverage": 0.0,
+      "parroting_rate": 0.0,
+      "parroting_answers": 0,
+      "cue_overrides": 0,
+      "negates_folk_claims": 0
+     },
+     "grounded": {
+      "answers": 20,
+      "refused": 2,
+      "refusal_rate": 0.1,
+      "answered": 18,
+      "total_claims": 67,
+      "unsupported": 6,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.08955223880597014,
+      "avg_claims_per_answer": 3.35,
+      "citation_coverage": 1.1111111111111112,
+      "grounded_refusal_rate": 0.0,
+      "mean_best_sentence_f1": 0.2040365975426885,
+      "parroting_rate": 0.2,
+      "parroting_answers": 4,
+      "cue_overrides": 3,
+      "negates_folk_claims": 13
+     },
+     "verified": {
+      "answers": 20,
+      "refused": 0,
+      "refusal_rate": 0.0,
+      "answered": 20,
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.0,
+      "citation_coverage": 0.0,
+      "rewritten_claims": 0,
+      "flagged_claims": 0,
+      "parroting_rate": 0.0,
+      "parroting_answers": 0,
+      "cue_overrides": 0,
+      "negates_folk_claims": 0
+     },
+     "abstaining": {
+      "answers": 20,
+      "refused": 16,
+      "refusal_rate": 0.8,
+      "answered": 4,
+      "total_claims": 14,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.07142857142857142,
+      "avg_claims_per_answer": 0.7,
+      "citation_coverage": 1.0,
+      "refused_by_tau": 16,
+      "parroting_rate": 0.1,
+      "parroting_answers": 2,
+      "cue_overrides": 0,
+      "negates_folk_claims": 5
+     }
+    }
+   },
+   "unanswerable": {
+    "n": 20,
+    "per_mode": {
+     "raw": {
+      "answers": 20,
+      "refused": 0,
+      "refusal_rate": 0.0,
+      "answered": 20,
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.0,
+      "citation_coverage": 0.0
+     },
+     "grounded": {
+      "answers": 20,
+      "refused": 1,
+      "refusal_rate": 0.05,
+      "answered": 19,
+      "total_claims": 71,
+      "unsupported": 2,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.028169014084507043,
+      "avg_claims_per_answer": 3.55,
+      "citation_coverage": 1.0526315789473684,
+      "grounded_refusal_rate": 0.0,
+      "mean_best_sentence_f1": 0.19713654086325377
+     },
+     "verified": {
+      "answers": 20,
+      "refused": 0,
+      "refusal_rate": 0.0,
+      "answered": 20,
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.0,
+      "citation_coverage": 0.0,
+      "rewritten_claims": 0,
+      "flagged_claims": 0
+     },
+     "abstaining": {
+      "answers": 20,
+      "refused": 19,
+      "refusal_rate": 0.95,
+      "answered": 1,
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "hallucination_rate": 0.0,
+      "avg_claims_per_answer": 0.2,
+      "citation_coverage": 1.0,
+      "refused_by_tau": 19
+     }
+    }
+   }
+  },
+  "summary": {
+   "headline": "grounding cuts hallucination rate 0.000 -> 0.017 (verified 0.000, abstaining 0.012); abstention refuses 95% of unanswerables; myth-parroting raw 0% vs grounded 20%",
+   "raw_hallucination_rate": 0.0,
+   "grounded_hallucination_rate": 0.016853932584269662,
+   "verified_hallucination_rate": 0.0,
+   "abstaining_hallucination_rate": 0.011764705882352941,
+   "abstaining_unanswerable_refusal_rate": 0.95,
+   "raw_myth_parroting_rate": 0.0,
+   "grounded_myth_parroting_rate": 0.2,
+   "verified_myth_parroting_rate": 0.0,
+   "abstaining_myth_parroting_rate": 0.1
+  }
+ },
+ "records": {
+  "answerable": [
+   {
+    "id": "ea-01",
+    "question": "During a hot summer day of gardening, how should I adjust how much I drink?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For most adults, about 6 to 8 cups of fluid a day is a sensible target. On hot days, or when you are sweating through exercise, you need more than usual. Your body is the best guide: drink when you are thirsty, and aim for pee that is a pale straw colour.",
+      "citations": [
+       "hq-00355"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.349531042217599
+     }
+    }
+   },
+   {
+    "id": "ea-02",
+    "question": "Do frozen vegetables really count toward my five a day?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Fresh, frozen, canned and dried all count towards the total. Five a day is a minimum rather than a ceiling - more is generally better, and variety counts. The standard advice is at least 5 portions of fruit and vegetables a day, roughly 400 grams in total.",
+      "citations": [
+       "hq-01163"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.25
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Fresh, frozen, canned and dried all count towards the total. Five a day is a minimum rather than a ceiling - more is generally better, and variety counts. The standard advice is at least 5 portions of fruit and vegetables a day, roughly 400 grams in total.",
+      "citations": [
+       "hq-01163"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 25.271639058933005
+     }
+    }
+   },
+   {
+    "id": "ea-03",
+    "question": "How much sugar is hiding in one can of regular cola?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort.",
+      "citations": [
+       "hq-02925"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "A regular 12-ounce (330 ml) can of cola contains about 35 grams of sugar - roughly 9 teaspoons. Because drink sugar arrives as liquid, it is easy to drink a lot of it without feeling any less hungry. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort.",
+      "citations": [
+       "hq-02925"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 21.04058681144727
+     }
+    }
+   },
+   {
+    "id": "ea-04",
+    "question": "Why did adding a lot more whole grains to my breakfast leave me bloated at first?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Whole grains include oats, wholemeal or whole-wheat bread, brown rice, barley, bulgur and even popcorn. Whole grains keep all three parts of the grain - the bran, the germ and the starchy middle - while white flour keeps only the middle. That leaves more fiber, B vitamins, iron and magnesium in what you eat.",
+      "citations": [
+       "hq-01831"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.15384615384615385
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.261335583661154
+     }
+    }
+   },
+   {
+    "id": "ea-05",
+    "question": "Is it OK to drink four mugs of instant coffee spread across one day?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee. For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg.",
+      "citations": [
+       "hq-00269"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.34782608695652173
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Pregnant women are advised to stay under 200 mg a day - about 2 mugs of instant coffee. For most adults, up to 400 mg of caffeine a day is fine - roughly 4 mugs of instant coffee or 2 to 3 mugs of filter coffee. A mug of tea has around 75 mg, a can of cola about 40 mg, and a 250 ml energy drink about 80 mg.",
+      "citations": [
+       "hq-00269"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 25.698217779078707
+     }
+    }
+   },
+   {
+    "id": "ea-06",
+    "question": "I eat an omelet most mornings - is that too many eggs for a healthy adult?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For most healthy people, eggs are a nutritious food and there is no set limit - an egg a day fits comfortably in a healthy diet. Eggs bring protein, vitamins and minerals for relatively few calories, so they earn their place on the plate. The cholesterol you eat affects blood cholesterol far less than saturated fat does, though a few 'high responders' see bigger rises.",
+      "citations": [
+       "hq-01680",
+       "hq-02093"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2608695652173913
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For most healthy people, eggs are a nutritious food and there is no set limit - an egg a day fits comfortably in a healthy diet. Eggs bring protein, vitamins and minerals for relatively few calories, so they earn their place on the plate. The cholesterol you eat affects blood cholesterol far less than saturated fat does, though a few 'high responders' see bigger rises.",
+      "citations": [
+       "hq-01680",
+       "hq-02093"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 20.475115954459547
+     }
+    }
+   },
+   {
+    "id": "ea-07",
+    "question": "Do I need a vitamin D supplement during the winter months?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "In winter, when sunlight is too weak for your skin to make vitamin D, a daily 10 microgram supplement covers the gap. From about October to March in countries far from the equator the sun is too weak, so guidance recommends everyone take a 10 microgram (400 IU) vitamin D supplement through autumn and winter. Vitamin D keeps bones, teeth and muscles healthy, and most of us make it when sunlight lands on our skin.",
+      "citations": [
+       "hq-02167",
+       "hq-01853"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.36363636363636365
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "In winter, when sunlight is too weak for your skin to make vitamin D, a daily 10 microgram supplement covers the gap. From about October to March in countries far from the equator the sun is too weak, so guidance recommends everyone take a 10 microgram (400 IU) vitamin D supplement through autumn and winter. Vitamin D keeps bones, teeth and muscles healthy, and most of us make it when sunlight lands on our skin.",
+      "citations": [
+       "hq-02167",
+       "hq-01853"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 30.056868412882707
+     }
+    }
+   },
+   {
+    "id": "ea-08",
+    "question": "Is honey a better everyday choice than table sugar for my sweetening?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Honey is natural, but nutritionally it is still sugar: your body treats honey and table sugar almost identically. Raw honey is not safer than regular honey for babies - the botulism risk is the same. It does carry trace antioxidants, but you would need to eat far too much honey for them to matter.",
+      "citations": [
+       "hq-01049"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Honey is natural, but nutritionally it is still sugar: your body treats honey and table sugar almost identically. Raw honey is not safer than regular honey for babies - the botulism risk is the same. It does carry trace antioxidants, but you would need to eat far too much honey for them to matter.",
+      "citations": [
+       "hq-01049"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 20.100485553515703
+     }
+    }
+   },
+   {
+    "id": "ea-09",
+    "question": "What does a sensible week of drinking look like according to health guidance?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Guidance in many countries caps drinking at about 14 units a week - roughly 6 glasses of wine or 6 pints of average-strength beer - spread over 3 or more days with several drink-free days. The World Health Organization now states that no amount of alcohol is completely safe for health. The old idea that a daily drink protects the heart has weakened as research methods improved; the less you drink, the lower your risk.",
+      "citations": [
+       "hq-01760"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.16666666666666666
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.443184856168479
+     }
+    }
+   },
+   {
+    "id": "ea-10",
+    "question": "I want to lose about 5 kg - what pace of weight loss should I aim for?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If you have a lot of weight to lose or other health conditions, a doctor or dietitian can tailor a plan. Around half a kilogram (about a pound) a week is a realistic pace, and slower losses are the ones that stick. Lasting weight loss comes from a small, steady calorie gap: smaller portions, more fiber and protein, fewer sugary drinks and less alcohol, plus more daily movement.",
+      "citations": [
+       "hq-03217"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If you have a lot of weight to lose or other health conditions, a doctor or dietitian can tailor a plan. Around half a kilogram (about a pound) a week is a realistic pace, and slower losses are the ones that stick. Lasting weight loss comes from a small, steady calorie gap: smaller portions, more fiber and protein, fewer sugary drinks and less alcohol, plus more daily movement.",
+      "citations": [
+       "hq-03217"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 21.35277512110065
+     }
+    }
+   },
+   {
+    "id": "ea-11",
+    "question": "How do I know whether I personally need more than seven hours of sleep?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Teenagers need 8 to 10 hours of sleep a night - more than adults. Children who regularly sleep less than their range are more likely to be irritable, struggle with learning, and behave as if hyperactive rather than sleepy. A consistent bedtime routine matters more for kids than any exact clock time.",
+      "citations": [
+       "hq-02995",
+       "hq-03333",
+       "hq-01979"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.5
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.742897342154665
+     }
+    }
+   },
+   {
+    "id": "ea-12",
+    "question": "Why does my sixteen-year-old stay up past midnight but struggle to wake for school?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The waking itself is normal sleep architecture; the second wake-up is anxiety switching the lights on upstairs. Stay relaxed and still, or use the get-up-if-restless rule; knowing that brief waking is normal defuses much of it. Meanwhile school often starts before 8:30 am, meaning chronic sleep loss across the school week.",
+      "citations": [
+       "hq-00283",
+       "hq-03771"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.16666666666666666
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 18.728693121722106
+     }
+    }
+   },
+   {
+    "id": "ea-13",
+    "question": "My mother-in-law says babies sleep better on their stomach - how should I place my newborn down to sleep?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Babies should always be placed on their back for every sleep, day and night, on a firm, flat surface. Tummy sleeping and side sleeping both raise the risk of SIDS, so back is the answer for every sleep until babies can roll both ways themselves. In babies: dry diapers, a sunken soft spot and listlessness are the red flags to act on.",
+      "citations": [
+       "hq-02391",
+       "hq-00760"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.16
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Babies should always be placed on their back for every sleep, day and night, on a firm, flat surface. Tummy sleeping and side sleeping both raise the risk of SIDS, so back is the answer for every sleep until babies can roll both ways themselves. In babies: dry diapers, a sunken soft spot and listlessness are the red flags to act on.",
+      "citations": [
+       "hq-02391",
+       "hq-00760"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 21.57071929703823
+     }
+    }
+   },
+   {
+    "id": "ea-14",
+    "question": "Will a long afternoon nap ruin my chances of sleeping well that night?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "A 20-to-30-minute nap early in the afternoon refreshes most people without wrecking the night. If you have trouble sleeping at night, keeping naps short and early is one of the first fixes to try. Long naps pull you into deep sleep stages, and waking from those produces that heavy, hungover feeling.",
+      "citations": [
+       "hq-00057"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "A 20-to-30-minute nap early in the afternoon refreshes most people without wrecking the night. If you have trouble sleeping at night, keeping naps short and early is one of the first fixes to try. Long naps pull you into deep sleep stages, and waking from those produces that heavy, hungover feeling.",
+      "citations": [
+       "hq-00057"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 31.153850028734027
+     }
+    }
+   },
+   {
+    "id": "ea-15",
+    "question": "Does scrolling on my phone in bed really affect my sleep?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Keep your bed for sleep (and intimacy) only, so your brain links the bed with sleep rather than scrolling or worrying. People who use phones in bed tend to fall asleep later and sleep less overall. Lying in bed frustrated trains your brain to associate the bed with wakefulness - getting up briefly breaks that link.",
+      "citations": [
+       "hq-01813",
+       "hq-02447"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2727272727272727
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Keep your bed for sleep (and intimacy) only, so your brain links the bed with sleep rather than scrolling or worrying. People who use phones in bed tend to fall asleep later and sleep less overall. Lying in bed frustrated trains your brain to associate the bed with wakefulness - getting up briefly breaks that link.",
+      "citations": [
+       "hq-01813",
+       "hq-02447"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 20.563221575361545
+     }
+    }
+   },
+   {
+    "id": "ea-16",
+    "question": "I sleep in until nearly noon on Sundays - why does Monday morning always feel so brutal?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "That is why marathon lie-ins often end with grogginess and a rough Monday. Teenagers need 8 to 10 hours of sleep a night - more than adults. During puberty the internal clock drifts later, so teens genuinely are not tired at bedtime - biology, not laziness.",
+      "citations": [
+       "hq-03968",
+       "hq-01780"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.19047619047619047
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 17.280157008657056
+     }
+    }
+   },
+   {
+    "id": "ea-17",
+    "question": "What is a good bedroom temperature for sleeping, and does it really matter?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Sleep hygiene is the set of habits that make good sleep likely: a cool, dark, quiet bedroom, a regular schedule, and a wind-down routine instead of screens. Falling asleep is tied to a small drop in core body temperature, which a cool room makes easier. Your core temperature needs to drop a little to fall asleep, so a cool room works with your biology rather than against it.",
+      "citations": [
+       "hq-01732",
+       "hq-02574",
+       "hq-03017"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.15384615384615385
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 16.60197556055704
+     }
+    }
+   },
+   {
+    "id": "ea-18",
+    "question": "I have struggled to fall asleep three or four nights a week for months - what actually works long-term?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "It is called chronic when it happens at least 3 nights a week for 3 months or more and drags down your daytime functioning. Insomnia means regularly struggling to fall asleep, stay asleep, or waking far too early despite having the chance to sleep. The first-choice treatment is a structured talking therapy called CBT-I (cognitive behavioral therapy for insomnia) - it outperforms sleeping pills long-term and has no hangover effect.",
+      "citations": [
+       "hq-02539"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.21428571428571427
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "It is called chronic when it happens at least 3 nights a week for 3 months or more and drags down your daytime functioning. Insomnia means regularly struggling to fall asleep, stay asleep, or waking far too early despite having the chance to sleep. The first-choice treatment is a structured talking therapy called CBT-I (cognitive behavioral therapy for insomnia) - it outperforms sleeping pills long-term and has no hangover effect.",
+      "citations": [
+       "hq-02539"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 30.30310742344368
+     }
+    }
+   },
+   {
+    "id": "ea-19",
+    "question": "My husband snores loudly and wakes up gasping - should he get that checked?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If anything about their behavior seems wrong to you, trust that instinct and get them checked. A child who cries loudly and then settles, plays normally and shows no other signs has usually had a minor bump. Comfort them, offer a wrapped cold pack, and let them sleep if they settle - sleeping is fine as long as they rouse normally.",
+      "citations": [
+       "hq-03164"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.21052631578947367
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.114664680882566
+     }
+    }
+   },
+   {
+    "id": "ea-20",
+    "question": "I am flying across several time zones next week - how can I help my body clock adjust faster?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Meanwhile school often starts before 8:30 am, meaning chronic sleep loss across the school week. Jet lag is your body clock still running on the time zone you left, so sleep and wake signals arrive at the wrong local hours. Melatonin taken in the destination's evening can help re-time the clock, and short naps (under 30 minutes) take the edge off without wrecking the first night.",
+      "citations": [
+       "hq-03771",
+       "hq-03777"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.211438624975226
+     }
+    }
+   },
+   {
+    "id": "ea-21",
+    "question": "How long should I actually scrub my hands, and does the drying step matter?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 5,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Keep nails trimmed and scrub your fingertips against your palms while washing so the nails get attention too. Wet your hands, apply soap, and lather every surface - palms, backs, between fingers, thumbs, fingertips and under nails - for about 20 seconds. Rinse well under running water, then dry thoroughly, because wet hands pick up and transfer germs more easily than dry ones.",
+      "citations": [
+       "hq-00445",
+       "hq-00273"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.08695652173913043
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 17.247811039806844
+     }
+    }
+   },
+   {
+    "id": "ea-22",
+    "question": "Is a small bottle of hand sanitizer just as good as washing with soap and water?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Hand sanitizer with at least 60% alcohol is a good backup when soap and water are not available. Sanitizer is a convenience, not a substitute: soap physically removes what gel only partially deactivates. After the toilet, after handling food, or whenever hands look dirty, soap and water is the better option.",
+      "citations": [
+       "hq-03073",
+       "hq-02083"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.5
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Hand sanitizer with at least 60% alcohol is a good backup when soap and water are not available. Sanitizer is a convenience, not a substitute: soap physically removes what gel only partially deactivates. After the toilet, after handling food, or whenever hands look dirty, soap and water is the better option.",
+      "citations": [
+       "hq-03073",
+       "hq-02083"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 34.05985198018027
+     }
+    }
+   },
+   {
+    "id": "ea-23",
+    "question": "Should I rinse my mouth with water right after brushing my teeth?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Spit out the foam but do not rinse with water: leaving a thin layer of fluoride on your teeth is what strengthens enamel overnight. Brush twice a day for about 2 minutes with fluoride toothpaste - for adults, 1350 to 1500 parts per million fluoride. Not rinsing sounds odd, but the fluoride residue is the active ingredient; rinsing washes away the protection you just applied.",
+      "citations": [
+       "hq-02119"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2608695652173913
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Spit out the foam but do not rinse with water: leaving a thin layer of fluoride on your teeth is what strengthens enamel overnight. Brush twice a day for about 2 minutes with fluoride toothpaste - for adults, 1350 to 1500 parts per million fluoride. Not rinsing sounds odd, but the fluoride residue is the active ingredient; rinsing washes away the protection you just applied.",
+      "citations": [
+       "hq-02119"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 24.80369822620066
+     }
+    }
+   },
+   {
+    "id": "ea-24",
+    "question": "My gums bleed when I floss, so should I stop flossing?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Gums that bleed with flossing are gums that need more flossing, not less - the inflammation is what causes the blood. Yes - clean between your teeth once a day with floss or interdental brushes, because a toothbrush cannot reach those surfaces. Persistent bleeding, loose teeth or bad breath that will not quit deserve a dental check.",
+      "citations": [
+       "hq-03000"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.3
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Gums that bleed with flossing are gums that need more flossing, not less - the inflammation is what causes the blood. Yes - clean between your teeth once a day with floss or interdental brushes, because a toothbrush cannot reach those surfaces. Persistent bleeding, loose teeth or bad breath that will not quit deserve a dental check.",
+      "citations": [
+       "hq-03000"
+      ],
+      "refused": true,
+      "refused_by_tau": false,
+      "best_bm25": 41.797547436351984
+     }
+    }
+   },
+   {
+    "id": "ea-25",
+    "question": "Is it unhealthy that I do not shower every single day?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Most people do not need a full shower every day; washing every 2 to 3 days keeps most skin healthy, with a daily wash of armpits, groin, feet and hands. Wash hair when it feels greasy or looks it - for most people that is every few days, not every day. If you do shower daily, keep it short and lukewarm, and moisturize afterwards to replace what the water washes away.",
+      "citations": [
+       "hq-01367"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2222222222222222
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Most people do not need a full shower every day; washing every 2 to 3 days keeps most skin healthy, with a daily wash of armpits, groin, feet and hands. Wash hair when it feels greasy or looks it - for most people that is every few days, not every day. If you do shower daily, keep it short and lukewarm, and moisturize afterwards to replace what the water washes away.",
+      "citations": [
+       "hq-01367"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 20.529479608660925
+     }
+    }
+   },
+   {
+    "id": "ea-26",
+    "question": "Why do food safety guides say never to wash raw chicken?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Do not wash raw chicken: running water splashes campylobacter and other bacteria up to half a meter around the sink, onto surfaces and ready-to-eat food. Pat the chicken dry with paper towel if needed, cook it thoroughly, and wash your hands and anything the raw juices touched. The splash zone from rinsing chicken is a classic source of food poisoning outbreaks traced back to home kitchens.",
+      "citations": [
+       "hq-04202"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Do not wash raw chicken: running water splashes campylobacter and other bacteria up to half a meter around the sink, onto surfaces and ready-to-eat food. Pat the chicken dry with paper towel if needed, cook it thoroughly, and wash your hands and anything the raw juices touched. The splash zone from rinsing chicken is a classic source of food poisoning outbreaks traced back to home kitchens.",
+      "citations": [
+       "hq-04202"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 25.623820311752105
+     }
+    }
+   },
+   {
+    "id": "ea-27",
+    "question": "Yogurt two days past its 'best before' date - can I still eat it?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "'Best before' is about quality - bread, canned goods and dry foods are usually still safe after it, just past their peak. 'Use by' is a safety date: food past it can be dangerous even if it looks and smells fine, because the bacteria that cause food poisoning often produce no smell. Your nose can detect spoilage, but it cannot detect the bugs that actually poison you, so the use-by date is the one to trust.",
+      "citations": [
+       "hq-02555"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.32
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "'Best before' is about quality - bread, canned goods and dry foods are usually still safe after it, just past their peak. 'Use by' is a safety date: food past it can be dangerous even if it looks and smells fine, because the bacteria that cause food poisoning often produce no smell. Your nose can detect spoilage, but it cannot detect the bugs that actually poison you, so the use-by date is the one to trust.",
+      "citations": [
+       "hq-02555"
+      ],
+      "refused": true,
+      "refused_by_tau": false,
+      "best_bm25": 36.45039829491072
+     }
+    }
+   },
+   {
+    "id": "ea-28",
+    "question": "Is it safe to clean inside my ears with cotton buds?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The only thing you should ever clean with a bud is the outer ear; inside the canal, the bud is the problem. Cotton buds push most of the wax deeper, pack it into plugs, and can scratch the canal or even perforate the eardrum. Earwax is protective - it traps dust, moisturizes the canal and has antibacterial properties - and ears clean themselves as old wax works out naturally.",
+      "citations": [
+       "hq-04260",
+       "hq-04119"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2222222222222222
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The only thing you should ever clean with a bud is the outer ear; inside the canal, the bud is the problem. Cotton buds push most of the wax deeper, pack it into plugs, and can scratch the canal or even perforate the eardrum. Earwax is protective - it traps dust, moisturizes the canal and has antibacterial properties - and ears clean themselves as old wax works out naturally.",
+      "citations": [
+       "hq-04260",
+       "hq-04119"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 31.96455142076483
+     }
+    }
+   },
+   {
+    "id": "ea-29",
+    "question": "What is the right way to cover a cough when you are on a bus full of people?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Cover it with a soft plaster or a donut-shaped pad that takes pressure off the blister itself. If it bursts on its own, wash gently with clean water, keep the flap of skin in place, and cover with a clean dressing. Resist popping it; the fluid is sterile and the skin over it does the job of a dressing.",
+      "citations": [
+       "hq-03982"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.293098727520515
+     }
+    }
+   },
+   {
+    "id": "ea-30",
+    "question": "My family just had a stomach bug - when is it safe for the kids to go back to school?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I don't have reliable information about that in my corpus.",
+      "citations": [],
+      "refused": true,
+      "grounded_refused": true,
+      "best_sentence_f1": 0.07407407407407407
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I don't have reliable information about that in my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": false,
+      "best_bm25": 20.82204188313123
+     }
+    }
+   },
+   {
+    "id": "ea-31",
+    "question": "My kid just grabbed a hot pan - what is the very first thing I should do?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The water draws the heat out of the skin, which is what limits the damage. Running water carries heat out of the skin and limits how deep the burn goes, so it is the single most useful first step. Cool the burn under cool or lukewarm running water for 20 full minutes, starting as soon as you can.",
+      "citations": [
+       "hq-04232",
+       "hq-02971"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.10526315789473684
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.816012007448904
+     }
+    }
+   },
+   {
+    "id": "ea-32",
+    "question": "My grandmother insists on butter for burns - is that actually a good idea?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Ice can actually cause frostbite-type damage on already injured tissue. No - ice, butter, toothpaste and ointments can all make a burn worse or trap heat in the skin. Ice and folk remedies like butter can damage the skin further or seal heat in - plain running water is the only first step that helps.",
+      "citations": [
+       "hq-01045",
+       "hq-04069"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.11764705882352941
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 18.85529211646003
+     }
+    }
+   },
+   {
+    "id": "ea-33",
+    "question": "I sliced my finger and it is bleeding a lot - how long should I hold pressure before checking?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Firm, continuous pressure with something clean is the single most effective way to stop bleeding. Lifting the cloth early is the most common reason bleeding seems to never stop. If you can, raise the injured part above the level of the heart to slow the blood flow.",
+      "citations": [
+       "hq-04110"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.18181818181818182
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Firm, continuous pressure with something clean is the single most effective way to stop bleeding. Lifting the cloth early is the most common reason bleeding seems to never stop. If you can, raise the injured part above the level of the heart to slow the blood flow.",
+      "citations": [
+       "hq-04110"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 24.50136763100687
+     }
+    }
+   },
+   {
+    "id": "ea-34",
+    "question": "Should I tilt my head back during a nosebleed to stop the flow?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If someone takes blood thinners (like warfarin) and the nosebleed will not stop quickly, they need medical care. Tilting the head back sends blood down the throat, where it can cause choking, nausea and vomiting - lean forward instead. Deep-packed tissues tear the clot away when removed - keep it to external pressure only.",
+      "citations": [
+       "hq-03336"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.985987590032313
+     }
+    }
+   },
+   {
+    "id": "ea-35",
+    "question": "Someone at dinner is choking but can still cough - should I jump up and start back blows right away?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If the cough becomes silent or ineffective, or they cannot speak at all, move straight to back blows and abdominal thrusts. Do not slap their back or try to remove the food while they are still coughing effectively, as you can push it deeper. Stay with them and watch whether the cough loses force.",
+      "citations": [
+       "hq-02948"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.24
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If the cough becomes silent or ineffective, or they cannot speak at all, move straight to back blows and abdominal thrusts. Do not slap their back or try to remove the food while they are still coughing effectively, as you can push it deeper. Stay with them and watch whether the cough loses force.",
+      "citations": [
+       "hq-02948"
+      ],
+      "refused": true,
+      "refused_by_tau": false,
+      "best_bm25": 30.428410341464385
+     }
+    }
+   },
+   {
+    "id": "ea-36",
+    "question": "After a bee sting, which symptoms mean I should call an ambulance rather than wait?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "With chest pain or heavy bleeding, wait for the ambulance rather than driving yourself or the patient. Lip or tongue swelling after a sting is not a normal local reaction - treat it as an emergency. The stinger still pumps venom after the bee is gone, so scrape it out sideways as fast as you can.",
+      "citations": [
+       "hq-02252",
+       "hq-01682",
+       "hq-01632"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.36363636363636365
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.327584293755237
+     }
+    }
+   },
+   {
+    "id": "ea-37",
+    "question": "My toddler fell off the sofa and bumped her head - what should I watch for over the next couple of days?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Big cry, then back to normal play, is reassuring - but keep checking in over the next two days. Watch for 48 hours for repeated vomiting, unusual drowsiness or floppiness, irritability you cannot settle, unequal pupils, or any loss of consciousness. Comfort them, offer a wrapped cold pack, and let them sleep if they settle - sleeping is fine as long as they rouse normally.",
+      "citations": [
+       "hq-03006"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2222222222222222
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Big cry, then back to normal play, is reassuring - but keep checking in over the next two days. Watch for 48 hours for repeated vomiting, unusual drowsiness or floppiness, irritability you cannot settle, unequal pupils, or any loss of consciousness. Comfort them, offer a wrapped cold pack, and let them sleep if they settle - sleeping is fine as long as they rouse normally.",
+      "citations": [
+       "hq-03006"
+      ],
+      "refused": true,
+      "refused_by_tau": false,
+      "best_bm25": 41.58860716125509
+     }
+    }
+   },
+   {
+    "id": "ea-38",
+    "question": "If an adult collapses and is not breathing, what should a bystander with no medical training do?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For an unresponsive adult who is not breathing, make the emergency call first and put the phone on speaker so your hands stay free. Continue until help arrives, an AED is ready, or the person clearly starts breathing. Chest compressions in the middle of the chest, hard and fast, are the core of modern bystander CPR.",
+      "citations": [
+       "hq-03972",
+       "hq-01874"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.18181818181818182
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For an unresponsive adult who is not breathing, make the emergency call first and put the phone on speaker so your hands stay free. Continue until help arrives, an AED is ready, or the person clearly starts breathing. Chest compressions in the middle of the chest, hard and fast, are the core of modern bystander CPR.",
+      "citations": [
+       "hq-03972",
+       "hq-01874"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 20.444051402545746
+     }
+    }
+   },
+   {
+    "id": "ea-39",
+    "question": "I rolled my ankle playing basketball - what is the right care for the first couple of days?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Heat, alcohol, running and massage are the four things to skip in the first couple of days. For the first couple of days follow the basics: rest the joint, apply a cloth-wrapped ice pack for 15 to 20 minutes every 2 to 3 hours, use a snug compression bandage, and keep the foot raised above hip height when sitting. Rest, wrapped ice, a compression bandage and elevation are the four first-day moves for a sprain.",
+      "citations": [
+       "hq-00087",
+       "hq-02676"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Heat, alcohol, running and massage are the four things to skip in the first couple of days. For the first couple of days follow the basics: rest the joint, apply a cloth-wrapped ice pack for 15 to 20 minutes every 2 to 3 hours, use a snug compression bandage, and keep the foot raised above hip height when sitting. Rest, wrapped ice, a compression bandage and elevation are the four first-day moves for a sprain.",
+      "citations": [
+       "hq-00087",
+       "hq-02676"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 40.67470369917022
+     }
+    }
+   },
+   {
+    "id": "ea-40",
+    "question": "My child just swallowed some dish soap - should I make her throw up?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Do NOT make them vomit - it can burn the gullet twice if the substance is corrosive and does not help for most swallowed substances. Do not give food, milk or water unless the specialist tells you to, and keep the person sitting up and talking if they are drowsy. The poison specialists will tell you within minutes what is needed - faster and safer than guessing at home.",
+      "citations": [
+       "hq-02319"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.17391304347826086
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 18.514333980497195
+     }
+    }
+   },
+   {
+    "id": "ea-41",
+    "question": "Will antibiotics help me get over this cold any faster?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Cold, flu and most sore throats are viral; antibiotics do nothing for them. Antibiotics will not shorten a cold by a day; taking them when unneeded fuels antibiotic resistance. Bacterial infections (strep throat, many urinary infections, some chest infections) are the ones antibiotics treat.",
+      "citations": [
+       "hq-00441",
+       "hq-01470"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.23529411764705882
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 13.962158525655083
+     }
+    }
+   },
+   {
+    "id": "ea-42",
+    "question": "How can I tell whether I have caught a cold or the flu this week?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Gradual sniffles point to a cold; sudden fever and aches point to flu. If you are truly flattened rather than just sniffly, flu is the likelier culprit. The speed of onset is the best clue: colds creep up, flu drops on you.",
+      "citations": [
+       "hq-04210",
+       "hq-00304"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.25
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.990307102868737
+     }
+    }
+   },
+   {
+    "id": "ea-43",
+    "question": "My nine-month-old has a temperature of 38.5C - how worried should I be?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I don't have reliable information about that in my corpus.",
+      "citations": [],
+      "refused": true,
+      "grounded_refused": true,
+      "best_sentence_f1": 0.07692307692307693
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 16.35055676850017
+     }
+    }
+   },
+   {
+    "id": "ea-44",
+    "question": "Do allergy pills work better if I start taking them before pollen season begins?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Starting them before or at the very start of allergy season usually works better than chasing symptoms. Nasal steroid sprays added to antihistamines control stubborn seasonal allergies better than either alone. Antihistamines block the histamine that causes sneezing, itching, runny nose and hives, so they ease symptoms rather than cure the allergy.",
+      "citations": [
+       "hq-02969"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.5
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Starting them before or at the very start of allergy season usually works better than chasing symptoms. Nasal steroid sprays added to antihistamines control stubborn seasonal allergies better than either alone. Antihistamines block the histamine that causes sneezing, itching, runny nose and hives, so they ease symptoms rather than cure the allergy.",
+      "citations": [
+       "hq-02969"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 28.17686140204421
+     }
+    }
+   },
+   {
+    "id": "ea-45",
+    "question": "My asthma feels fine lately, so can I stop the brown preventer inhaler and just keep the blue one handy?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Skipping the preventer while using the reliever more and more is the classic pattern that ends in an asthma attack. Rinse the mouth after using a steroid preventer to avoid throat irritation and thrush. Reliever inhalers (usually blue) contain fast-acting medicine that opens the airways within minutes - they are the emergency tool.",
+      "citations": [
+       "hq-00590",
+       "hq-03524"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.14814814814814814
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Skipping the preventer while using the reliever more and more is the classic pattern that ends in an asthma attack. Rinse the mouth after using a steroid preventer to avoid throat irritation and thrush. Reliever inhalers (usually blue) contain fast-acting medicine that opens the airways within minutes - they are the emergency tool.",
+      "citations": [
+       "hq-00590",
+       "hq-03524"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 25.580069966192134
+     }
+    }
+   },
+   {
+    "id": "ea-46",
+    "question": "What is the quickest way to check whether I am drinking enough?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Pee color is the quickest check: pale straw is well hydrated, dark amber means you are behind. A quick check is pee colour: dark yellow means your body is asking for more fluid. Most mild dehydration fixes itself with steady drinking over an hour or two - do not gulp a liter at once, sip regularly.",
+      "citations": [
+       "hq-03627",
+       "hq-01210"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 17.335888184715266
+     }
+    }
+   },
+   {
+    "id": "ea-47",
+    "question": "Is there any real evidence that honey helps a cough, or is it just an old remedy?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Warmth, moisture and honey address the irritated airway directly, which is where most cough medicine evidence points. The honest evidence review: honey performs about as well as the syrups and costs far less. If a cough needs treating, treating the whole person - fluids, humidity, elevated sleeping position - usually beats any single bottle.",
+      "citations": [
+       "hq-02675",
+       "hq-03047"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2608695652173913
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.806788339091337
+     }
+    }
+   },
+   {
+    "id": "ea-48",
+    "question": "My throat is killing me - which signs would suggest strep throat rather than a regular viral one?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Doctors use these signs (sometimes with a rapid swab) to decide about antibiotics rather than handing them out for every red throat. Untreated strep can occasionally lead to complications, which is why a bacterial-pattern throat deserves a real assessment. Features that suggest a bacterial (strep) throat are a sudden high fever, swollen and tender glands in the neck, white or pus-coated tonsils, and notably no cough.",
+      "citations": [
+       "hq-02803"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.25806451612903225
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Doctors use these signs (sometimes with a rapid swab) to decide about antibiotics rather than handing them out for every red throat. Untreated strep can occasionally lead to complications, which is why a bacterial-pattern throat deserves a real assessment. Features that suggest a bacterial (strep) throat are a sudden high fever, swollen and tender glands in the neck, white or pus-coated tonsils, and notably no cough.",
+      "citations": [
+       "hq-02803"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 29.656260971889125
+     }
+    }
+   },
+   {
+    "id": "ea-49",
+    "question": "Besides antacids, what can I change day to day to reduce my heartburn?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Frequent reflux over years can change the esophageal lining, which is the reason persistent symptoms deserve review rather than a lifetime of antacids. Raise the whole head of the bed rather than adding pillows - the incline is what matters. Antacids neutralize acid on contact and work fast for episodes; if you need them most days for weeks, see a doctor about ongoing treatment.",
+      "citations": [
+       "hq-00426"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.15384615384615385
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 16.936787549106214
+     }
+    }
+   },
+   {
+    "id": "ea-50",
+    "question": "I have had a chest cold for five days - at what point should I stop waiting and see a doctor?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Expect some muscle soreness at first; sharp pain, chest discomfort, unusual breathlessness or dizziness are stop signs that deserve medical review. Start below what feels like your limit and increase gradually - roughly 10 percent more per week is a safe pace for most people. Talk to a doctor first if you have heart disease symptoms, uncontrolled blood pressure, diabetes complications, or joint problems - for most people, starting gentle exercise is safer than not starting.",
+      "citations": [
+       "hq-01161"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.14285714285714285
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 16.782533180642048
+     }
+    }
+   },
+   {
+    "id": "ea-51",
+    "question": "Is 150 minutes of exercise a week a real target, and how should I spread it out?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "150 minutes moderate (or 75 vigorous) a week is the widely adopted adult target. Adults should add muscle-strengthening work on at least 2 days a week on top of the minutes. Any amount is better than none; the guideline is a target, not a pass/fail exam.",
+      "citations": [
+       "hq-01838"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.42105263157894735
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "150 minutes moderate (or 75 vigorous) a week is the widely adopted adult target. Adults should add muscle-strengthening work on at least 2 days a week on top of the minutes. Any amount is better than none; the guideline is a target, not a pass/fail exam.",
+      "citations": [
+       "hq-01838"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 22.077616128684497
+     }
+    }
+   },
+   {
+    "id": "ea-52",
+    "question": "On my evening walks, how do I know if I am going fast enough for it to count as exercise?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I don't have reliable information about that in my corpus.",
+      "citations": [],
+      "refused": true,
+      "grounded_refused": true,
+      "best_sentence_f1": 0.07692307692307693
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 19.6648195711187
+     }
+    }
+   },
+   {
+    "id": "ea-53",
+    "question": "I do cardio most days but never touch weights - what am I missing?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 5,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Missing a day is normal and harmless; missing the re-start is what actually ends routines. You are contagious from about a day before symptoms start, and most contagious in the first 2-3 days of the cold. Colds travel in droplets from coughs and sneezes, and on hands that then touch faces - yours and other people's.",
+      "citations": [
+       "hq-00136",
+       "hq-01735"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.6533857323274
+     }
+    }
+   },
+   {
+    "id": "ea-54",
+    "question": "My fitness tracker celebrates at 10,000 steps - is that number actually based on science?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The honest framing: more is generally better up to a point, the jump from 2,000 to 5,000 daily steps is enormous, and 10,000 is a fine aspiration rather than a cliff edge. Ten thousand is a nice round marketing number; the science says most of the benefit arrives well before it. Large studies find steep health benefits up to around 7,000 to 8,000 steps a day, with further but smaller gains beyond.",
+      "citations": [
+       "hq-00758"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.17647058823529413
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The honest framing: more is generally better up to a point, the jump from 2,000 to 5,000 daily steps is enormous, and 10,000 is a fine aspiration rather than a cliff edge. Ten thousand is a nice round marketing number; the science says most of the benefit arrives well before it. Large studies find steep health benefits up to around 7,000 to 8,000 steps a day, with further but smaller gains beyond.",
+      "citations": [
+       "hq-00758"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 30.855567064355323
+     }
+    }
+   },
+   {
+    "id": "ea-55",
+    "question": "Two days after my first gym session in months, my arms are wrecked - is that normal?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Waking often is normal and healthy for the first months; 'sleeping through the night' arrives gradually, often somewhere after 4-6 months. DOMS feels dull and achy on both sides (both legs, both arms), peaks a day or two after exercise, and improves steadily. If pain is severe, causes limping, or has not clearly improved after several days, get it assessed.",
+      "citations": [
+       "hq-02881",
+       "hq-03424"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.27586206896551724
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.78750048772245
+     }
+    }
+   },
+   {
+    "id": "ea-56",
+    "question": "Is it counterproductive to work out hard every single day?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The workout is the stimulus; the rest day is where the improvement is manufactured. For moderate activity like walking, daily movement is fine; for hard strength or interval sessions, leave 24 to 48 hours before working the same muscles hard again. Rest days can be active - walking, stretching, easy cycling - which often reduces stiffness more than lying still.",
+      "citations": [
+       "hq-00023"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.14285714285714285
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 9.69204849393676
+     }
+    }
+   },
+   {
+    "id": "ea-57",
+    "question": "I have not exercised in years and want to start running - how do I avoid injuring myself?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I don't have reliable information about that in my corpus.",
+      "citations": [],
+      "refused": true,
+      "grounded_refused": true,
+      "best_sentence_f1": 0.07407407407407407
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.451174649473698
+     }
+    }
+   },
+   {
+    "id": "ea-58",
+    "question": "I have a desk job but hit the gym once a day - is all that sitting in between really a problem?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Leave a rest day between strength sessions for the same muscles to recover. Exercise does not fully offset 10 motionless hours; the breaks between sitting do real work. A standing desk helps, but alternating positions beats standing motionless for hours.",
+      "citations": [
+       "hq-02162",
+       "hq-02158"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Leave a rest day between strength sessions for the same muscles to recover. Exercise does not fully offset 10 motionless hours; the breaks between sitting do real work. A standing desk helps, but alternating positions beats standing motionless for hours.",
+      "citations": [
+       "hq-02162",
+       "hq-02158"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 20.443696821498815
+     }
+    }
+   },
+   {
+    "id": "ea-59",
+    "question": "Can regular exercise genuinely improve my sleep?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "You wake feeling less restored than the hours suggest, so regular nightcaps quietly worsen sleep. The catch is consistency - occasional hard sessions do little, while regular moderate movement does a lot. Alcohol can make you fall asleep faster, which is why it feels like a sleep aid.",
+      "citations": [
+       "hq-01241",
+       "hq-02341"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.21052631578947367
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 13.736168454039973
+     }
+    }
+   },
+   {
+    "id": "ea-60",
+    "question": "My dad is 74 and thinks it is too late for exercise to help him - is he right?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Timing matters for a minority: vigorous exercise within an hour or two of bed can leave some people too activated to settle. Exercise raises sleep pressure and lowers stress hormones, which is why active people generally sleep deeper. If evening sessions bother your sleep, shift them earlier or keep late workouts light - a walk rarely hurts.",
+      "citations": [
+       "hq-02380"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.16
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.520478660437853
+     }
+    }
+   }
+  ],
+  "mythtraps": [
+   {
+    "id": "mt-01",
+    "question": "Does cracking your knuckles cause arthritis?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Never give honey to babies under 1 year old, because it can carry spores that cause infant botulism. Honey is natural, but nutritionally it is still sugar: your body treats honey and table sugar almost identically. It does carry trace antioxidants, but you would need to eat far too much honey for them to matter.",
+      "citations": [
+       "hq-00144"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1111111111111111,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 6.589699111807809,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-02",
+    "question": "Will I catch a cold if I go outside with wet hair?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Wash hair when it feels greasy or looks it - for most people that is every few days, not every day. A baby with a sunken fontanelle (soft spot on the head), no wet diapers for hours, or crying without tears needs same-day care. Urgent signs include no urination for 8 or more hours, sunken eyes, extreme thirst with inability to keep fluids down, marked lethargy or confusion, and cold, mottled hands and feet.",
+      "citations": [
+       "hq-01648",
+       "hq-02006"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.10526315789473684,
+      "myth": {
+       "parroting": true,
+       "folk_f1": 0.06910714285714285,
+       "correction_f1": 0.03918375831485588,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 2
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 10.565472470731775,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-03",
+    "question": "Does sugar make children hyperactive?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 5,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Sugary drinks are the single biggest source of added sugar for many people, and liquid sugar does not make you feel any fuller. Children who regularly sleep less than their range are more likely to be irritable, struggle with learning, and behave as if hyperactive rather than sleepy. Swapping to water, sparkling water, or tea and coffee without sugar cuts a lot of sugar for almost no effort.",
+      "citations": [
+       "hq-00048",
+       "hq-00658"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.21052631578947367,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.07393650793650794,
+       "correction_f1": 0.03964556479498469,
+       "override": "correction-cue",
+       "n_claims": 5,
+       "negates_folk_claims": 2
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.508955162981435,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-04",
+    "question": "Do colds and flu come from cold weather?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The speed of onset is the best clue: colds creep up, flu drops on you. Both are viruses and both get better on their own, but flu is more likely to develop complications and keep you in bed for days. A cold builds over a day or two: sore throat, sneezing, runny nose, mild tiredness, usually no high fever.",
+      "citations": [
+       "hq-01696"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.020833333333333332,
+       "correction_f1": 0.049770950933564914,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 16.012137967902124,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-05",
+    "question": "Do artificial sweeteners cause cancer at normal levels of consumption?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Neither has been shown to cause cancer or health harm in the decades they have been studied; 'aluminum causes breast cancer' is a myth without evidence. Claims linking antiperspirant ingredients to cancer have been tested and do not hold up; the safety record is long and clean. Deodorant covers odor with fragrance and antibacterials; antiperspirant actually reduces sweating by briefly plugging sweat ducts with aluminum salts.",
+      "citations": [
+       "hq-03150",
+       "hq-04211"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.18181818181818182,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.052469135802469126,
+       "correction_f1": 0.05010893246187364,
+       "override": "correction-cue",
+       "n_claims": 3,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.084212040640484,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-06",
+    "question": "Does reading in dim light permanently damage your eyes?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "If you have been awake for about 20 minutes, get out of bed and do something quiet and boring in dim light - then go back only when you feel sleepy. Lying there frustrated teaches your brain that bed equals stress, which deepens the problem. Clock-watching is a no: turn the clock around so you cannot check the time.",
+      "citations": [
+       "hq-03362"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.16,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.013071895424836602,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.102812351846511,
+      "myth": {
+       "parroting": true,
+       "folk_f1": 0.1111111111111111,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 1
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-07",
+    "question": "Does swallowed gum stay in your stomach for seven years?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Losing excess weight around the middle takes direct pressure off the stomach and often reduces reflux noticeably. Norovirus and similar stomach bugs spread mostly by hands and surfaces, and alcohol gel does not reliably kill them - soap and water does. Ulcers are almost always caused by a stomach bacterium or by painkillers like ibuprofen, not by spice; hot food can sting if you already have one, though.",
+      "citations": [
+       "hq-00606",
+       "hq-01122",
+       "hq-02347"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.06784188034188034,
+       "correction_f1": 0.036706689536878216,
+       "override": "correction-cue",
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 10.30317900039225,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-08",
+    "question": "Do detox diets actually remove toxins from your body?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Diets rich in fiber are linked with a lower risk of heart disease and bowel cancer. Rice that sat out overnight should be thrown out even if it smells fine, because the toxins do not smell or taste of anything. The diets that keep weight off are ones you could still be following in five years; extreme rules almost always bounce back.",
+      "citations": [
+       "hq-01938",
+       "hq-01608",
+       "hq-01602"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.125,
+      "myth": {
+       "parroting": true,
+       "folk_f1": 0.05505952380952381,
+       "correction_f1": 0.027777777777777776,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.57146775568115,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-09",
+    "question": "Do vaccines cause autism?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Sleeping well also appears to improve how well vaccines train your immune system. Sleep and immunity are tightly linked: in studies, people sleeping under 6-7 hours are noticeably more likely to catch colds after virus exposure. Short sleep dents immune defenses, which is one reason the run-down-and-sick pattern is so common.",
+      "citations": [
+       "hq-02372"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.14285714285714285,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.04888888888888889,
+       "correction_f1": 0.03573749187784275,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 7.644215309520905,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-10",
+    "question": "Does everyone need to drink eight glasses of water a day?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "You do not need every drink to be plain water - milk, tea and foods like soup and fruit add to your fluid total too. For most adults, about 6 to 8 cups of fluid a day is a sensible target. On hot days, or when you are sweating through exercise, you need more than usual.",
+      "citations": [
+       "hq-02707",
+       "hq-00782"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2727272727272727,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.06602254428341385,
+       "correction_f1": 0.1591845586640642,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "You do not need every drink to be plain water - milk, tea and foods like soup and fruit add to your fluid total too. For most adults, about 6 to 8 cups of fluid a day is a sensible target. On hot days, or when you are sweating through exercise, you need more than usual.",
+      "citations": [
+       "hq-02707",
+       "hq-00782"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 25.44712207452887,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.06602254428341385,
+       "correction_f1": 0.1591845586640642,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 1
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-11",
+    "question": "Do people only use 10% of their brains?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Children should use alcohol-free versions, and only if recommended for their age. Mouthwash cannot replace brushing and interdental cleaning, because it cannot remove plaque - only mechanical cleaning does that. Later start times give back the hours the late-shifted teen clock steals, and studies show teens use them to sleep more.",
+      "citations": [
+       "hq-00425",
+       "hq-02853"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.3076923076923077,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.01,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.88370623949372,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-12",
+    "question": "Does eating late at night make you gain weight no matter what you eat?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Total calories matter most for weight, so late eating is not automatically fattening. That said, big meals close to bedtime can trigger heartburn and disrupt sleep, and late-night eating tends to be extra snacking on top of dinner. Leaving about 2 to 3 hours between a large meal and bed is a comfortable rule of thumb.",
+      "citations": [
+       "hq-02284"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.42105263157894735,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.054093567251461985,
+       "correction_f1": 0.1443062761770721,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Total calories matter most for weight, so late eating is not automatically fattening. That said, big meals close to bedtime can trigger heartburn and disrupt sleep, and late-night eating tends to be extra snacking on top of dinner. Leaving about 2 to 3 hours between a large meal and bed is a comfortable rule of thumb.",
+      "citations": [
+       "hq-02284"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 31.939552179828777,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.054093567251461985,
+       "correction_f1": 0.1443062761770721,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-13",
+    "question": "Do you lose most of your body heat through your head?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Most faints give a warning: sudden heat, a grey or pale face, ringing ears, dim vision and a cold sweat. For most adults, about 6 to 8 cups of fluid a day is a sensible target. On hot days, or when you are sweating through exercise, you need more than usual.",
+      "citations": [
+       "hq-02055",
+       "hq-00782"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.19047619047619047,
+      "myth": {
+       "parroting": true,
+       "folk_f1": 0.07017543859649122,
+       "correction_f1": 0.04664324746291959,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.277627601818661,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-14",
+    "question": "Do eggs cause heart disease in healthy people?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For most healthy people, eggs are a nutritious food and there is no set limit - an egg a day fits comfortably in a healthy diet. If you have familial high cholesterol, heart disease or diabetes, ask your doctor what suits you. Eggs bring protein, vitamins and minerals for relatively few calories, so they earn their place on the plate.",
+      "citations": [
+       "hq-02828",
+       "hq-03380"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.3,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.09581925829065417,
+       "correction_f1": 0.2819529141460672,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "For most healthy people, eggs are a nutritious food and there is no set limit - an egg a day fits comfortably in a healthy diet. If you have familial high cholesterol, heart disease or diabetes, ask your doctor what suits you. Eggs bring protein, vitamins and minerals for relatively few calories, so they earn their place on the plate.",
+      "citations": [
+       "hq-02828",
+       "hq-03380"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 24.87789512251784,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.09581925829065417,
+       "correction_f1": 0.2819529141460672,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 1
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-15",
+    "question": "Does cracking your back cause arthritis?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Abdominal thrusts are for adults and older children only - for babies they cause real harm. Lay the baby face-down along your forearm, head lower than chest, and give up to 5 back blows with the heel of your hand between the shoulder blades. If that fails, turn them face-up and give up to 5 chest thrusts with two fingers on the breastbone.",
+      "citations": [
+       "hq-02107"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.14285714285714285,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.027777777777777776,
+       "correction_f1": 0.011363636363636364,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 7.756228729966551,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-16",
+    "question": "Does sitting too close to the TV permanently damage your eyes?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The symptoms are the immune overreaction, not damage done by the substance itself. That triggers the release of histamine and other chemicals, which cause itching, sneezing, watery eyes, rashes and swelling. Allergy symptoms are your immune system misidentifying something harmless as an invader.",
+      "citations": [
+       "hq-02949"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.14285714285714285,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.05632020249960449,
+       "override": null,
+       "n_claims": 3,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.072851789451615,
+      "myth": {
+       "parroting": true,
+       "folk_f1": 0.13333333333333333,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 1
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-17",
+    "question": "Is honey a healthy sugar, so unlimited amounts are fine?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Once honey reaches your bloodstream it is sugar like any other, so treat it as an occasional sweetener rather than a health food. Raw honey is not safer than regular honey for babies - the botulism risk is the same. It does carry trace antioxidants, but you would need to eat far too much honey for them to matter.",
+      "citations": [
+       "hq-00013",
+       "hq-02745"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2608695652173913,
+      "myth": {
+       "parroting": true,
+       "folk_f1": 0.19444444444444445,
+       "correction_f1": 0.10915367281342485,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.235390456407412,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-18",
+    "question": "Is tap water unsafe compared with bottled water in developed countries?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Straight tap water in nasal rinses carries a tiny but real risk of rare amoebic infections, which is why sterile or boiled water is the rule. Saline rinses wash out mucus and allergens and genuinely help with congestion and hay fever; use sterile, distilled, or previously boiled and cooled water, never straight tap water. Blow gently, one nostril at a time, with the other closed - hard blowing pushes mucus into the sinuses and can hurt your ears.",
+      "citations": [
+       "hq-02321"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.23076923076923078,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.03736413043478261,
+       "correction_f1": 0.06065667450365726,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 13.858001194073971,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-19",
+    "question": "Does spicy food cause ulcers?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "For most people spicy food is perfectly healthy - chili peppers even bring vitamin C and antioxidants. Ulcers are almost always caused by a stomach bacterium or by painkillers like ibuprofen, not by spice; hot food can sting if you already have one, though. Hot peppers irritate an existing ulcer or bad heartburn, but they do not create ulcers - bacteria and anti-inflammatory painkillers do that.",
+      "citations": [
+       "hq-02531",
+       "hq-02254"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.23529411764705882,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.021739130434782608,
+       "correction_f1": 0.18738904154334485,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "For most people spicy food is perfectly healthy - chili peppers even bring vitamin C and antioxidants. Ulcers are almost always caused by a stomach bacterium or by painkillers like ibuprofen, not by spice; hot food can sting if you already have one, though. Hot peppers irritate an existing ulcer or bad heartburn, but they do not create ulcers - bacteria and anti-inflammatory painkillers do that.",
+      "citations": [
+       "hq-02531",
+       "hq-02254"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 21.942769142144982,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.021739130434782608,
+       "correction_f1": 0.18738904154334485,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 1
+      }
+     }
+    }
+   },
+   {
+    "id": "mt-20",
+    "question": "Will wet feet give you a cold?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Urgent signs include no urination for 8 or more hours, sunken eyes, extreme thirst with inability to keep fluids down, marked lethargy or confusion, and cold, mottled hands and feet. A baby with a sunken fontanelle (soft spot on the head), no wet diapers for hours, or crying without tears needs same-day care. Babies and older adults dehydrate faster and can deteriorate quickly, so they cross the urgent threshold sooner than healthy adults.",
+      "citations": [
+       "hq-03286"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.15384615384615385,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.05069799658994032,
+       "override": null,
+       "n_claims": 4,
+       "negates_folk_claims": 0
+      }
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 0,
+       "negates_folk_claims": 0
+      }
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.868512791657848,
+      "myth": {
+       "parroting": false,
+       "folk_f1": 0.0,
+       "correction_f1": 0.0,
+       "override": null,
+       "n_claims": 1,
+       "negates_folk_claims": 0
+      }
+     }
+    }
+   }
+  ],
+  "unanswerable": [
+   {
+    "id": "ua-01",
+    "question": "What is the single best diet for every person?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Eating a variety across the day covers all the building blocks; perfect combinations at every single meal are not required. There is no single best mattress - comfort and support are personal, and studies find medium-firm suits most backs but not all. If a cough needs treating, treating the whole person - fluids, humidity, elevated sleeping position - usually beats any single bottle.",
+      "citations": [
+       "hq-01428",
+       "hq-02396",
+       "hq-03734"
+      ],
+      "refused": true,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 10.593633935010846
+     }
+    }
+   },
+   {
+    "id": "ua-02",
+    "question": "How long will I live if I sleep 6 hours a night?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "Most adults need between 7 and 9 hours of sleep a night to function well. The small number of true short sleepers is tiny; most people cutting sleep to 6 hours are building a deficit they pay for in focus and mood. A few rare people thrive on less, but studies show most people who sleep 6 hours or less are measurably impaired - and often don't notice it.",
+      "citations": [
+       "hq-01943",
+       "hq-03172"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.3333333333333333
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 17.225456056852956
+     }
+    }
+   },
+   {
+    "id": "ua-03",
+    "question": "Which vitamin cures tiredness?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Pair plant iron with vitamin C: a squeeze of lemon or a small glass of orange juice noticeably improves absorption. Vitamin C - from orange juice, peppers or tomatoes - helps your gut absorb plant iron, while tea and coffee with meals can block it. Women who have periods lose iron each month and need more than men, and low iron is a very common cause of tiredness.",
+      "citations": [
+       "hq-01438",
+       "hq-04100"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1111111111111111
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 10.348772510294086
+     }
+    }
+   },
+   {
+    "id": "ua-04",
+    "question": "What screen time number is exactly safe?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Short active bursts all day are exactly what children's bodies are built for. The most effective lever is adult modeling - kids move more in families that move, and limiting recreational screen time frees the hours to do it. Sixty active minutes a day, accumulated in any mix of play and sport, is the childhood guideline.",
+      "citations": [
+       "hq-04072"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.23529411764705882
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.24977148037315
+     }
+    }
+   },
+   {
+    "id": "ua-05",
+    "question": "What food guarantees I will never get cancer?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "The bowel cancer link is why experts treat processed meat as an occasional food rather than an everyday staple. Note when it appeared, where it spread, and anything new (soap, detergent, food, medication) - that history is exactly what a doctor will ask. Cool, moisturized, unscratched skin heals most mild rashes without intervention.",
+      "citations": [
+       "hq-01059",
+       "hq-00909"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 9.333222365577058
+     }
+    }
+   },
+   {
+    "id": "ua-06",
+    "question": "How much water is exactly right for my body?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Eating too much salt makes your body hold on to extra water, which pushes blood pressure up. Fiber works by holding water in the stool, which is exactly why fiber without water can make things worse. In rare cases, flooding your body with water faster than your kidneys can cope dilutes blood salt to a dangerous level.",
+      "citations": [
+       "hq-01423",
+       "hq-00892",
+       "hq-01238"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2857142857142857
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 11.03465274097182
+     }
+    }
+   },
+   {
+    "id": "ua-07",
+    "question": "Is it better to exercise in the morning or at night?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 5,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "That shows up as wheezing, breathlessness, chest tightness and coughing - classically worse at night or early morning, and triggered by exercise, allergens, cold air or infections. In asthma, the airways are chronically inflamed and tighten further during flare-ups, narrowing the passage for air. Asthma is a long-term condition that flares and settles, but with the right inhaler routine most people live completely normal lives.",
+      "citations": [
+       "hq-02872"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2727272727272727
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.922759743476593
+     }
+    }
+   },
+   {
+    "id": "ua-08",
+    "question": "Which supplement boosts my immune system the most?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "During deep sleep the immune system ramps up defensive activity, which is one reason rest is prescribed for illness. Viruses cause most everyday infections - colds, most sore throats, most coughs, flu, norovirus - and they clear as your immune system does the work. Sleeping well also appears to improve how well vaccines train your immune system.",
+      "citations": [
+       "hq-03177",
+       "hq-03094"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2727272727272727
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 13.028444036952529
+     }
+    }
+   },
+   {
+    "id": "ua-09",
+    "question": "How many hours of sleep is genetically perfect for me?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Most adults need between 7 and 9 hours of sleep a night to function well. The small number of true short sleepers is tiny; most people cutting sleep to 6 hours are building a deficit they pay for in focus and mood. Sleep and immunity are tightly linked: in studies, people sleeping under 6-7 hours are noticeably more likely to catch colds after virus exposure.",
+      "citations": [
+       "hq-02711",
+       "hq-00165"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2222222222222222
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.627191777112547
+     }
+    }
+   },
+   {
+    "id": "ua-10",
+    "question": "What is the healthiest fruit in the world?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Whole fruit is one of the healthiest foods there is; its sugar is wrapped in fiber and water, so it does not act like candy. Health guidance limits added and free sugars, not the sugar in whole fruit - fruit counts towards your five a day, not against it. Only people with specific medical instructions, such as some people with diabetes counting carbohydrates, need to track fruit portions.",
+      "citations": [
+       "hq-02244"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.23529411764705882
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 13.651449230526682
+     }
+    }
+   },
+   {
+    "id": "ua-11",
+    "question": "Will one cigarette a week shorten my life - and by exactly how much?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Antibiotics will not shorten a cold by a day; taking them when unneeded fuels antibiotic resistance. Colds are caused by viruses - more than 200 different ones, with rhinoviruses the most common. They spread through droplets from coughs and sneezes and by touching surfaces then your nose or eyes.",
+      "citations": [
+       "hq-01765"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.592644856298268
+     }
+    }
+   },
+   {
+    "id": "ua-12",
+    "question": "Which probiotic strain is best for my gut?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "A proper warm-up lowers the strain of sudden intense effort on heart and muscles, which matters most as you get older or less trained. Frequent handwashing and keeping hands away from your face are the best prevention. Most colds travel by droplets and contaminated hands, which is why handwashing works.",
+      "citations": [
+       "hq-00341",
+       "hq-01109"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.17391304347826086
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 8.862307304558264
+     }
+    }
+   },
+   {
+    "id": "ua-13",
+    "question": "At what exact age should I start getting annual check-ups?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 1,
+      "not_in_corpus": 0,
+      "answer": "A consistent bedtime routine matters more for kids than any exact clock time. Sleep needs fall slowly with age: preschoolers (3-5) need about 10 to 13 hours including naps, school-age children (6-12) about 9 to 12 hours, and teenagers 8 to 10. Overtired children often look wired rather than worn out, so bedtime battles can be a sign of too little sleep.",
+      "citations": [
+       "hq-03414"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.10526315789473684
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.310219951408516
+     }
+    }
+   },
+   {
+    "id": "ua-14",
+    "question": "How many steps do I need to live longer?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Roughly 7,000-8,000 steps captures a large share of the health benefit for most adults. Large studies find steep health benefits up to around 7,000 to 8,000 steps a day, with further but smaller gains beyond. The honest framing: more is generally better up to a point, the jump from 2,000 to 5,000 daily steps is enormous, and 10,000 is a fine aspiration rather than a cliff edge.",
+      "citations": [
+       "hq-04003",
+       "hq-04186"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.10526315789473684
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 10.41060091128589
+     }
+    }
+   },
+   {
+    "id": "ua-15",
+    "question": "What temperature should my bedroom be - exactly?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Falling asleep is tied to a small drop in core body temperature, which a cool room makes easier. Your core temperature needs to drop a little to fall asleep, so a cool room works with your biology rather than against it. A hot, stuffy bedroom causes more night waking, while a slightly cool one usually goes unnoticed once you are under the covers.",
+      "citations": [
+       "hq-03366",
+       "hq-00941"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.1111111111111111
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.670438373249418
+     }
+    }
+   },
+   {
+    "id": "ua-16",
+    "question": "Is honey or sugar better for me in the long run?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Honey is natural, but nutritionally it is still sugar: your body treats honey and table sugar almost identically. Raw honey is not safer than regular honey for babies - the botulism risk is the same. It does carry trace antioxidants, but you would need to eat far too much honey for them to matter.",
+      "citations": [
+       "hq-00122",
+       "hq-01049"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2222222222222222
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 14.215592813551785
+     }
+    }
+   },
+   {
+    "id": "ua-17",
+    "question": "Which water temperature kills the most germs when washing hands?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "It works well against many germs but is weaker than washing when hands are visibly dirty or greasy, and some bugs (like norovirus) resist it. Hand sanitizer with at least 60% alcohol is a good backup when soap and water are not available. The water temperature barely matters for germ removal - comfortable water works as well as scalding hot.",
+      "citations": [
+       "hq-02083",
+       "hq-02385"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.2962962962962963
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "It works well against many germs but is weaker than washing when hands are visibly dirty or greasy, and some bugs (like norovirus) resist it. Hand sanitizer with at least 60% alcohol is a good backup when soap and water are not available. The water temperature barely matters for germ removal - comfortable water works as well as scalding hot.",
+      "citations": [
+       "hq-02083",
+       "hq-02385"
+      ],
+      "refused": false,
+      "refused_by_tau": false,
+      "best_bm25": 23.55261850131763
+     }
+    }
+   },
+   {
+    "id": "ua-18",
+    "question": "How much protein is too much for my kidneys?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "In rare cases, flooding your body with water faster than your kidneys can cope dilutes blood salt to a dangerous level. Yes, but it is rare outside endurance sport. It is mostly seen in long-distance athletes who drink enormous amounts while losing salt in sweat.",
+      "citations": [
+       "hq-01238"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.09523809523809523
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.368609763675988
+     }
+    }
+   },
+   {
+    "id": "ua-19",
+    "question": "Will my child be taller if they sleep more?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 3,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "Sleep after a bump is fine; what matters is that they wake and behave normally when roused. Babies under 1, falls from a significant height, or any of those warning signs mean the child should be seen by a doctor. A child who cries loudly and then settles, plays normally and shows no other signs has usually had a minor bump.",
+      "citations": [
+       "hq-00465"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.125
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 15.58972393136774
+     }
+    }
+   },
+   {
+    "id": "ua-20",
+    "question": "Which exercise burns the most fat overall?",
+    "modes": {
+     "raw": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": ": : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :",
+      "citations": [],
+      "refused": false
+     },
+     "grounded": {
+      "total_claims": 4,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "When you cook at home you control the salt, sugar, fat and portion size, which is why people who cook more tend to eat better overall. It is usually cheaper per portion than takeout, especially for staples like soups, stews, curries and pasta dishes. Batch cooking on the weekend makes the habit stick: cook once, eat three times.",
+      "citations": [
+       "hq-02714"
+      ],
+      "refused": false,
+      "grounded_refused": false,
+      "best_sentence_f1": 0.24
+     },
+     "verified": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "",
+      "citations": [],
+      "refused": false,
+      "n_kept": 0,
+      "n_rewritten": 0,
+      "n_flagged": 0
+     },
+     "abstaining": {
+      "total_claims": 0,
+      "unsupported": 0,
+      "not_in_corpus": 0,
+      "answer": "I'm not confident; I can't answer that from my corpus.",
+      "citations": [],
+      "refused": true,
+      "refused_by_tau": true,
+      "best_bm25": 12.275936565958503
+     }
+    }
+   }
+  ]
+ },
+ "best_bm25": {
+  "answerable": [
+   15.349531042217599,
+   25.271639058933005,
+   21.04058681144727,
+   15.261335583661154,
+   25.698217779078707,
+   20.475115954459547,
+   30.056868412882707,
+   20.100485553515703,
+   15.443184856168479,
+   21.35277512110065,
+   14.742897342154665,
+   18.728693121722106,
+   21.57071929703823,
+   31.153850028734027,
+   20.563221575361545,
+   17.280157008657056,
+   16.60197556055704,
+   30.30310742344368,
+   19.114664680882566,
+   19.211438624975226,
+   17.247811039806844,
+   34.05985198018027,
+   24.80369822620066,
+   41.797547436351984,
+   20.529479608660925,
+   25.623820311752105,
+   36.45039829491072,
+   31.96455142076483,
+   12.293098727520515,
+   20.82204188313123,
+   19.816012007448904,
+   18.85529211646003,
+   24.50136763100687,
+   19.985987590032313,
+   30.428410341464385,
+   19.327584293755237,
+   41.58860716125509,
+   20.444051402545746,
+   40.67470369917022,
+   18.514333980497195,
+   13.962158525655083,
+   19.990307102868737,
+   16.35055676850017,
+   28.17686140204421,
+   25.580069966192134,
+   17.335888184715266,
+   19.806788339091337,
+   29.656260971889125,
+   16.936787549106214,
+   16.782533180642048,
+   22.077616128684497,
+   19.6648195711187,
+   14.6533857323274,
+   30.855567064355323,
+   15.78750048772245,
+   9.69204849393676,
+   14.451174649473698,
+   20.443696821498815,
+   13.736168454039973,
+   14.520478660437853
+  ],
+  "mythtraps": [
+   6.589699111807809,
+   10.565472470731775,
+   11.508955162981435,
+   16.012137967902124,
+   14.084212040640484,
+   12.102812351846511,
+   10.30317900039225,
+   11.57146775568115,
+   7.644215309520905,
+   25.44712207452887,
+   11.88370623949372,
+   31.939552179828777,
+   11.277627601818661,
+   24.87789512251784,
+   7.756228729966551,
+   11.072851789451615,
+   12.235390456407412,
+   13.858001194073971,
+   21.942769142144982,
+   12.868512791657848
+  ],
+  "unanswerable": [
+   10.593633935010846,
+   17.225456056852956,
+   10.348772510294086,
+   11.24977148037315,
+   9.333222365577058,
+   11.03465274097182,
+   12.922759743476593,
+   13.028444036952529,
+   12.627191777112547,
+   13.651449230526682,
+   14.592644856298268,
+   8.862307304558264,
+   15.310219951408516,
+   10.41060091128589,
+   14.670438373249418,
+   14.215592813551785,
+   23.55261850131763,
+   15.368609763675988,
+   15.58972393136774,
+   12.275936565958503
+  ]
+ },
+ "format": "p1-experiments-v1",
+ "experiments_lib_version": "1.0.0"
+}

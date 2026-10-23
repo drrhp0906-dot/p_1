@@ -1,0 +1,3023 @@
+{
+ "format": "p1-retrieval-eval-v1",
+ "meta": {
+  "corpus": "health_qa.jsonl",
+  "n_chunks": 4278,
+  "vocab": 3992,
+  "avgdl": 85.517532,
+  "k": 3,
+  "methods": [
+   "bm25",
+   "tfidf"
+  ],
+  "n_questions": 100,
+  "eval_files": [
+   "eval_answerable.jsonl",
+   "eval_mythtraps.jsonl",
+   "eval_unanswerable.jsonl"
+  ],
+  "retrieval_py_version": "1.0.0"
+ },
+ "questions": [
+  {
+   "id": "ea-01",
+   "question": "During a hot summer day of gardening, how should I adjust how much I drink?",
+   "method": "bm25",
+   "top3": [
+    "hq-00355",
+    "hq-00664",
+    "hq-01713"
+   ],
+   "scores": [
+    15.349531042217599,
+    14.892081106038486,
+    13.957493048470406
+   ]
+  },
+  {
+   "id": "ea-02",
+   "question": "Do frozen vegetables really count toward my five a day?",
+   "method": "bm25",
+   "top3": [
+    "hq-01163",
+    "hq-03781",
+    "hq-00697"
+   ],
+   "scores": [
+    25.271639058933005,
+    24.755206193263067,
+    24.06763404149369
+   ]
+  },
+  {
+   "id": "ea-03",
+   "question": "How much sugar is hiding in one can of regular cola?",
+   "method": "bm25",
+   "top3": [
+    "hq-02925",
+    "hq-00048",
+    "hq-01539"
+   ],
+   "scores": [
+    21.04058681144727,
+    20.903628186116528,
+    20.087703688600776
+   ]
+  },
+  {
+   "id": "ea-04",
+   "question": "Why did adding a lot more whole grains to my breakfast leave me bloated at first?",
+   "method": "bm25",
+   "top3": [
+    "hq-00369",
+    "hq-01716",
+    "hq-01831"
+   ],
+   "scores": [
+    15.261335583661154,
+    15.024489906725734,
+    14.732265448645489
+   ]
+  },
+  {
+   "id": "ea-05",
+   "question": "Is it OK to drink four mugs of instant coffee spread across one day?",
+   "method": "bm25",
+   "top3": [
+    "hq-00269",
+    "hq-02773",
+    "hq-00228"
+   ],
+   "scores": [
+    25.698217779078707,
+    25.698217779078707,
+    25.021340460699662
+   ]
+  },
+  {
+   "id": "ea-06",
+   "question": "I eat an omelet most mornings - is that too many eggs for a healthy adult?",
+   "method": "bm25",
+   "top3": [
+    "hq-01680",
+    "hq-02093",
+    "hq-02393"
+   ],
+   "scores": [
+    20.475115954459547,
+    20.024549581482475,
+    19.891266783289296
+   ]
+  },
+  {
+   "id": "ea-07",
+   "question": "Do I need a vitamin D supplement during the winter months?",
+   "method": "bm25",
+   "top3": [
+    "hq-02167",
+    "hq-01881",
+    "hq-01853"
+   ],
+   "scores": [
+    30.056868412882707,
+    30.002932230752826,
+    28.85071616220933
+   ]
+  },
+  {
+   "id": "ea-08",
+   "question": "Is honey a better everyday choice than table sugar for my sweetening?",
+   "method": "bm25",
+   "top3": [
+    "hq-01049",
+    "hq-00122",
+    "hq-03282"
+   ],
+   "scores": [
+    20.100485553515703,
+    19.684194229373556,
+    19.152473744616383
+   ]
+  },
+  {
+   "id": "ea-09",
+   "question": "What does a sensible week of drinking look like according to health guidance?",
+   "method": "bm25",
+   "top3": [
+    "hq-01760",
+    "hq-01704",
+    "hq-03827"
+   ],
+   "scores": [
+    15.443184856168479,
+    15.165413679176098,
+    14.720093104292499
+   ]
+  },
+  {
+   "id": "ea-10",
+   "question": "I want to lose about 5 kg - what pace of weight loss should I aim for?",
+   "method": "bm25",
+   "top3": [
+    "hq-03217",
+    "hq-03465",
+    "hq-02582"
+   ],
+   "scores": [
+    21.35277512110065,
+    20.477814375436495,
+    20.46792251874689
+   ]
+  },
+  {
+   "id": "ea-11",
+   "question": "How do I know whether I personally need more than seven hours of sleep?",
+   "method": "bm25",
+   "top3": [
+    "hq-02995",
+    "hq-01979",
+    "hq-03333"
+   ],
+   "scores": [
+    14.742897342154665,
+    14.61707098237372,
+    14.613944052283117
+   ]
+  },
+  {
+   "id": "ea-12",
+   "question": "Why does my sixteen-year-old stay up past midnight but struggle to wake for school?",
+   "method": "bm25",
+   "top3": [
+    "hq-03771",
+    "hq-04126",
+    "hq-00283"
+   ],
+   "scores": [
+    18.728693121722106,
+    18.052099587409558,
+    16.182815862885214
+   ]
+  },
+  {
+   "id": "ea-13",
+   "question": "My mother-in-law says babies sleep better on their stomach - how should I place my newborn down to sleep?",
+   "method": "bm25",
+   "top3": [
+    "hq-00760",
+    "hq-02391",
+    "hq-01898"
+   ],
+   "scores": [
+    21.57071929703823,
+    20.048745304138627,
+    19.762963622100138
+   ]
+  },
+  {
+   "id": "ea-14",
+   "question": "Will a long afternoon nap ruin my chances of sleeping well that night?",
+   "method": "bm25",
+   "top3": [
+    "hq-00057",
+    "hq-04106",
+    "hq-02795"
+   ],
+   "scores": [
+    31.153850028734027,
+    27.500562483357864,
+    24.886324341259975
+   ]
+  },
+  {
+   "id": "ea-15",
+   "question": "Does scrolling on my phone in bed really affect my sleep?",
+   "method": "bm25",
+   "top3": [
+    "hq-02447",
+    "hq-03442",
+    "hq-01813"
+   ],
+   "scores": [
+    20.563221575361545,
+    18.017517754013486,
+    17.842639644751607
+   ]
+  },
+  {
+   "id": "ea-16",
+   "question": "I sleep in until nearly noon on Sundays - why does Monday morning always feel so brutal?",
+   "method": "bm25",
+   "top3": [
+    "hq-03968",
+    "hq-01780",
+    "hq-03193"
+   ],
+   "scores": [
+    17.280157008657056,
+    16.037007048942307,
+    15.787067888173583
+   ]
+  },
+  {
+   "id": "ea-17",
+   "question": "What is a good bedroom temperature for sleeping, and does it really matter?",
+   "method": "bm25",
+   "top3": [
+    "hq-03017",
+    "hq-02574",
+    "hq-01732"
+   ],
+   "scores": [
+    16.60197556055704,
+    16.420889089934242,
+    13.547179965867397
+   ]
+  },
+  {
+   "id": "ea-18",
+   "question": "I have struggled to fall asleep three or four nights a week for months - what actually works long-term?",
+   "method": "bm25",
+   "top3": [
+    "hq-02539",
+    "hq-02733",
+    "hq-03574"
+   ],
+   "scores": [
+    30.30310742344368,
+    30.264836720800986,
+    29.961209551676458
+   ]
+  },
+  {
+   "id": "ea-19",
+   "question": "My husband snores loudly and wakes up gasping - should he get that checked?",
+   "method": "bm25",
+   "top3": [
+    "hq-03164",
+    "hq-03859",
+    "hq-00148"
+   ],
+   "scores": [
+    19.114664680882566,
+    18.321925802480774,
+    14.599436193597935
+   ]
+  },
+  {
+   "id": "ea-20",
+   "question": "I am flying across several time zones next week - how can I help my body clock adjust faster?",
+   "method": "bm25",
+   "top3": [
+    "hq-03777",
+    "hq-03771",
+    "hq-02568"
+   ],
+   "scores": [
+    19.211438624975226,
+    17.689181112420336,
+    17.330432458194167
+   ]
+  },
+  {
+   "id": "ea-21",
+   "question": "How long should I actually scrub my hands, and does the drying step matter?",
+   "method": "bm25",
+   "top3": [
+    "hq-00445",
+    "hq-00273",
+    "hq-03397"
+   ],
+   "scores": [
+    17.247811039806844,
+    14.49560035263424,
+    14.487524791407004
+   ]
+  },
+  {
+   "id": "ea-22",
+   "question": "Is a small bottle of hand sanitizer just as good as washing with soap and water?",
+   "method": "bm25",
+   "top3": [
+    "hq-03073",
+    "hq-02083",
+    "hq-00322"
+   ],
+   "scores": [
+    34.05985198018027,
+    33.09695917740269,
+    30.649771319939845
+   ]
+  },
+  {
+   "id": "ea-23",
+   "question": "Should I rinse my mouth with water right after brushing my teeth?",
+   "method": "bm25",
+   "top3": [
+    "hq-02119",
+    "hq-01023",
+    "hq-02384"
+   ],
+   "scores": [
+    24.80369822620066,
+    24.568125329364733,
+    18.560209847010743
+   ]
+  },
+  {
+   "id": "ea-24",
+   "question": "My gums bleed when I floss, so should I stop flossing?",
+   "method": "bm25",
+   "top3": [
+    "hq-03000",
+    "hq-00345",
+    "hq-02359"
+   ],
+   "scores": [
+    41.797547436351984,
+    36.80017681342413,
+    36.46536201958583
+   ]
+  },
+  {
+   "id": "ea-25",
+   "question": "Is it unhealthy that I do not shower every single day?",
+   "method": "bm25",
+   "top3": [
+    "hq-01367",
+    "hq-04132",
+    "hq-03083"
+   ],
+   "scores": [
+    20.529479608660925,
+    20.38905503718543,
+    19.45269829527299
+   ]
+  },
+  {
+   "id": "ea-26",
+   "question": "Why do food safety guides say never to wash raw chicken?",
+   "method": "bm25",
+   "top3": [
+    "hq-04202",
+    "hq-00184",
+    "hq-00291"
+   ],
+   "scores": [
+    25.623820311752105,
+    25.248395648649698,
+    24.804135276624336
+   ]
+  },
+  {
+   "id": "ea-27",
+   "question": "Yogurt two days past its 'best before' date - can I still eat it?",
+   "method": "bm25",
+   "top3": [
+    "hq-02555",
+    "hq-01065",
+    "hq-03545"
+   ],
+   "scores": [
+    36.45039829491072,
+    34.985188171081084,
+    29.893028330399098
+   ]
+  },
+  {
+   "id": "ea-28",
+   "question": "Is it safe to clean inside my ears with cotton buds?",
+   "method": "bm25",
+   "top3": [
+    "hq-04260",
+    "hq-04119",
+    "hq-03069"
+   ],
+   "scores": [
+    31.96455142076483,
+    28.94858282441031,
+    28.832374953111668
+   ]
+  },
+  {
+   "id": "ea-29",
+   "question": "What is the right way to cover a cough when you are on a bus full of people?",
+   "method": "bm25",
+   "top3": [
+    "hq-03982",
+    "hq-01803",
+    "hq-01590"
+   ],
+   "scores": [
+    12.293098727520515,
+    12.231700988569347,
+    11.907070102572014
+   ]
+  },
+  {
+   "id": "ea-30",
+   "question": "My family just had a stomach bug - when is it safe for the kids to go back to school?",
+   "method": "bm25",
+   "top3": [
+    "hq-02912",
+    "hq-03354",
+    "hq-04049"
+   ],
+   "scores": [
+    20.82204188313123,
+    19.75616338033108,
+    18.876509716826416
+   ]
+  },
+  {
+   "id": "ea-31",
+   "question": "My kid just grabbed a hot pan - what is the very first thing I should do?",
+   "method": "bm25",
+   "top3": [
+    "hq-04232",
+    "hq-02971",
+    "hq-03030"
+   ],
+   "scores": [
+    19.816012007448904,
+    19.806974423869065,
+    19.32059367132808
+   ]
+  },
+  {
+   "id": "ea-32",
+   "question": "My grandmother insists on butter for burns - is that actually a good idea?",
+   "method": "bm25",
+   "top3": [
+    "hq-01045",
+    "hq-04069",
+    "hq-02410"
+   ],
+   "scores": [
+    18.85529211646003,
+    18.690580779943907,
+    18.067600485125116
+   ]
+  },
+  {
+   "id": "ea-33",
+   "question": "I sliced my finger and it is bleeding a lot - how long should I hold pressure before checking?",
+   "method": "bm25",
+   "top3": [
+    "hq-04110",
+    "hq-03648",
+    "hq-02402"
+   ],
+   "scores": [
+    24.50136763100687,
+    22.798777286731873,
+    20.35556496081809
+   ]
+  },
+  {
+   "id": "ea-34",
+   "question": "Should I tilt my head back during a nosebleed to stop the flow?",
+   "method": "bm25",
+   "top3": [
+    "hq-03336",
+    "hq-01365",
+    "hq-03116"
+   ],
+   "scores": [
+    19.985987590032313,
+    19.39732047756099,
+    19.29530197057597
+   ]
+  },
+  {
+   "id": "ea-35",
+   "question": "Someone at dinner is choking but can still cough - should I jump up and start back blows right away?",
+   "method": "bm25",
+   "top3": [
+    "hq-02948",
+    "hq-01273",
+    "hq-04216"
+   ],
+   "scores": [
+    30.428410341464385,
+    30.26996832812383,
+    29.86193262947517
+   ]
+  },
+  {
+   "id": "ea-36",
+   "question": "After a bee sting, which symptoms mean I should call an ambulance rather than wait?",
+   "method": "bm25",
+   "top3": [
+    "hq-01682",
+    "hq-02252",
+    "hq-01632"
+   ],
+   "scores": [
+    19.327584293755237,
+    18.90778595142856,
+    18.672020507617543
+   ]
+  },
+  {
+   "id": "ea-37",
+   "question": "My toddler fell off the sofa and bumped her head - what should I watch for over the next couple of days?",
+   "method": "bm25",
+   "top3": [
+    "hq-03006",
+    "hq-03468",
+    "hq-03733"
+   ],
+   "scores": [
+    41.58860716125509,
+    38.63161733567512,
+    34.262057547188114
+   ]
+  },
+  {
+   "id": "ea-38",
+   "question": "If an adult collapses and is not breathing, what should a bystander with no medical training do?",
+   "method": "bm25",
+   "top3": [
+    "hq-03972",
+    "hq-02260",
+    "hq-01874"
+   ],
+   "scores": [
+    20.444051402545746,
+    19.34885109634926,
+    18.146577891079424
+   ]
+  },
+  {
+   "id": "ea-39",
+   "question": "I rolled my ankle playing basketball - what is the right care for the first couple of days?",
+   "method": "bm25",
+   "top3": [
+    "hq-00087",
+    "hq-02035",
+    "hq-02676"
+   ],
+   "scores": [
+    40.67470369917022,
+    37.95010489725925,
+    36.66205415601169
+   ]
+  },
+  {
+   "id": "ea-40",
+   "question": "My child just swallowed some dish soap - should I make her throw up?",
+   "method": "bm25",
+   "top3": [
+    "hq-02319",
+    "hq-03341",
+    "hq-02679"
+   ],
+   "scores": [
+    18.514333980497195,
+    17.863173225304116,
+    17.799879690755926
+   ]
+  },
+  {
+   "id": "ea-41",
+   "question": "Will antibiotics help me get over this cold any faster?",
+   "method": "bm25",
+   "top3": [
+    "hq-01470",
+    "hq-02076",
+    "hq-00441"
+   ],
+   "scores": [
+    13.962158525655083,
+    12.804550863975368,
+    11.834868948098954
+   ]
+  },
+  {
+   "id": "ea-42",
+   "question": "How can I tell whether I have caught a cold or the flu this week?",
+   "method": "bm25",
+   "top3": [
+    "hq-04210",
+    "hq-04152",
+    "hq-00304"
+   ],
+   "scores": [
+    19.990307102868737,
+    19.31751795188793,
+    19.262758990049253
+   ]
+  },
+  {
+   "id": "ea-43",
+   "question": "My nine-month-old has a temperature of 38.5C - how worried should I be?",
+   "method": "bm25",
+   "top3": [
+    "hq-02178",
+    "hq-01883",
+    "hq-03185"
+   ],
+   "scores": [
+    16.35055676850017,
+    15.25872244053697,
+    15.053997814126216
+   ]
+  },
+  {
+   "id": "ea-44",
+   "question": "Do allergy pills work better if I start taking them before pollen season begins?",
+   "method": "bm25",
+   "top3": [
+    "hq-02969",
+    "hq-02201",
+    "hq-02570"
+   ],
+   "scores": [
+    28.17686140204421,
+    27.361668558973797,
+    26.81038894205345
+   ]
+  },
+  {
+   "id": "ea-45",
+   "question": "My asthma feels fine lately, so can I stop the brown preventer inhaler and just keep the blue one handy?",
+   "method": "bm25",
+   "top3": [
+    "hq-00590",
+    "hq-03806",
+    "hq-03524"
+   ],
+   "scores": [
+    25.580069966192134,
+    25.346277412462364,
+    24.925644096806028
+   ]
+  },
+  {
+   "id": "ea-46",
+   "question": "What is the quickest way to check whether I am drinking enough?",
+   "method": "bm25",
+   "top3": [
+    "hq-01210",
+    "hq-03627",
+    "hq-03477"
+   ],
+   "scores": [
+    17.335888184715266,
+    17.079465647711338,
+    16.43014677537861
+   ]
+  },
+  {
+   "id": "ea-47",
+   "question": "Is there any real evidence that honey helps a cough, or is it just an old remedy?",
+   "method": "bm25",
+   "top3": [
+    "hq-03047",
+    "hq-01057",
+    "hq-02675"
+   ],
+   "scores": [
+    19.806788339091337,
+    19.154013220104627,
+    18.905669639527268
+   ]
+  },
+  {
+   "id": "ea-48",
+   "question": "My throat is killing me - which signs would suggest strep throat rather than a regular viral one?",
+   "method": "bm25",
+   "top3": [
+    "hq-02803",
+    "hq-02996",
+    "hq-00515"
+   ],
+   "scores": [
+    29.656260971889125,
+    28.950656536398583,
+    27.37969793715215
+   ]
+  },
+  {
+   "id": "ea-49",
+   "question": "Besides antacids, what can I change day to day to reduce my heartburn?",
+   "method": "bm25",
+   "top3": [
+    "hq-00426",
+    "hq-00606",
+    "hq-01856"
+   ],
+   "scores": [
+    16.936787549106214,
+    16.10009405248976,
+    16.01860039137555
+   ]
+  },
+  {
+   "id": "ea-50",
+   "question": "I have had a chest cold for five days - at what point should I stop waiting and see a doctor?",
+   "method": "bm25",
+   "top3": [
+    "hq-01161",
+    "hq-02259",
+    "hq-01363"
+   ],
+   "scores": [
+    16.782533180642048,
+    16.600486188745766,
+    16.320194739453328
+   ]
+  },
+  {
+   "id": "ea-51",
+   "question": "Is 150 minutes of exercise a week a real target, and how should I spread it out?",
+   "method": "bm25",
+   "top3": [
+    "hq-01838",
+    "hq-01343",
+    "hq-03597"
+   ],
+   "scores": [
+    22.077616128684497,
+    22.003143774201416,
+    21.26702160362019
+   ]
+  },
+  {
+   "id": "ea-52",
+   "question": "On my evening walks, how do I know if I am going fast enough for it to count as exercise?",
+   "method": "bm25",
+   "top3": [
+    "hq-02051",
+    "hq-01210",
+    "hq-04197"
+   ],
+   "scores": [
+    19.6648195711187,
+    19.439006430171986,
+    19.409042497360833
+   ]
+  },
+  {
+   "id": "ea-53",
+   "question": "I do cardio most days but never touch weights - what am I missing?",
+   "method": "bm25",
+   "top3": [
+    "hq-00136",
+    "hq-01735",
+    "hq-00532"
+   ],
+   "scores": [
+    14.6533857323274,
+    14.572562587060798,
+    13.779952153726558
+   ]
+  },
+  {
+   "id": "ea-54",
+   "question": "My fitness tracker celebrates at 10,000 steps - is that number actually based on science?",
+   "method": "bm25",
+   "top3": [
+    "hq-00758",
+    "hq-02953",
+    "hq-03782"
+   ],
+   "scores": [
+    30.855567064355323,
+    30.53892245817232,
+    29.137903487377226
+   ]
+  },
+  {
+   "id": "ea-55",
+   "question": "Two days after my first gym session in months, my arms are wrecked - is that normal?",
+   "method": "bm25",
+   "top3": [
+    "hq-02881",
+    "hq-03613",
+    "hq-03424"
+   ],
+   "scores": [
+    15.78750048772245,
+    15.78750048772245,
+    15.309413893586608
+   ]
+  },
+  {
+   "id": "ea-56",
+   "question": "Is it counterproductive to work out hard every single day?",
+   "method": "bm25",
+   "top3": [
+    "hq-00023",
+    "hq-02294",
+    "hq-00339"
+   ],
+   "scores": [
+    9.69204849393676,
+    9.642533519165854,
+    9.225376619394229
+   ]
+  },
+  {
+   "id": "ea-57",
+   "question": "I have not exercised in years and want to start running - how do I avoid injuring myself?",
+   "method": "bm25",
+   "top3": [
+    "hq-01261",
+    "hq-03589",
+    "hq-00692"
+   ],
+   "scores": [
+    14.451174649473698,
+    14.199417191680851,
+    13.95654312910901
+   ]
+  },
+  {
+   "id": "ea-58",
+   "question": "I have a desk job but hit the gym once a day - is all that sitting in between really a problem?",
+   "method": "bm25",
+   "top3": [
+    "hq-02162",
+    "hq-02158",
+    "hq-01976"
+   ],
+   "scores": [
+    20.443696821498815,
+    19.40459439567403,
+    19.132220051227996
+   ]
+  },
+  {
+   "id": "ea-59",
+   "question": "Can regular exercise genuinely improve my sleep?",
+   "method": "bm25",
+   "top3": [
+    "hq-02341",
+    "hq-01124",
+    "hq-01241"
+   ],
+   "scores": [
+    13.736168454039973,
+    12.981894642444985,
+    12.25563620800449
+   ]
+  },
+  {
+   "id": "ea-60",
+   "question": "My dad is 74 and thinks it is too late for exercise to help him - is he right?",
+   "method": "bm25",
+   "top3": [
+    "hq-02380",
+    "hq-01728",
+    "hq-01859"
+   ],
+   "scores": [
+    14.520478660437853,
+    14.150442412301368,
+    13.747611431145927
+   ]
+  },
+  {
+   "id": "mt-01",
+   "question": "Does cracking your knuckles cause arthritis?",
+   "method": "bm25",
+   "top3": [
+    "hq-00144",
+    "hq-02254",
+    "hq-03520"
+   ],
+   "scores": [
+    6.589699111807809,
+    6.486387647560292,
+    6.419342128703631
+   ]
+  },
+  {
+   "id": "mt-02",
+   "question": "Will I catch a cold if I go outside with wet hair?",
+   "method": "bm25",
+   "top3": [
+    "hq-01648",
+    "hq-02006",
+    "hq-03286"
+   ],
+   "scores": [
+    10.565472470731775,
+    10.414573196546137,
+    9.97077946313399
+   ]
+  },
+  {
+   "id": "mt-03",
+   "question": "Does sugar make children hyperactive?",
+   "method": "bm25",
+   "top3": [
+    "hq-00658",
+    "hq-03333",
+    "hq-00048"
+   ],
+   "scores": [
+    11.508955162981435,
+    10.666561449663353,
+    10.176743955723424
+   ]
+  },
+  {
+   "id": "mt-04",
+   "question": "Do colds and flu come from cold weather?",
+   "method": "bm25",
+   "top3": [
+    "hq-01696",
+    "hq-02957",
+    "hq-02775"
+   ],
+   "scores": [
+    16.012137967902124,
+    13.925845774874233,
+    13.545626064197506
+   ]
+  },
+  {
+   "id": "mt-05",
+   "question": "Do artificial sweeteners cause cancer at normal levels of consumption?",
+   "method": "bm25",
+   "top3": [
+    "hq-03150",
+    "hq-04211",
+    "hq-00221"
+   ],
+   "scores": [
+    14.084212040640484,
+    12.607143703315728,
+    10.9514691160589
+   ]
+  },
+  {
+   "id": "mt-06",
+   "question": "Does reading in dim light permanently damage your eyes?",
+   "method": "bm25",
+   "top3": [
+    "hq-03362",
+    "hq-04273",
+    "hq-00757"
+   ],
+   "scores": [
+    12.102812351846511,
+    10.628311683012903,
+    10.600831597227856
+   ]
+  },
+  {
+   "id": "mt-07",
+   "question": "Does swallowed gum stay in your stomach for seven years?",
+   "method": "bm25",
+   "top3": [
+    "hq-02347",
+    "hq-00606",
+    "hq-01122"
+   ],
+   "scores": [
+    10.30317900039225,
+    9.847101378881305,
+    9.813368302889355
+   ]
+  },
+  {
+   "id": "mt-08",
+   "question": "Do detox diets actually remove toxins from your body?",
+   "method": "bm25",
+   "top3": [
+    "hq-01938",
+    "hq-01608",
+    "hq-01602"
+   ],
+   "scores": [
+    11.57146775568115,
+    11.224686251232438,
+    10.476214034329317
+   ]
+  },
+  {
+   "id": "mt-09",
+   "question": "Do vaccines cause autism?",
+   "method": "bm25",
+   "top3": [
+    "hq-02372",
+    "hq-03667",
+    "hq-03273"
+   ],
+   "scores": [
+    7.644215309520905,
+    7.599906521782824,
+    6.817951847348811
+   ]
+  },
+  {
+   "id": "mt-10",
+   "question": "Does everyone need to drink eight glasses of water a day?",
+   "method": "bm25",
+   "top3": [
+    "hq-02707",
+    "hq-00782",
+    "hq-03188"
+   ],
+   "scores": [
+    25.44712207452887,
+    24.23929820809722,
+    24.23031758869186
+   ]
+  },
+  {
+   "id": "mt-11",
+   "question": "Do people only use 10% of their brains?",
+   "method": "bm25",
+   "top3": [
+    "hq-02853",
+    "hq-00425",
+    "hq-01239"
+   ],
+   "scores": [
+    11.88370623949372,
+    10.900130721258634,
+    10.900130721258634
+   ]
+  },
+  {
+   "id": "mt-12",
+   "question": "Does eating late at night make you gain weight no matter what you eat?",
+   "method": "bm25",
+   "top3": [
+    "hq-02284",
+    "hq-00635",
+    "hq-03316"
+   ],
+   "scores": [
+    31.939552179828777,
+    31.335086783853033,
+    26.555460600315893
+   ]
+  },
+  {
+   "id": "mt-13",
+   "question": "Do you lose most of your body heat through your head?",
+   "method": "bm25",
+   "top3": [
+    "hq-02055",
+    "hq-02335",
+    "hq-00782"
+   ],
+   "scores": [
+    11.277627601818661,
+    10.882686580263304,
+    10.62671202197474
+   ]
+  },
+  {
+   "id": "mt-14",
+   "question": "Do eggs cause heart disease in healthy people?",
+   "method": "bm25",
+   "top3": [
+    "hq-02828",
+    "hq-00982",
+    "hq-03380"
+   ],
+   "scores": [
+    24.87789512251784,
+    24.210485570747437,
+    24.009203391922387
+   ]
+  },
+  {
+   "id": "mt-15",
+   "question": "Does cracking your back cause arthritis?",
+   "method": "bm25",
+   "top3": [
+    "hq-02107",
+    "hq-02401",
+    "hq-00963"
+   ],
+   "scores": [
+    7.756228729966551,
+    7.756228729966551,
+    7.683468315628131
+   ]
+  },
+  {
+   "id": "mt-16",
+   "question": "Does sitting too close to the TV permanently damage your eyes?",
+   "method": "bm25",
+   "top3": [
+    "hq-02949",
+    "hq-04138",
+    "hq-01283"
+   ],
+   "scores": [
+    11.072851789451615,
+    10.316273843167318,
+    10.190769048160462
+   ]
+  },
+  {
+   "id": "mt-17",
+   "question": "Is honey a healthy sugar, so unlimited amounts are fine?",
+   "method": "bm25",
+   "top3": [
+    "hq-00013",
+    "hq-02745",
+    "hq-01679"
+   ],
+   "scores": [
+    12.235390456407412,
+    12.223407329337737,
+    12.164772504104434
+   ]
+  },
+  {
+   "id": "mt-18",
+   "question": "Is tap water unsafe compared with bottled water in developed countries?",
+   "method": "bm25",
+   "top3": [
+    "hq-02321",
+    "hq-02744",
+    "hq-04064"
+   ],
+   "scores": [
+    13.858001194073971,
+    12.524171454163906,
+    12.480013045459087
+   ]
+  },
+  {
+   "id": "mt-19",
+   "question": "Does spicy food cause ulcers?",
+   "method": "bm25",
+   "top3": [
+    "hq-02531",
+    "hq-02254",
+    "hq-02347"
+   ],
+   "scores": [
+    21.942769142144982,
+    21.496558739139005,
+    18.988097109367864
+   ]
+  },
+  {
+   "id": "mt-20",
+   "question": "Will wet feet give you a cold?",
+   "method": "bm25",
+   "top3": [
+    "hq-03286",
+    "hq-02006",
+    "hq-00363"
+   ],
+   "scores": [
+    12.868512791657848,
+    10.738891635906828,
+    10.37639318826579
+   ]
+  },
+  {
+   "id": "ua-01",
+   "question": "What is the single best diet for every person?",
+   "method": "bm25",
+   "top3": [
+    "hq-01428",
+    "hq-03734",
+    "hq-02396"
+   ],
+   "scores": [
+    10.593633935010846,
+    10.498771746825206,
+    10.397856264554097
+   ]
+  },
+  {
+   "id": "ua-02",
+   "question": "How long will I live if I sleep 6 hours a night?",
+   "method": "bm25",
+   "top3": [
+    "hq-01943",
+    "hq-03172",
+    "hq-02711"
+   ],
+   "scores": [
+    17.225456056852956,
+    17.225456056852956,
+    16.58691027999828
+   ]
+  },
+  {
+   "id": "ua-03",
+   "question": "Which vitamin cures tiredness?",
+   "method": "bm25",
+   "top3": [
+    "hq-01438",
+    "hq-04100",
+    "hq-01440"
+   ],
+   "scores": [
+    10.348772510294086,
+    10.170878494739474,
+    9.805569014243396
+   ]
+  },
+  {
+   "id": "ua-04",
+   "question": "What screen time number is exactly safe?",
+   "method": "bm25",
+   "top3": [
+    "hq-04072",
+    "hq-02132",
+    "hq-03881"
+   ],
+   "scores": [
+    11.24977148037315,
+    11.013420133493222,
+    10.729995590063602
+   ]
+  },
+  {
+   "id": "ua-05",
+   "question": "What food guarantees I will never get cancer?",
+   "method": "bm25",
+   "top3": [
+    "hq-00909",
+    "hq-01059",
+    "hq-00587"
+   ],
+   "scores": [
+    9.333222365577058,
+    9.057134910692412,
+    9.003390202691214
+   ]
+  },
+  {
+   "id": "ua-06",
+   "question": "How much water is exactly right for my body?",
+   "method": "bm25",
+   "top3": [
+    "hq-00892",
+    "hq-01238",
+    "hq-01423"
+   ],
+   "scores": [
+    11.03465274097182,
+    10.864573687870482,
+    10.597957264723673
+   ]
+  },
+  {
+   "id": "ua-07",
+   "question": "Is it better to exercise in the morning or at night?",
+   "method": "bm25",
+   "top3": [
+    "hq-02872",
+    "hq-01915",
+    "hq-04025"
+   ],
+   "scores": [
+    12.922759743476593,
+    12.496887659446243,
+    12.371286502107791
+   ]
+  },
+  {
+   "id": "ua-08",
+   "question": "Which supplement boosts my immune system the most?",
+   "method": "bm25",
+   "top3": [
+    "hq-03177",
+    "hq-03094",
+    "hq-03016"
+   ],
+   "scores": [
+    13.028444036952529,
+    12.505503026273697,
+    12.409345723972939
+   ]
+  },
+  {
+   "id": "ua-09",
+   "question": "How many hours of sleep is genetically perfect for me?",
+   "method": "bm25",
+   "top3": [
+    "hq-00165",
+    "hq-02525",
+    "hq-02711"
+   ],
+   "scores": [
+    12.627191777112547,
+    12.133961138566129,
+    12.092855465041051
+   ]
+  },
+  {
+   "id": "ua-10",
+   "question": "What is the healthiest fruit in the world?",
+   "method": "bm25",
+   "top3": [
+    "hq-02244",
+    "hq-00407",
+    "hq-00779"
+   ],
+   "scores": [
+    13.651449230526682,
+    13.54134798132859,
+    13.387911751501239
+   ]
+  },
+  {
+   "id": "ua-11",
+   "question": "Will one cigarette a week shorten my life - and by exactly how much?",
+   "method": "bm25",
+   "top3": [
+    "hq-01765",
+    "hq-04206",
+    "hq-03664"
+   ],
+   "scores": [
+    14.592644856298268,
+    13.40984054894195,
+    12.229450141809268
+   ]
+  },
+  {
+   "id": "ua-12",
+   "question": "Which probiotic strain is best for my gut?",
+   "method": "bm25",
+   "top3": [
+    "hq-00341",
+    "hq-01109",
+    "hq-03062"
+   ],
+   "scores": [
+    8.862307304558264,
+    8.677199659844042,
+    8.553536262203593
+   ]
+  },
+  {
+   "id": "ua-13",
+   "question": "At what exact age should I start getting annual check-ups?",
+   "method": "bm25",
+   "top3": [
+    "hq-03414",
+    "hq-00211",
+    "hq-02720"
+   ],
+   "scores": [
+    15.310219951408516,
+    14.93258762639412,
+    14.025845205106686
+   ]
+  },
+  {
+   "id": "ua-14",
+   "question": "How many steps do I need to live longer?",
+   "method": "bm25",
+   "top3": [
+    "hq-04003",
+    "hq-01665",
+    "hq-04186"
+   ],
+   "scores": [
+    10.41060091128589,
+    10.14800420147063,
+    9.794309575038852
+   ]
+  },
+  {
+   "id": "ua-15",
+   "question": "What temperature should my bedroom be - exactly?",
+   "method": "bm25",
+   "top3": [
+    "hq-03366",
+    "hq-00941",
+    "hq-03122"
+   ],
+   "scores": [
+    14.670438373249418,
+    14.322534336881112,
+    13.217290908504065
+   ]
+  },
+  {
+   "id": "ua-16",
+   "question": "Is honey or sugar better for me in the long run?",
+   "method": "bm25",
+   "top3": [
+    "hq-00122",
+    "hq-01049",
+    "hq-01174"
+   ],
+   "scores": [
+    14.215592813551785,
+    14.149546338582688,
+    12.726542652947826
+   ]
+  },
+  {
+   "id": "ua-17",
+   "question": "Which water temperature kills the most germs when washing hands?",
+   "method": "bm25",
+   "top3": [
+    "hq-02385",
+    "hq-03726",
+    "hq-02083"
+   ],
+   "scores": [
+    23.55261850131763,
+    22.534988633437898,
+    18.904859598064647
+   ]
+  },
+  {
+   "id": "ua-18",
+   "question": "How much protein is too much for my kidneys?",
+   "method": "bm25",
+   "top3": [
+    "hq-01238",
+    "hq-00260",
+    "hq-04257"
+   ],
+   "scores": [
+    15.368609763675988,
+    14.572947697674403,
+    12.996908099738757
+   ]
+  },
+  {
+   "id": "ua-19",
+   "question": "Will my child be taller if they sleep more?",
+   "method": "bm25",
+   "top3": [
+    "hq-00465",
+    "hq-03565",
+    "hq-04011"
+   ],
+   "scores": [
+    15.58972393136774,
+    15.30674216981942,
+    15.195509605122313
+   ]
+  },
+  {
+   "id": "ua-20",
+   "question": "Which exercise burns the most fat overall?",
+   "method": "bm25",
+   "top3": [
+    "hq-02714",
+    "hq-02717",
+    "hq-01234"
+   ],
+   "scores": [
+    12.275936565958503,
+    12.275936565958503,
+    12.204299138867242
+   ]
+  },
+  {
+   "id": "ea-01",
+   "question": "During a hot summer day of gardening, how should I adjust how much I drink?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01713",
+    "hq-02044",
+    "hq-02249"
+   ],
+   "scores": [
+    0.24011593424532726,
+    0.20769727587009976,
+    0.17287483939392348
+   ]
+  },
+  {
+   "id": "ea-02",
+   "question": "Do frozen vegetables really count toward my five a day?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01163",
+    "hq-03781",
+    "hq-00697"
+   ],
+   "scores": [
+    0.3975963698532762,
+    0.3962057685707489,
+    0.3479116495007178
+   ]
+  },
+  {
+   "id": "ea-03",
+   "question": "How much sugar is hiding in one can of regular cola?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00409",
+    "hq-01539",
+    "hq-00048"
+   ],
+   "scores": [
+    0.36559549391698015,
+    0.3644459705312814,
+    0.34588378544666987
+   ]
+  },
+  {
+   "id": "ea-04",
+   "question": "Why did adding a lot more whole grains to my breakfast leave me bloated at first?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01668",
+    "hq-00011",
+    "hq-01594"
+   ],
+   "scores": [
+    0.16615376124702944,
+    0.16286891118289312,
+    0.15326622644179042
+   ]
+  },
+  {
+   "id": "ea-05",
+   "question": "Is it OK to drink four mugs of instant coffee spread across one day?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02773",
+    "hq-00269",
+    "hq-00228"
+   ],
+   "scores": [
+    0.29473272526434485,
+    0.2919707535701601,
+    0.2835739632677651
+   ]
+  },
+  {
+   "id": "ea-06",
+   "question": "I eat an omelet most mornings - is that too many eggs for a healthy adult?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01680",
+    "hq-02093",
+    "hq-02393"
+   ],
+   "scores": [
+    0.2505333405554352,
+    0.23718704875900418,
+    0.23571639449855977
+   ]
+  },
+  {
+   "id": "ea-07",
+   "question": "Do I need a vitamin D supplement during the winter months?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02167",
+    "hq-01881",
+    "hq-01526"
+   ],
+   "scores": [
+    0.47631840713926915,
+    0.47067697972686234,
+    0.4279488462051565
+   ]
+  },
+  {
+   "id": "ea-08",
+   "question": "Is honey a better everyday choice than table sugar for my sweetening?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00122",
+    "hq-03282",
+    "hq-00144"
+   ],
+   "scores": [
+    0.31497609526361015,
+    0.31063932122335625,
+    0.3084521139035869
+   ]
+  },
+  {
+   "id": "ea-09",
+   "question": "What does a sensible week of drinking look like according to health guidance?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01760",
+    "hq-03827",
+    "hq-01704"
+   ],
+   "scores": [
+    0.17723803372718874,
+    0.1771222133208885,
+    0.17454010942333786
+   ]
+  },
+  {
+   "id": "ea-10",
+   "question": "I want to lose about 5 kg - what pace of weight loss should I aim for?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03217",
+    "hq-03465",
+    "hq-01323"
+   ],
+   "scores": [
+    0.261007931603923,
+    0.2531581815690873,
+    0.2488847174529848
+   ]
+  },
+  {
+   "id": "ea-11",
+   "question": "How do I know whether I personally need more than seven hours of sleep?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01532",
+    "hq-00398",
+    "hq-03254"
+   ],
+   "scores": [
+    0.17402614518124995,
+    0.1704977800349015,
+    0.16719315990767503
+   ]
+  },
+  {
+   "id": "ea-12",
+   "question": "Why does my sixteen-year-old stay up past midnight but struggle to wake for school?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03771",
+    "hq-04126",
+    "hq-02588"
+   ],
+   "scores": [
+    0.22723654151675288,
+    0.19178321897083073,
+    0.18830121168963967
+   ]
+  },
+  {
+   "id": "ea-13",
+   "question": "My mother-in-law says babies sleep better on their stomach - how should I place my newborn down to sleep?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00760",
+    "hq-02796",
+    "hq-03286"
+   ],
+   "scores": [
+    0.23418987673895483,
+    0.22965475377242986,
+    0.2143624169307323
+   ]
+  },
+  {
+   "id": "ea-14",
+   "question": "Will a long afternoon nap ruin my chances of sleeping well that night?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00057",
+    "hq-04106",
+    "hq-03874"
+   ],
+   "scores": [
+    0.38383905039205385,
+    0.3755109211633842,
+    0.3199599901052273
+   ]
+  },
+  {
+   "id": "ea-15",
+   "question": "Does scrolling on my phone in bed really affect my sleep?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01732",
+    "hq-01813",
+    "hq-04034"
+   ],
+   "scores": [
+    0.23523135803299686,
+    0.23362226777610637,
+    0.2236696343089783
+   ]
+  },
+  {
+   "id": "ea-16",
+   "question": "I sleep in until nearly noon on Sundays - why does Monday morning always feel so brutal?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01780",
+    "hq-03193",
+    "hq-03537"
+   ],
+   "scores": [
+    0.2045154921803882,
+    0.20098409727359207,
+    0.14003264187719922
+   ]
+  },
+  {
+   "id": "ea-17",
+   "question": "What is a good bedroom temperature for sleeping, and does it really matter?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03017",
+    "hq-02574",
+    "hq-00941"
+   ],
+   "scores": [
+    0.22250035910080737,
+    0.21856721996753736,
+    0.2049611693763005
+   ]
+  },
+  {
+   "id": "ea-18",
+   "question": "I have struggled to fall asleep three or four nights a week for months - what actually works long-term?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00503",
+    "hq-02539",
+    "hq-03574"
+   ],
+   "scores": [
+    0.2582797782415756,
+    0.2582314827826477,
+    0.2571401782016516
+   ]
+  },
+  {
+   "id": "ea-19",
+   "question": "My husband snores loudly and wakes up gasping - should he get that checked?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03164",
+    "hq-03859",
+    "hq-00148"
+   ],
+   "scores": [
+    0.2308419599667789,
+    0.21920540327514992,
+    0.19692952926619828
+   ]
+  },
+  {
+   "id": "ea-20",
+   "question": "I am flying across several time zones next week - how can I help my body clock adjust faster?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01713",
+    "hq-02044",
+    "hq-03777"
+   ],
+   "scores": [
+    0.20860737510577707,
+    0.19515801998573137,
+    0.15530042187755488
+   ]
+  },
+  {
+   "id": "ea-21",
+   "question": "How long should I actually scrub my hands, and does the drying step matter?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00445",
+    "hq-03397",
+    "hq-01429"
+   ],
+   "scores": [
+    0.21819671244618602,
+    0.14324675247139412,
+    0.14048551862231287
+   ]
+  },
+  {
+   "id": "ea-22",
+   "question": "Is a small bottle of hand sanitizer just as good as washing with soap and water?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03073",
+    "hq-02083",
+    "hq-00322"
+   ],
+   "scores": [
+    0.44103796686134433,
+    0.4278568885918907,
+    0.39288156208477726
+   ]
+  },
+  {
+   "id": "ea-23",
+   "question": "Should I rinse my mouth with water right after brushing my teeth?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01023",
+    "hq-02119",
+    "hq-02106"
+   ],
+   "scores": [
+    0.2974028088385607,
+    0.28114918338810047,
+    0.2438824053123058
+   ]
+  },
+  {
+   "id": "ea-24",
+   "question": "My gums bleed when I floss, so should I stop flossing?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03000",
+    "hq-00345",
+    "hq-02359"
+   ],
+   "scores": [
+    0.6725969703594353,
+    0.6145501694349246,
+    0.6122596902337017
+   ]
+  },
+  {
+   "id": "ea-25",
+   "question": "Is it unhealthy that I do not shower every single day?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04132",
+    "hq-01367",
+    "hq-03083"
+   ],
+   "scores": [
+    0.3166471304708186,
+    0.31552452057231906,
+    0.31215088943104774
+   ]
+  },
+  {
+   "id": "ea-26",
+   "question": "Why do food safety guides say never to wash raw chicken?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00184",
+    "hq-03475",
+    "hq-04202"
+   ],
+   "scores": [
+    0.32842700890244314,
+    0.3221710513710858,
+    0.31413829460185577
+   ]
+  },
+  {
+   "id": "ea-27",
+   "question": "Yogurt two days past its 'best before' date - can I still eat it?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02555",
+    "hq-01065",
+    "hq-03545"
+   ],
+   "scores": [
+    0.4835552169446784,
+    0.4444681445830151,
+    0.4269535366503563
+   ]
+  },
+  {
+   "id": "ea-28",
+   "question": "Is it safe to clean inside my ears with cotton buds?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04260",
+    "hq-03069",
+    "hq-04119"
+   ],
+   "scores": [
+    0.4117069092004333,
+    0.38720313215947344,
+    0.37166692560840753
+   ]
+  },
+  {
+   "id": "ea-29",
+   "question": "What is the right way to cover a cough when you are on a bus full of people?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03982",
+    "hq-02898",
+    "hq-02861"
+   ],
+   "scores": [
+    0.14549979426092588,
+    0.14217219415705676,
+    0.13900741689384455
+   ]
+  },
+  {
+   "id": "ea-30",
+   "question": "My family just had a stomach bug - when is it safe for the kids to go back to school?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04134",
+    "hq-02590",
+    "hq-00873"
+   ],
+   "scores": [
+    0.21190793252245663,
+    0.21151113477415884,
+    0.19321862009822496
+   ]
+  },
+  {
+   "id": "ea-31",
+   "question": "My kid just grabbed a hot pan - what is the very first thing I should do?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02971",
+    "hq-04232",
+    "hq-03030"
+   ],
+   "scores": [
+    0.2393643405159367,
+    0.238298649190075,
+    0.2313582030428735
+   ]
+  },
+  {
+   "id": "ea-32",
+   "question": "My grandmother insists on butter for burns - is that actually a good idea?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01045",
+    "hq-04069",
+    "hq-03490"
+   ],
+   "scores": [
+    0.20164689010395387,
+    0.19201783906880862,
+    0.18187253241066054
+   ]
+  },
+  {
+   "id": "ea-33",
+   "question": "I sliced my finger and it is bleeding a lot - how long should I hold pressure before checking?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04110",
+    "hq-03648",
+    "hq-02402"
+   ],
+   "scores": [
+    0.33613986364161186,
+    0.2979269332890704,
+    0.2814606581047535
+   ]
+  },
+  {
+   "id": "ea-34",
+   "question": "Should I tilt my head back during a nosebleed to stop the flow?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01365",
+    "hq-03336",
+    "hq-00149"
+   ],
+   "scores": [
+    0.24870552685213546,
+    0.2406115165225808,
+    0.23607003553861777
+   ]
+  },
+  {
+   "id": "ea-35",
+   "question": "Someone at dinner is choking but can still cough - should I jump up and start back blows right away?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04216",
+    "hq-02751",
+    "hq-02948"
+   ],
+   "scores": [
+    0.3233232889990091,
+    0.30082775563137854,
+    0.27973273995164816
+   ]
+  },
+  {
+   "id": "ea-36",
+   "question": "After a bee sting, which symptoms mean I should call an ambulance rather than wait?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01632",
+    "hq-01278",
+    "hq-01682"
+   ],
+   "scores": [
+    0.25203219871933286,
+    0.24286334149650632,
+    0.24191060784601862
+   ]
+  },
+  {
+   "id": "ea-37",
+   "question": "My toddler fell off the sofa and bumped her head - what should I watch for over the next couple of days?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03006",
+    "hq-03468",
+    "hq-03733"
+   ],
+   "scores": [
+    0.3873086099334832,
+    0.35859982659286443,
+    0.3318121811022534
+   ]
+  },
+  {
+   "id": "ea-38",
+   "question": "If an adult collapses and is not breathing, what should a bystander with no medical training do?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01874",
+    "hq-03972",
+    "hq-03604"
+   ],
+   "scores": [
+    0.20978289506656675,
+    0.2047425489965992,
+    0.19428119266027893
+   ]
+  },
+  {
+   "id": "ea-39",
+   "question": "I rolled my ankle playing basketball - what is the right care for the first couple of days?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00087",
+    "hq-02676",
+    "hq-02035"
+   ],
+   "scores": [
+    0.4478387114756363,
+    0.4338114446366697,
+    0.4262420691559336
+   ]
+  },
+  {
+   "id": "ea-40",
+   "question": "My child just swallowed some dish soap - should I make her throw up?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02319",
+    "hq-03341",
+    "hq-01391"
+   ],
+   "scores": [
+    0.24430375529432313,
+    0.22761167747271346,
+    0.22284242783825306
+   ]
+  },
+  {
+   "id": "ea-41",
+   "question": "Will antibiotics help me get over this cold any faster?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01470",
+    "hq-02076",
+    "hq-01765"
+   ],
+   "scores": [
+    0.18059416921064472,
+    0.16353286950268497,
+    0.15172396265802904
+   ]
+  },
+  {
+   "id": "ea-42",
+   "question": "How can I tell whether I have caught a cold or the flu this week?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04210",
+    "hq-00304",
+    "hq-04152"
+   ],
+   "scores": [
+    0.27013290225816594,
+    0.2638816208745167,
+    0.2636428752612434
+   ]
+  },
+  {
+   "id": "ea-43",
+   "question": "My nine-month-old has a temperature of 38.5C - how worried should I be?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02178",
+    "hq-01883",
+    "hq-03185"
+   ],
+   "scores": [
+    0.23957142081562743,
+    0.2249402098407976,
+    0.2168102159617168
+   ]
+  },
+  {
+   "id": "ea-44",
+   "question": "Do allergy pills work better if I start taking them before pollen season begins?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03292",
+    "hq-02809",
+    "hq-02201"
+   ],
+   "scores": [
+    0.2549910728205201,
+    0.254235682524636,
+    0.247186938398042
+   ]
+  },
+  {
+   "id": "ea-45",
+   "question": "My asthma feels fine lately, so can I stop the brown preventer inhaler and just keep the blue one handy?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02079",
+    "hq-03379",
+    "hq-00244"
+   ],
+   "scores": [
+    0.27529582906626865,
+    0.27427521370044644,
+    0.2726595783007042
+   ]
+  },
+  {
+   "id": "ea-46",
+   "question": "What is the quickest way to check whether I am drinking enough?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03627",
+    "hq-03477",
+    "hq-01210"
+   ],
+   "scores": [
+    0.2129343728424591,
+    0.20722946373825538,
+    0.19284943417363354
+   ]
+  },
+  {
+   "id": "ea-47",
+   "question": "Is there any real evidence that honey helps a cough, or is it just an old remedy?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02675",
+    "hq-03047",
+    "hq-02471"
+   ],
+   "scores": [
+    0.24763937614556172,
+    0.2444874729391678,
+    0.2357265651799893
+   ]
+  },
+  {
+   "id": "ea-48",
+   "question": "My throat is killing me - which signs would suggest strep throat rather than a regular viral one?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02996",
+    "hq-02803",
+    "hq-01266"
+   ],
+   "scores": [
+    0.33711305328854896,
+    0.3361713348878799,
+    0.3185509728694568
+   ]
+  },
+  {
+   "id": "ea-49",
+   "question": "Besides antacids, what can I change day to day to reduce my heartburn?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01483",
+    "hq-00426",
+    "hq-02950"
+   ],
+   "scores": [
+    0.2601321358627225,
+    0.24337974392301068,
+    0.2420919993973172
+   ]
+  },
+  {
+   "id": "ea-50",
+   "question": "I have had a chest cold for five days - at what point should I stop waiting and see a doctor?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04210",
+    "hq-00651",
+    "hq-02001"
+   ],
+   "scores": [
+    0.16181227772564502,
+    0.14668011899663033,
+    0.14547959256415346
+   ]
+  },
+  {
+   "id": "ea-51",
+   "question": "Is 150 minutes of exercise a week a real target, and how should I spread it out?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03597",
+    "hq-03654",
+    "hq-02960"
+   ],
+   "scores": [
+    0.2850773531951477,
+    0.28037631989184036,
+    0.2790857367281726
+   ]
+  },
+  {
+   "id": "ea-52",
+   "question": "On my evening walks, how do I know if I am going fast enough for it to count as exercise?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03330",
+    "hq-04103",
+    "hq-03921"
+   ],
+   "scores": [
+    0.18280762107577264,
+    0.1781860669312468,
+    0.17387823483423087
+   ]
+  },
+  {
+   "id": "ea-53",
+   "question": "I do cardio most days but never touch weights - what am I missing?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00136",
+    "hq-00532",
+    "hq-03922"
+   ],
+   "scores": [
+    0.21791525690197858,
+    0.20876003269369012,
+    0.20322702959087427
+   ]
+  },
+  {
+   "id": "ea-54",
+   "question": "My fitness tracker celebrates at 10,000 steps - is that number actually based on science?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02953",
+    "hq-00758",
+    "hq-03782"
+   ],
+   "scores": [
+    0.3962005056145746,
+    0.3911378553240514,
+    0.3835190025205873
+   ]
+  },
+  {
+   "id": "ea-55",
+   "question": "Two days after my first gym session in months, my arms are wrecked - is that normal?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00528",
+    "hq-04074",
+    "hq-00991"
+   ],
+   "scores": [
+    0.20601760405269068,
+    0.20184132000373775,
+    0.2004741189762695
+   ]
+  },
+  {
+   "id": "ea-56",
+   "question": "Is it counterproductive to work out hard every single day?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02294",
+    "hq-03970",
+    "hq-02593"
+   ],
+   "scores": [
+    0.15490155613091788,
+    0.14301039868600982,
+    0.14189106173097524
+   ]
+  },
+  {
+   "id": "ea-57",
+   "question": "I have not exercised in years and want to start running - how do I avoid injuring myself?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01784",
+    "hq-00140",
+    "hq-01707"
+   ],
+   "scores": [
+    0.18081965295998312,
+    0.17686964266385233,
+    0.17479937083406819
+   ]
+  },
+  {
+   "id": "ea-58",
+   "question": "I have a desk job but hit the gym once a day - is all that sitting in between really a problem?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02162",
+    "hq-01794",
+    "hq-02158"
+   ],
+   "scores": [
+    0.1820974186536922,
+    0.17592140766943382,
+    0.17249713426516444
+   ]
+  },
+  {
+   "id": "ea-59",
+   "question": "Can regular exercise genuinely improve my sleep?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02341",
+    "hq-01124",
+    "hq-01241"
+   ],
+   "scores": [
+    0.22022104386814098,
+    0.20700971474368687,
+    0.19973135735211553
+   ]
+  },
+  {
+   "id": "ea-60",
+   "question": "My dad is 74 and thinks it is too late for exercise to help him - is he right?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03642",
+    "hq-03034",
+    "hq-01220"
+   ],
+   "scores": [
+    0.1383238855825662,
+    0.13220548146379293,
+    0.13053622371041132
+   ]
+  },
+  {
+   "id": "mt-01",
+   "question": "Does cracking your knuckles cause arthritis?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03520",
+    "hq-00144",
+    "hq-01476"
+   ],
+   "scores": [
+    0.15011308296086542,
+    0.1478388901566856,
+    0.14085340612602038
+   ]
+  },
+  {
+   "id": "mt-02",
+   "question": "Will I catch a cold if I go outside with wet hair?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01648",
+    "hq-03986",
+    "hq-01631"
+   ],
+   "scores": [
+    0.2150930657674078,
+    0.19782322819897488,
+    0.14041823889982044
+   ]
+  },
+  {
+   "id": "mt-03",
+   "question": "Does sugar make children hyperactive?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03333",
+    "hq-00658",
+    "hq-00211"
+   ],
+   "scores": [
+    0.23817962519758495,
+    0.23070705113391063,
+    0.22653087445598225
+   ]
+  },
+  {
+   "id": "mt-04",
+   "question": "Do colds and flu come from cold weather?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01696",
+    "hq-02775",
+    "hq-00304"
+   ],
+   "scores": [
+    0.26478660568034756,
+    0.23053666629597178,
+    0.23043807628169044
+   ]
+  },
+  {
+   "id": "mt-05",
+   "question": "Do artificial sweeteners cause cancer at normal levels of consumption?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03150",
+    "hq-01960",
+    "hq-02495"
+   ],
+   "scores": [
+    0.15581105429352837,
+    0.14847818772718369,
+    0.14691731287005336
+   ]
+  },
+  {
+   "id": "mt-06",
+   "question": "Does reading in dim light permanently damage your eyes?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03362",
+    "hq-03776",
+    "hq-01358"
+   ],
+   "scores": [
+    0.15746412035080634,
+    0.14820300152010704,
+    0.14818436649094122
+   ]
+  },
+  {
+   "id": "mt-07",
+   "question": "Does swallowed gum stay in your stomach for seven years?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03592",
+    "hq-00771",
+    "hq-01348"
+   ],
+   "scores": [
+    0.14315703242747088,
+    0.14296484293730827,
+    0.14105168826888345
+   ]
+  },
+  {
+   "id": "mt-08",
+   "question": "Do detox diets actually remove toxins from your body?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01608",
+    "hq-02305",
+    "hq-02227"
+   ],
+   "scores": [
+    0.20244856398472436,
+    0.19747477302990848,
+    0.19426002251520139
+   ]
+  },
+  {
+   "id": "mt-09",
+   "question": "Do vaccines cause autism?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03248",
+    "hq-03273",
+    "hq-03932"
+   ],
+   "scores": [
+    0.21617194434927933,
+    0.21490110019623815,
+    0.21232684205151808
+   ]
+  },
+  {
+   "id": "mt-10",
+   "question": "Does everyone need to drink eight glasses of water a day?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02707",
+    "hq-00782",
+    "hq-03188"
+   ],
+   "scores": [
+    0.4205344444297669,
+    0.4000221670137648,
+    0.39196902757668384
+   ]
+  },
+  {
+   "id": "mt-11",
+   "question": "Do people only use 10% of their brains?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02853",
+    "hq-00683",
+    "hq-01903"
+   ],
+   "scores": [
+    0.18841283147221832,
+    0.16085650744976293,
+    0.15898409472150274
+   ]
+  },
+  {
+   "id": "mt-12",
+   "question": "Does eating late at night make you gain weight no matter what you eat?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02284",
+    "hq-00635",
+    "hq-02781"
+   ],
+   "scores": [
+    0.413221087088685,
+    0.39603060766434406,
+    0.3482186291565774
+   ]
+  },
+  {
+   "id": "mt-13",
+   "question": "Do you lose most of your body heat through your head?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02650",
+    "hq-04247",
+    "hq-02774"
+   ],
+   "scores": [
+    0.167168811783971,
+    0.16366895586445646,
+    0.16231118997750257
+   ]
+  },
+  {
+   "id": "mt-14",
+   "question": "Do eggs cause heart disease in healthy people?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02828",
+    "hq-00982",
+    "hq-03380"
+   ],
+   "scores": [
+    0.4100545110874793,
+    0.39987261861971074,
+    0.3815456648229908
+   ]
+  },
+  {
+   "id": "mt-15",
+   "question": "Does cracking your back cause arthritis?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01410",
+    "hq-01150",
+    "hq-02107"
+   ],
+   "scores": [
+    0.14943546067387228,
+    0.14912686928846997,
+    0.14865838929164343
+   ]
+  },
+  {
+   "id": "mt-16",
+   "question": "Does sitting too close to the TV permanently damage your eyes?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04138",
+    "hq-01283",
+    "hq-03965"
+   ],
+   "scores": [
+    0.19159193029762323,
+    0.17508421211823258,
+    0.1029928315178976
+   ]
+  },
+  {
+   "id": "mt-17",
+   "question": "Is honey a healthy sugar, so unlimited amounts are fine?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00144",
+    "hq-03282",
+    "hq-01487"
+   ],
+   "scores": [
+    0.23829869837708903,
+    0.23632861717028916,
+    0.23178663039018105
+   ]
+  },
+  {
+   "id": "mt-18",
+   "question": "Is tap water unsafe compared with bottled water in developed countries?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02321",
+    "hq-01202",
+    "hq-02146"
+   ],
+   "scores": [
+    0.17098239264984144,
+    0.15278235692141098,
+    0.15060732329820267
+   ]
+  },
+  {
+   "id": "mt-19",
+   "question": "Does spicy food cause ulcers?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02531",
+    "hq-02254",
+    "hq-01359"
+   ],
+   "scores": [
+    0.4037862949506223,
+    0.37162313982189527,
+    0.3543058238866597
+   ]
+  },
+  {
+   "id": "mt-20",
+   "question": "Will wet feet give you a cold?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03286",
+    "hq-00363",
+    "hq-00848"
+   ],
+   "scores": [
+    0.20101735597768672,
+    0.17243972416988232,
+    0.17133611078040867
+   ]
+  },
+  {
+   "id": "ua-01",
+   "question": "What is the single best diet for every person?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03205",
+    "hq-01428",
+    "hq-02425"
+   ],
+   "scores": [
+    0.1495696342354136,
+    0.14788221970034443,
+    0.14224250162732222
+   ]
+  },
+  {
+   "id": "ua-02",
+   "question": "How long will I live if I sleep 6 hours a night?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01943",
+    "hq-02243",
+    "hq-02695"
+   ],
+   "scores": [
+    0.21905927842391848,
+    0.21527644808171953,
+    0.21472382670597312
+   ]
+  },
+  {
+   "id": "ua-03",
+   "question": "Which vitamin cures tiredness?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01440",
+    "hq-03335",
+    "hq-00604"
+   ],
+   "scores": [
+    0.22487757767445482,
+    0.22207833097047058,
+    0.20849543770664397
+   ]
+  },
+  {
+   "id": "ua-04",
+   "question": "What screen time number is exactly safe?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04072",
+    "hq-02132",
+    "hq-03881"
+   ],
+   "scores": [
+    0.15631887616169168,
+    0.15329480691872582,
+    0.15288828471642013
+   ]
+  },
+  {
+   "id": "ua-05",
+   "question": "What food guarantees I will never get cancer?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01960",
+    "hq-02495",
+    "hq-03150"
+   ],
+   "scores": [
+    0.21816104946455459,
+    0.21586763450491034,
+    0.17468022159656227
+   ]
+  },
+  {
+   "id": "ua-06",
+   "question": "How much water is exactly right for my body?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00892",
+    "hq-02050",
+    "hq-03441"
+   ],
+   "scores": [
+    0.15079418372697376,
+    0.1364559379075997,
+    0.13444578293609794
+   ]
+  },
+  {
+   "id": "ua-07",
+   "question": "Is it better to exercise in the morning or at night?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03102",
+    "hq-04154",
+    "hq-01982"
+   ],
+   "scores": [
+    0.21656699687668723,
+    0.20687923441177786,
+    0.20386361182521034
+   ]
+  },
+  {
+   "id": "ua-08",
+   "question": "Which supplement boosts my immune system the most?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03177",
+    "hq-03273",
+    "hq-01032"
+   ],
+   "scores": [
+    0.2482703134755603,
+    0.22799627093843278,
+    0.2032576688218968
+   ]
+  },
+  {
+   "id": "ua-09",
+   "question": "How many hours of sleep is genetically perfect for me?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01586",
+    "hq-00165",
+    "hq-02525"
+   ],
+   "scores": [
+    0.150698329330429,
+    0.1504915167813309,
+    0.14996987007512474
+   ]
+  },
+  {
+   "id": "ua-10",
+   "question": "What is the healthiest fruit in the world?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02244",
+    "hq-00407",
+    "hq-00779"
+   ],
+   "scores": [
+    0.2900324883032657,
+    0.287386414224189,
+    0.2843775157163242
+   ]
+  },
+  {
+   "id": "ua-11",
+   "question": "Will one cigarette a week shorten my life - and by exactly how much?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01765",
+    "hq-03664",
+    "hq-04206"
+   ],
+   "scores": [
+    0.19597108603271823,
+    0.17970131233980224,
+    0.1788218685820753
+   ]
+  },
+  {
+   "id": "ua-12",
+   "question": "Which probiotic strain is best for my gut?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00341",
+    "hq-03062",
+    "hq-02320"
+   ],
+   "scores": [
+    0.14379141961420253,
+    0.1360358835611683,
+    0.13523743832070304
+   ]
+  },
+  {
+   "id": "ua-13",
+   "question": "At what exact age should I start getting annual check-ups?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03414",
+    "hq-00211",
+    "hq-00357"
+   ],
+   "scores": [
+    0.21943046884571898,
+    0.21422228132481666,
+    0.1880159179141892
+   ]
+  },
+  {
+   "id": "ua-14",
+   "question": "How many steps do I need to live longer?",
+   "method": "tfidf",
+   "top3": [
+    "hq-04003",
+    "hq-02137",
+    "hq-00758"
+   ],
+   "scores": [
+    0.1314509159356989,
+    0.12657286457506425,
+    0.12430769154550944
+   ]
+  },
+  {
+   "id": "ua-15",
+   "question": "What temperature should my bedroom be - exactly?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00941",
+    "hq-03366",
+    "hq-00116"
+   ],
+   "scores": [
+    0.27397653679717193,
+    0.27097591849366387,
+    0.265058209820427
+   ]
+  },
+  {
+   "id": "ua-16",
+   "question": "Is honey or sugar better for me in the long run?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00122",
+    "hq-00144",
+    "hq-03282"
+   ],
+   "scores": [
+    0.23890133624695545,
+    0.2329771264759818,
+    0.23105075260170144
+   ]
+  },
+  {
+   "id": "ua-17",
+   "question": "Which water temperature kills the most germs when washing hands?",
+   "method": "tfidf",
+   "top3": [
+    "hq-02385",
+    "hq-03726",
+    "hq-00970"
+   ],
+   "scores": [
+    0.29723033987396347,
+    0.2687889119093673,
+    0.2297460027879152
+   ]
+  },
+  {
+   "id": "ua-18",
+   "question": "How much protein is too much for my kidneys?",
+   "method": "tfidf",
+   "top3": [
+    "hq-01238",
+    "hq-00260",
+    "hq-04257"
+   ],
+   "scores": [
+    0.2775128652164217,
+    0.24282943739996138,
+    0.24010600863043152
+   ]
+  },
+  {
+   "id": "ua-19",
+   "question": "Will my child be taller if they sleep more?",
+   "method": "tfidf",
+   "top3": [
+    "hq-00465",
+    "hq-03565",
+    "hq-04011"
+   ],
+   "scores": [
+    0.24831403478955402,
+    0.23553005870225135,
+    0.23158239703564648
+   ]
+  },
+  {
+   "id": "ua-20",
+   "question": "Which exercise burns the most fat overall?",
+   "method": "tfidf",
+   "top3": [
+    "hq-03547",
+    "hq-02714",
+    "hq-02717"
+   ],
+   "scores": [
+    0.1938776169717751,
+    0.1936901604394384,
+    0.19147559454980728
+   ]
+  }
+ ]
+}

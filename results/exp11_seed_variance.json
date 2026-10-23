@@ -1,0 +1,63 @@
+{
+ "experiment": "exp4_seed_variance",
+ "mode": "smoke",
+ "config": {
+  "n_layer": 2,
+  "n_head": 2,
+  "d_model": 64,
+  "d_ff": 128,
+  "ctx": 128,
+  "vocab_size": 4096
+ },
+ "steps_per_seed": 60,
+ "corpus": "health_qa.jsonl",
+ "seeds": [
+  42,
+  7,
+  1234
+ ],
+ "rows": [
+  {
+   "seed": 42,
+   "wall_s": 62.926931619644165,
+   "step": 60,
+   "val_loss": 7.555569171905518,
+   "n_questions": 60,
+   "raw_hallucination_rate": 0.0,
+   "grounded_hallucination_rate": 0.016853932584269662
+  },
+  {
+   "seed": 7,
+   "wall_s": 62.821173906326294,
+   "step": 60,
+   "val_loss": 7.539700984954834,
+   "n_questions": 60,
+   "raw_hallucination_rate": 0.0,
+   "grounded_hallucination_rate": 0.016853932584269662
+  },
+  {
+   "seed": 1234,
+   "wall_s": 64.68950843811035,
+   "step": 60,
+   "val_loss": 7.543364524841309,
+   "n_questions": 60,
+   "raw_hallucination_rate": 0.0,
+   "grounded_hallucination_rate": 0.016853932584269662
+  }
+ ],
+ "summary": {
+  "raw_hallucination_rate": {
+   "mean": 0.0,
+   "spread": 0.0,
+   "std": 0.0
+  },
+  "grounded_hallucination_rate": {
+   "mean": 0.016853932584269662,
+   "spread": 0.0,
+   "std": 0.0
+  },
+  "spread_definition": "spread = max − min over seeds (n=3); std = population"
+ },
+ "format": "p1-experiments-v1",
+ "experiments_lib_version": "1.0.0"
+}
